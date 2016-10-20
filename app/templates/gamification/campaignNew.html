@@ -1,0 +1,104 @@
+<ul class="page-breadcrumb breadcrumb">
+  <li>
+    <a ui-sref="gamification">Gamification</a>
+    <i class="fa fa-circle"></i>
+  </li>
+  <li>
+    <a ui-sref="gamificationCampaigns">Campaigns</a>
+    <i class="fa fa-circle"></i>
+  </li>
+  <li>
+    <span>New</span>
+  </li>
+</ul>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="portlet light bordered">
+      <div class="portlet-title">
+        <div class="caption font-green-sharp">
+          <i class="icon-diamond font-green-sharp"></i>
+          <span class="caption-subject bold uppercase" data-ng-bind="$state.current.data.pageTitle"></span>
+          <span class="caption-helper hide"></span>
+        </div>
+        <div class="actions">
+          <a class="btn btn-default" ui-sref="gamificationCampaigns"><i class="icon-map"></i> Campaigns</a>
+          <a class="btn btn-default" ui-sref="gamificationEvents"><i class="icon-globe"></i> Events</a>
+        </div>
+      </div>
+      <div class="portlet-body">
+
+        <div class="row">
+          <div class="col-md-7">
+
+            <div class="portlet-body form">
+              <form role="form">
+                <div class="form-body">
+                  <div class="form-group">
+                    <label><b>Provider</b></label>
+                    <select class="form-control" ng-model="campaign.provider_id">
+                      <option ng-repeat="provider in providers" value="{{provider.id}}">{{provider.name}}</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label><b>Name</b></label>
+                    <div class="input-group">
+                      <span class="input-group-addon">
+                        <i class="fa fa-archive"></i>
+                      </span>
+                      <input type="text" class="form-control" placeholder="Name" ng-model="campaign.name">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label><b>Description</b></label>
+                    <textarea class="form-control" rows="6" ng-model="campaign.description"></textarea>
+                  </div>
+                    <div class="form-group">
+                      <label><b>Start date and End date</b></label>
+                      <div class="input-group input-large date-picker input-daterange" data-date="10/11/2012" data-date-format="mm/dd/yyyy">
+                          <input type="text" class="form-control" name="from" ng-model="campaign.start_date">
+                          <span class="input-group-addon"> to </span>
+                          <input type="text" class="form-control" name="to" ng-model="campaign.end_date"> </div>
+                    </div>
+                    <div class="form-group">
+                      <label><b>Status</b></label>
+                      <div class="mt-radio-list">
+                        <label class="mt-radio"> Active
+                          <input type="radio" ng-model="campaign.status" value="active"/>
+                          <span></span>
+                        </label>
+                        <label class="mt-radio"> Pending
+                          <input type="radio" ng-model="campaign.status" value="pending"/>
+                          <span></span>
+                        </label>
+                        <label class="mt-radio"> Locked
+                          <input type="radio" ng-model="campaign.status" value="locked"/>
+                          <span></span>
+                        </label>
+                        <label class="mt-radio"> Ended
+                          <input type="radio" ng-model="campaign.status" value="ended"/>
+                          <span></span>
+                        </label>
+                      </div>
+                    </div>
+                    <button type="button" name="button" class="btn btn-primary" ng-click="createCampaign(campaign)">Create</button>
+                  </div>
+                </form>
+
+            </div>
+
+          </div>
+        </div>
+
+        <script>
+        $('.date-picker').datepicker({
+            orientation: "left",
+            autoclose: true
+        });
+        </script>
+
+
+      </div>
+    </div>
+  </div>
+</div>

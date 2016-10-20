@@ -1,9 +1,8 @@
 {
-  "name": "angular-seed",
+  "name": "snapadmin",
   "private": true,
   "version": "0.0.0",
-  "description": "A starter project for AngularJS",
-  "repository": "https://github.com/angular/angular-seed",
+  "description": "Admin repository for snaplar project",
   "license": "MIT",
   "devDependencies": {
     "bower": "^1.7.7",

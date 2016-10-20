@@ -1,0 +1,714 @@
+<!-- BEGIN PAGE BREADCRUMB -->
+<ul class="page-breadcrumb breadcrumb">
+    <li>
+        <a ui-sref="dashboard">Dashboard</a>
+        <i class="fa fa-circle"></i>
+    </li>
+</ul>
+<!-- END PAGE BREADCRUMB -->
+<!-- BEGIN MAIN CONTENT -->
+<div>
+  <!-- BEGIN DASHBOARD STATS -->
+  <div class="row">
+      <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+          <div class="dashboard-stat green">
+              <div class="visual"></div>
+              <div class="details">
+                  <div class="number">Healthy</div>
+                  <div class="desc">Azure App Services</div>
+              </div>
+              <a class="more" href="#"> View logs
+                  <i class="m-icon-swapright m-icon-white"></i>
+              </a>
+          </div>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+          <div class="dashboard-stat yellow">
+              <div class="visual"></div>
+              <div class="details">
+                  <div class="number">Moderate</div>
+                  <div class="desc">Gamification Services</div>
+              </div>
+              <a class="more" href="#"> View logs
+                  <i class="m-icon-swapright m-icon-white"></i>
+              </a>
+          </div>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+          <div class="dashboard-stat red">
+              <div class="visual"></div>
+              <div class="details">
+                  <div class="number">Down</div>
+                  <div class="desc">Mobile CMS</div>
+              </div>
+              <a class="more" href="#"> View logs
+                  <i class="m-icon-swapright m-icon-white"></i>
+              </a>
+          </div>
+      </div>
+  </div>
+  <!-- END DASHBOARD STATS -->
+  <div class="row">
+    <div class="col-md-6 col-sm-12">
+        <!-- BEGIN PORTLET-->
+        <div class="portlet light bordered">
+            <div class="portlet-title tabbable-line">
+                <div class="caption caption-md">
+                    <i class="icon-globe font-green hide"></i>
+                    <span class="caption-subject font-green bold uppercase">Server Logs</span>
+                </div>
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="#" data-target="#tab_1_1" data-toggle="tab">Error</a>
+                    </li>
+                    <li>
+                        <a href="#" data-target="#tab_1_2" data-toggle="tab">Alerts</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="portlet-body">
+                <!--BEGIN TABS-->
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tab_1_1">
+                        <div class="scroller" style="height: 306px;" data-always-visible="1" data-rail-visible1="0" data-handle-color="#D7DCE2">
+                            <ul class="feeds">
+                                <li>
+                                    <div class="col1">
+                                        <div class="cont">
+                                            <div class="cont-col1">
+                                                <div class="label label-sm label-success">
+                                                    <i class="fa fa-bell-o"></i>
+                                                </div>
+                                            </div>
+                                            <div class="cont-col2">
+                                                <div class="desc"> You have 4 pending tasks.
+                                                    <span class="label label-sm label-info"> Take action
+                                                        <i class="fa fa-share"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col2">
+                                        <div class="date"> Just now </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">
+                                        <div class="col1">
+                                            <div class="cont">
+                                                <div class="cont-col1">
+                                                    <div class="label label-sm label-success">
+                                                        <i class="fa fa-bell-o"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="cont-col2">
+                                                    <div class="desc"> New version v1.4 just lunched! </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col2">
+                                            <div class="date"> 20 mins </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <div class="col1">
+                                        <div class="cont">
+                                            <div class="cont-col1">
+                                                <div class="label label-sm label-danger">
+                                                    <i class="fa fa-bolt"></i>
+                                                </div>
+                                            </div>
+                                            <div class="cont-col2">
+                                                <div class="desc"> Database server #12 overloaded. Please fix the issue. </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col2">
+                                        <div class="date"> 24 mins </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="col1">
+                                        <div class="cont">
+                                            <div class="cont-col1">
+                                                <div class="label label-sm label-info">
+                                                    <i class="fa fa-bullhorn"></i>
+                                                </div>
+                                            </div>
+                                            <div class="cont-col2">
+                                                <div class="desc"> New order received and pending for process. </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col2">
+                                        <div class="date"> 30 mins </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="col1">
+                                        <div class="cont">
+                                            <div class="cont-col1">
+                                                <div class="label label-sm label-success">
+                                                    <i class="fa fa-bullhorn"></i>
+                                                </div>
+                                            </div>
+                                            <div class="cont-col2">
+                                                <div class="desc"> New payment refund and pending approval. </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col2">
+                                        <div class="date"> 40 mins </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="col1">
+                                        <div class="cont">
+                                            <div class="cont-col1">
+                                                <div class="label label-sm label-warning">
+                                                    <i class="fa fa-plus"></i>
+                                                </div>
+                                            </div>
+                                            <div class="cont-col2">
+                                                <div class="desc"> New member registered. Pending approval. </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col2">
+                                        <div class="date"> 1.5 hours </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="col1">
+                                        <div class="cont">
+                                            <div class="cont-col1">
+                                                <div class="label label-sm label-success">
+                                                    <i class="fa fa-bell-o"></i>
+                                                </div>
+                                            </div>
+                                            <div class="cont-col2">
+                                                <div class="desc"> Web server hardware needs to be upgraded.
+                                                    <span class="label label-sm label-default "> Overdue </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col2">
+                                        <div class="date"> 2 hours </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="col1">
+                                        <div class="cont">
+                                            <div class="cont-col1">
+                                                <div class="label label-sm label-default">
+                                                    <i class="fa fa-bullhorn"></i>
+                                                </div>
+                                            </div>
+                                            <div class="cont-col2">
+                                                <div class="desc"> Prod01 database server is overloaded 90%. </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col2">
+                                        <div class="date"> 3 hours </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="col1">
+                                        <div class="cont">
+                                            <div class="cont-col1">
+                                                <div class="label label-sm label-warning">
+                                                    <i class="fa fa-bullhorn"></i>
+                                                </div>
+                                            </div>
+                                            <div class="cont-col2">
+                                                <div class="desc"> New group created. Pending manager review. </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col2">
+                                        <div class="date"> 5 hours </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="col1">
+                                        <div class="cont">
+                                            <div class="cont-col1">
+                                                <div class="label label-sm label-info">
+                                                    <i class="fa fa-bullhorn"></i>
+                                                </div>
+                                            </div>
+                                            <div class="cont-col2">
+                                                <div class="desc"> Order payment failed. </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col2">
+                                        <div class="date"> 18 hours </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="col1">
+                                        <div class="cont">
+                                            <div class="cont-col1">
+                                                <div class="label label-sm label-default">
+                                                    <i class="fa fa-bullhorn"></i>
+                                                </div>
+                                            </div>
+                                            <div class="cont-col2">
+                                                <div class="desc"> New application received. </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col2">
+                                        <div class="date"> 21 hours </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="col1">
+                                        <div class="cont">
+                                            <div class="cont-col1">
+                                                <div class="label label-sm label-info">
+                                                    <i class="fa fa-bullhorn"></i>
+                                                </div>
+                                            </div>
+                                            <div class="cont-col2">
+                                                <div class="desc"> Dev90 web server restarted. Pending overall system check. </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col2">
+                                        <div class="date"> 22 hours </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="col1">
+                                        <div class="cont">
+                                            <div class="cont-col1">
+                                                <div class="label label-sm label-default">
+                                                    <i class="fa fa-bullhorn"></i>
+                                                </div>
+                                            </div>
+                                            <div class="cont-col2">
+                                                <div class="desc"> New member registered. Pending approval </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col2">
+                                        <div class="date"> 21 hours </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="col1">
+                                        <div class="cont">
+                                            <div class="cont-col1">
+                                                <div class="label label-sm label-info">
+                                                    <i class="fa fa-bullhorn"></i>
+                                                </div>
+                                            </div>
+                                            <div class="cont-col2">
+                                                <div class="desc"> L45 Network failure. Schedule maintenance. </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col2">
+                                        <div class="date"> 22 hours </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="col1">
+                                        <div class="cont">
+                                            <div class="cont-col1">
+                                                <div class="label label-sm label-default">
+                                                    <i class="fa fa-bullhorn"></i>
+                                                </div>
+                                            </div>
+                                            <div class="cont-col2">
+                                                <div class="desc"> Order canceled with failed payment. </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col2">
+                                        <div class="date"> 21 hours </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="col1">
+                                        <div class="cont">
+                                            <div class="cont-col1">
+                                                <div class="label label-sm label-info">
+                                                    <i class="fa fa-bullhorn"></i>
+                                                </div>
+                                            </div>
+                                            <div class="cont-col2">
+                                                <div class="desc"> Web-A2 clound instance created. Schedule full scan. </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col2">
+                                        <div class="date"> 22 hours </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="col1">
+                                        <div class="cont">
+                                            <div class="cont-col1">
+                                                <div class="label label-sm label-default">
+                                                    <i class="fa fa-bullhorn"></i>
+                                                </div>
+                                            </div>
+                                            <div class="cont-col2">
+                                                <div class="desc"> Member canceled. Schedule account review. </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col2">
+                                        <div class="date"> 21 hours </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="col1">
+                                        <div class="cont">
+                                            <div class="cont-col1">
+                                                <div class="label label-sm label-info">
+                                                    <i class="fa fa-bullhorn"></i>
+                                                </div>
+                                            </div>
+                                            <div class="cont-col2">
+                                                <div class="desc"> New order received. Please take care of it. </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col2">
+                                        <div class="date"> 22 hours </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="tab_1_2">
+                        <div class="scroller" style="height: 337px;" data-always-visible="1" data-rail-visible1="0" data-handle-color="#D7DCE2">
+                            <ul class="feeds">
+                                <li>
+                                    <a href="javascript:;">
+                                        <div class="col1">
+                                            <div class="cont">
+                                                <div class="cont-col1">
+                                                    <div class="label label-sm label-success">
+                                                        <i class="fa fa-bell-o"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="cont-col2">
+                                                    <div class="desc"> New user registered </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col2">
+                                            <div class="date"> Just now </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">
+                                        <div class="col1">
+                                            <div class="cont">
+                                                <div class="cont-col1">
+                                                    <div class="label label-sm label-success">
+                                                        <i class="fa fa-bell-o"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="cont-col2">
+                                                    <div class="desc"> New order received </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col2">
+                                            <div class="date"> 10 mins </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <div class="col1">
+                                        <div class="cont">
+                                            <div class="cont-col1">
+                                                <div class="label label-sm label-danger">
+                                                    <i class="fa fa-bolt"></i>
+                                                </div>
+                                            </div>
+                                            <div class="cont-col2">
+                                                <div class="desc"> Order #24DOP4 has been rejected.
+                                                    <span class="label label-sm label-danger "> Take action
+                                                        <i class="fa fa-share"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col2">
+                                        <div class="date"> 24 mins </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">
+                                        <div class="col1">
+                                            <div class="cont">
+                                                <div class="cont-col1">
+                                                    <div class="label label-sm label-success">
+                                                        <i class="fa fa-bell-o"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="cont-col2">
+                                                    <div class="desc"> New user registered </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col2">
+                                            <div class="date"> Just now </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">
+                                        <div class="col1">
+                                            <div class="cont">
+                                                <div class="cont-col1">
+                                                    <div class="label label-sm label-success">
+                                                        <i class="fa fa-bell-o"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="cont-col2">
+                                                    <div class="desc"> New user registered </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col2">
+                                            <div class="date"> Just now </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">
+                                        <div class="col1">
+                                            <div class="cont">
+                                                <div class="cont-col1">
+                                                    <div class="label label-sm label-success">
+                                                        <i class="fa fa-bell-o"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="cont-col2">
+                                                    <div class="desc"> New user registered </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col2">
+                                            <div class="date"> Just now </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">
+                                        <div class="col1">
+                                            <div class="cont">
+                                                <div class="cont-col1">
+                                                    <div class="label label-sm label-success">
+                                                        <i class="fa fa-bell-o"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="cont-col2">
+                                                    <div class="desc"> New user registered </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col2">
+                                            <div class="date"> Just now </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">
+                                        <div class="col1">
+                                            <div class="cont">
+                                                <div class="cont-col1">
+                                                    <div class="label label-sm label-success">
+                                                        <i class="fa fa-bell-o"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="cont-col2">
+                                                    <div class="desc"> New user registered </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col2">
+                                            <div class="date"> Just now </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">
+                                        <div class="col1">
+                                            <div class="cont">
+                                                <div class="cont-col1">
+                                                    <div class="label label-sm label-success">
+                                                        <i class="fa fa-bell-o"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="cont-col2">
+                                                    <div class="desc"> New user registered </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col2">
+                                            <div class="date"> Just now </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">
+                                        <div class="col1">
+                                            <div class="cont">
+                                                <div class="cont-col1">
+                                                    <div class="label label-sm label-success">
+                                                        <i class="fa fa-bell-o"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="cont-col2">
+                                                    <div class="desc"> New user registered </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col2">
+                                            <div class="date"> Just now </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!--END TABS-->
+            </div>
+        </div>
+        <!-- END PORTLET-->
+    </div>
+      <div class="col-md-6 col-sm-12">
+          <!-- BEGIN PORTLET-->
+          <div class="portlet light bordered ">
+              <div class="portlet-title">
+                  <div class="caption caption-md">
+                      <i class="icon-bar-chart font-red"></i>
+                      <span class="caption-subject font-red bold uppercase">User Activity</span>
+                      <span class="caption-helper hide">weekly stats...</span>
+                  </div>
+                  <div class="actions">
+                      <div class="btn-group btn-group-devided" data-toggle="buttons">
+                          <label class="btn green btn-outline btn-circle btn-sm active">
+                              <input type="radio" name="options" class="toggle" id="option1">Today</label>
+                          <label class="btn red btn-outline btn-circle btn-sm">
+                              <input type="radio" name="options" class="toggle" id="option2">Week</label>
+                          <label class="btn blue btn-outline btn-circle btn-sm">
+                              <input type="radio" name="options" class="toggle" id="option2">Month</label>
+                      </div>
+                  </div>
+              </div>
+              <div class="portlet-body">
+                  <div class="row number-stats margin-bottom-30">
+                      <div class="col-md-6 col-sm-6 col-xs-6">
+                          <div class="stat-left">
+                              <div class="stat-chart">
+                                  <!-- do not line break "sparkline_bar" div. sparkline chart has an issue when the container div has line break -->
+                                  <div id="sparkline_bar"></div>
+                              </div>
+                              <div class="stat-number">
+                                  <div class="title"> New Registered Users </div>
+                                  <div class="number"> 2460 </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-md-6 col-sm-6 col-xs-6">
+                          <div class="stat-right">
+                              <div class="stat-chart">
+                                  <!-- do not line break "sparkline_bar" div. sparkline chart has an issue when the container div has line break -->
+                                  <div id="sparkline_bar2"></div>
+                              </div>
+                              <div class="stat-number">
+                                  <div class="title"> Active Users </div>
+                                  <div class="number"> 719 </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="table-scrollable table-scrollable-borderless">
+                      <table class="table table-hover table-light">
+                          <thead>
+                              <tr class="uppercase">
+                                  <th colspan="2"> User </th>
+                                  <th> Rewards Unlocked </th>
+                                  <th> Events Completed </th>
+                                  <th> Last Login </th>
+                              </tr>
+                          </thead>
+                          <tr>
+                              <td class="fit">
+                                  <img class="user-pic rounded" src="../assets/pages/media/users/avatar4.jpg"> </td>
+                              <td>
+                                  <a href="javascript:;" class="primary-link">Brain</a>
+                              </td>
+                              <td> 45 </td>
+                              <td> 124 </td>
+                              <td>
+                                  2d Ago
+                              </td>
+                          </tr>
+                          <tr>
+                              <td class="fit">
+                                  <img class="user-pic rounded" src="../assets/pages/media/users/avatar5.jpg"> </td>
+                              <td>
+                                  <a href="javascript:;" class="primary-link">Nick</a>
+                              </td>
+                              <td> 12 </td>
+                              <td> 24 </td>
+                              <td>
+                                  3h Ago
+                              </td>
+                          </tr>
+                          <tr>
+                              <td class="fit">
+                                  <img class="user-pic rounded" src="../assets/pages/media/users/avatar6.jpg"> </td>
+                              <td>
+                                  <a href="javascript:;" class="primary-link">Tim</a>
+                              </td>
+                              <td> 450 </td>
+                              <td> 46 </td>
+                              <td>
+                                  11m Ago
+                              </td>
+                          </tr>
+                          <tr>
+                              <td class="fit">
+                                  <img class="user-pic rounded" src="../assets/pages/media/users/avatar7.jpg"> </td>
+                              <td>
+                                  <a href="javascript:;" class="primary-link">Tom</a>
+                              </td>
+                              <td> 50 </td>
+                              <td> 89 </td>
+                              <td>
+                                  1w Ago
+                              </td>
+                          </tr>
+                      </table>
+                  </div>
+              </div>
+          </div>
+          <!-- END PORTLET-->
+      </div>
+  </div>
+</div>
+<!-- END MAIN CONTENT -->
+<!-- BEGIN MAIN JS-->
+<script>
+    // call any jquery or angularjs code ehre
+</script>
+<!-- BEGIN MAIN JS -->

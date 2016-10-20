@@ -1,0 +1,125 @@
+
+<ul class="page-breadcrumb breadcrumb">
+  <li>
+    <span>Providers</span>
+  </li>
+</ul>
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN: ACCORDION DEMO -->
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption font-green-sharp">
+                    <i class="icon-settings font-green-sharp"></i>
+                    <span class="caption-subject bold uppercase">Providers</span>
+                    <span class="caption-helper hide"></span>
+                </div>
+                <div class="actions">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-default" ng-class="{'active': viewMode == 'grid'}" aria-label="Grid View" ng-click="changeViewMode('grid')">
+                      <span class="fa fa-th-large" aria-hidden="true"></span>
+                    </button>
+                    <button type="button" class="btn btn-default" ng-class="{'active': viewMode == 'list'}"  aria-label="List View" ng-click="changeViewMode('list')">
+                      <span class="fa fa-list" aria-hidden="true"></span>
+                    </button>
+                  </div>
+                  <a class="btn btn-primary" ui-sref="providerNew"> Add New Provider
+                    <i class="fa fa-plus"></i>
+                  </a>
+                </div>
+            </div>
+
+            <div class="portlet-body">
+              <div class="row">
+                <div class="col-md-4">
+                  <label><b>Filter:</b></label>
+                  <div class="mt-checkbox-inline">
+                    <label class="mt-checkbox">
+                      <input type="checkbox" class="filterStatus" value="all"> All
+                      <span></span>
+                    </label>
+                    <label class="mt-checkbox">
+                      <input type="checkbox" class="filterStatus" value="trial" checked> Trial
+                      <span></span>
+                    </label>
+                    <label class="mt-checkbox">
+                      <input type="checkbox" class="filterStatus" value="active"> Active
+                      <span></span>
+                    </label>
+                    <label class="mt-checkbox">
+                      <input type="checkbox" class="filterStatus" value="expired"> Expired
+                      <span></span>
+                    </label>
+                  </div>
+                </div>
+
+                <div class="col-md-4 col-md-offset-4">
+                  <form role="form">
+                    <div class="form-body">
+                      <div class="form-group">
+                        <div class="input-group">
+                          <span class="input-group-addon">
+                            <i class="fa fa-search"></i>
+                          </span>
+                          <input type="text" class="form-control" placeholder="Search Provider" ng-model="searchText">
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+
+              <div class="row" ng-if="viewMode == 'grid'">
+                <div class="col-md-12">
+                  <div class="mt-element-card mt-element-overlay">
+                    <div class="row">
+
+                      <div ng-repeat="provider in providers | filter:searchText" class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                        <div class="mt-card-item">
+                          <div class="mt-card-avatar mt-overlay-1">
+                            <img src="assets/global/img/portfolio/600x600/5.jpg" />
+                            <div class="mt-overlay">
+                                <ul class="mt-info">
+                                    <li>
+                                        <a class="btn default btn-outline" href="javascript:;">
+                                            <i class="icon-magnifier"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="btn default btn-outline" href="javascript:;">
+                                            <i class="icon-link"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                          </div>
+                          <div class="mt-card-content">
+                            <a ui-sref="providerDetail({id: provider.id})" class="mt-card-name" style="display: block;">{{provider.name}}</a>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div ng-if="viewMode == 'list'">
+                <div ng-repeat="provider in providers | filter:searchText" class="row margin-bottom-10" style="padding-bottom: 10px;">
+                  <div class="col-md-12">
+                    <div class="col-md-1" style="padding: 0;">
+                      <img src="assets/global/img/portfolio/600x600/5.jpg" class="img-responsive img-thumbnail"/>
+                    </div>
+                    <div class="col-md-4">
+                      <a ui-sref="providerDetail({id: provider.id})" class="font-gray h3" style="padding: 0; margin: 5px 0 0; font-weight: 500;">{{provider.name}}</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

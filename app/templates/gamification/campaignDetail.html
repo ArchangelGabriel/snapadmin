@@ -1,0 +1,134 @@
+<ul class="page-breadcrumb breadcrumb">
+  <li>
+    <a ui-sref="gamification">Gamification</a>
+    <i class="fa fa-circle"></i>
+  </li>
+  <li>
+    <a ui-sref="gamificationCampaigns">Campaigns</a>
+    <i class="fa fa-circle"></i>
+  </li>
+  <li>
+    <span>{{campaign.id}}</span>
+  </li>
+</ul>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="portlet light bordered">
+      <div class="portlet-title">
+        <div class="caption font-green-sharp">
+          <i class="icon-diamond font-green-sharp"></i>
+          <span class="caption-subject bold uppercase" data-ng-bind="$state.current.data.pageTitle"></span>
+          <span class="caption-helper hide"></span>
+        </div>
+        <div class="actions">
+          <a class="btn btn-default" ui-sref="gamificationCampaigns"><i class="icon-map"></i> Campaigns</a>
+          <a class="btn btn-default" ui-sref="gamificationEvents"><i class="icon-globe"></i> Events</a>
+        </div>
+      </div>
+      <div class="portlet-body">
+
+        <div class="profile row">
+          <div class="col-md-3">
+            <ul class="list-unstyled profile-nav">
+              <li>
+                <img src="assets/global/img/portfolio/600x600/4.jpg" class="img-responsive pic-bordered" alt="">
+                <a href="javascript:;" class="profile-edit"> edit </a>
+              </li>
+              <li><a href="javascript:;">Users</a></li>
+              <li><a href="javascript:;">Settings</a></li>
+            </ul>
+          </div>
+
+          <div class="col-md-9">
+            <div class="row">
+              <div class="col-md-8 profile-info">
+                <h1 class="font-green sbold uppercase">{{campaign.name}}</h1>
+                <p>{{campaign.description}}</p>
+                <ul class="list-inline">
+                    <li><i class="fa fa-calendar-check-o"></i>{{campaign.start_date | moment: 'format': 'Do MMM YYYY'}}</li>
+                    <li><i class="fa fa-calendar-times-o"></i>{{campaign.end_date | moment: 'format': 'Do MMM YYYY'}}</li>
+                    <li><i class="fa fa-home"></i>{{campaign.provider.name}}</li>
+                </ul>
+                <div class="progress">
+                  <div class="progress-bar progress-bar-info" role="progressbar"
+                    style="width: {{progress}}%;">
+                    {{progress}}% Done
+                  </div>
+                </div>
+                <hr />
+              </div>
+              <!-- <div class="col-md-4">
+                <div class="portlet sale-summary">
+                    <div class="portlet-title">
+                        <div class="caption font-red sbold"> Campaign Summary </div>
+                        <div class="tools">
+                            <a class="reload" href="javascript:;" data-original-title="" title=""> </a>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <ul class="list-unstyled">
+                            <li>
+                                <span class="sale-info"> TODAY USERS
+                                    <i class="fa fa-img-up"></i>
+                                </span>
+                                <span class="sale-num"> 23 </span>
+                            </li>
+                            <li>
+                                <span class="sale-info"> WEEKLY USERS
+                                    <i class="fa fa-img-down"></i>
+                                </span>
+                                <span class="sale-num"> 87 </span>
+                            </li>
+                            <li>
+                                <span class="sale-info"> TOTAL USERS </span>
+                                <span class="sale-num"> 2377 </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+              </div> -->
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="row">
+                  <div class="col-md-7">
+                      <h5 class="sbold font-grey-mint"><i class="icon-globe"></i> Events</h5>
+                  </div>
+                  <div class="col-md-5">
+                    <a class="btn btn-primary btn-sm btn-block" ui-sref="gamificationEventNew({campaign_id: campaign.id})">Attach an Event to this Campaign</a>
+                  </div>
+                </div>
+                <br>
+                <table ng-if="campaign.events.length != 0" class="table">
+                  <thead>
+                    <tr>
+                      <th>Title</th>
+                      <th>Description</th>
+                      <th>Start Date</th>
+                      <th>End Date</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="event in campaign.events">
+                      <td><a ui-sref="gamificationEventDetail({id: event.id})">{{event.title}}</a></td>
+                      <td>{{event.description}}</td>
+                      <td>{{event.start_date | moment: 'format': 'Do MMM YYYY'}}</td>
+                      <td>{{event.end_date | moment: 'format': 'Do MMM YYYY'}}</td>
+                      <td>{{event.status}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div ng-if="campaign.events.length == 0">
+                  <h4>There are currently no events under this campaign. Why not add one?</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

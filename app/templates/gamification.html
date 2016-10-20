@@ -1,0 +1,27 @@
+<ul class="page-breadcrumb breadcrumb">
+  <li>
+    <a ui-sref="gamification">Gamification</a>
+  </li>
+</ul>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="portlet light bordered">
+      <div class="portlet-title">
+        <div class="caption font-green-sharp">
+          <i class="icon-diamond font-green-sharp"></i>
+          <span class="caption-subject bold uppercase" data-ng-bind="$state.current.data.pageTitle"></span>
+          <span class="caption-helper hide"></span>
+        </div>
+        <div class="actions">
+          <a class="btn btn-default" ui-sref="gamificationCampaigns"><i class="icon-map"></i> Campaigns</a>
+          <a class="btn btn-default" ui-sref="gamificationEvents"><i class="icon-globe"></i> Events</a>
+                <!-- <a class="btn btn-default" ui-sref="gamification.activities">
+                    <i class="icon-trophy"></i> Activities
+                </a> -->
+        </div>
+      </div>
+      <div ui-view class="portlet-body"></div>
+    </div>
+  </div>
+</div>

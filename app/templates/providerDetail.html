@@ -1,0 +1,88 @@
+<ul class="page-breadcrumb breadcrumb">
+  <li>
+    <a ui-sref="providers">Providers</a>
+    <i class="fa fa-circle"></i>
+  </li>
+  <li>
+    <span>{{provider.id}}</span>
+  </li>
+</ul>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="portlet light bordered">
+      <div class="portlet-title">
+        <div class="caption font-green-sharp">
+          <i class="icon-diamond font-green-sharp"></i>
+          <span class="caption-subject bold uppercase">Detail</span>
+          <span class="caption-helper hide"></span>
+        </div>
+        <!-- <div class="actions">
+          <button class="btn btn-primary"> Edit
+            <i class="fa fa-wrench"></i>
+          </button>
+        </div> -->
+      </div>
+      <div class="portlet-body">
+        <div class="profile row">
+
+          <div class="col-md-3">
+            <ul class="list-unstyled profile-nav">
+              <li><img src="assets/global/img/portfolio/600x600/5.jpg" class="img-responsive pic-bordered" alt=""></li>
+              <!-- <li><a href="javascript:;">Settings</a></li> -->
+            </ul>
+          </div>
+
+          <div class="col-md-9">
+            <div class="row">
+              <div class="col-md-12 profile-info">
+                <h1 class="font-gray sbold uppercase">{{provider.name}}</h1>
+                <hr />
+                <p>
+                  Status: <label class="label label-info">Trial</label>
+                </p>
+                <br />
+                <h5 class="sbold font-grey-mint"><i class="icon-map"></i> Campaigns</h5>
+                <table class="table table-striped table-bordered table-advance table-hover">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="campaign in campaigns">
+                            <td><a ui-sref="gamificationCampaignDetail({id: campaign.id})">{{campaign.name}}</a></td>
+                            <td class="hidden-xs">{{campaign.description}}</td>
+                            <td>{{campaign.status}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br />
+                <h5 class="sbold font-grey-mint"><i class="icon-globe"></i> Events</h5>
+                <table class="table table-striped table-bordered table-advance table-hover">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="event in events">
+                            <td><a ui-sref="gamificationEventDetail({id: event.id})">{{event.title}}</a></td>
+                            <td>{{event.description}}</td>
+                            <td>{{event.status}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

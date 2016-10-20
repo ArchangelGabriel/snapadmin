@@ -1,0 +1,155 @@
+<ul class="page-breadcrumb breadcrumb">
+  <li>
+    <a ui-sref="gamification">Gamification</a>
+    <i class="fa fa-circle"></i>
+  </li>
+  <li>
+    <a ui-sref="gamificationEvents">Events</a>
+    <i class="fa fa-circle"></i>
+  </li>
+  <li>
+    <span>{{event.id}}</span>
+  </li>
+</ul>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="portlet light bordered">
+      <div class="portlet-title">
+        <div class="caption font-green-sharp">
+          <i class="icon-diamond font-green-sharp"></i>
+          <span class="caption-subject bold uppercase" data-ng-bind="$state.current.data.pageTitle"></span>
+          <span class="caption-helper hide"></span>
+        </div>
+        <div class="actions">
+          <a class="btn btn-default" ui-sref="gamificationCampaigns"><i class="icon-map"></i> Campaigns</a>
+          <a class="btn btn-default" ui-sref="gamificationEvents"><i class="icon-globe"></i> Events</a>
+        </div>
+      </div>
+      <div class="portlet-body">
+
+        <div>
+          <div class="profile row">
+            <div class="col-md-3">
+              <ul class="list-unstyled profile-nav">
+                  <li>
+                      <img src="assets/global/img/portfolio/600x600/5.jpg" class="img-responsive pic-bordered" alt="">
+                      <a href="javascript:;" class="profile-edit"> edit </a>
+                  </li>
+                  <li>
+                      <a href="javascript:;"> Users </a>
+                  </li>
+                  <li>
+                      <a href="javascript:;"> Settings </a>
+                  </li>
+              </ul>
+            </div>
+            <div class="col-md-9">
+              <div class="row">
+                <div class="col-md-8 profile-info">
+                  <h1 class="font-green sbold uppercase">{{event.title}}</h1>
+                  <p>{{event.description}}</p>
+                  <ul class="list-inline">
+                      <li><i class="fa fa-calendar-check-o"></i>{{event.start_date | moment: 'format': 'Do MMM YYYY'}}</li>
+                      <li><i class="fa fa-calendar-times-o"></i>{{event.end_date | moment: 'format': 'Do MMM YYYY'}}</li>
+                      <li><i class="fa fa-home"></i>{{event.provider.name}}</li>
+                  </ul>
+                  <div class="progress">
+                    <div class="progress-bar progress-bar-info" role="progressbar"
+                      style="width: {{progress}}%;">
+                      {{progress}}% Done
+                    </div>
+                  </div>
+                  <h5 class="sbold font-grey-mint"><i class="fa fa-paperclip"></i> Attached Files</h5>
+                  <table class="table table-striped table-bordered table-advance table-hover">
+                      <thead>
+                          <tr>
+                              <th>Filename</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr>
+                              <td>
+                                  <a href="javascript:;">Uber_Car.3dmodel</a>
+                              </td>
+                          </tr>
+                      </tbody>
+                  </table>
+                  <hr />
+                </div>
+                <!-- <div class="col-md-4">
+                  <div class="portlet sale-summary">
+                      <div class="portlet-title">
+                          <div class="caption font-red sbold">Event Summary</div>
+                          <div class="tools">
+                              <a class="reload" href="javascript:;" data-original-title="" title=""> </a>
+                          </div>
+                      </div>
+                      <div class="portlet-body">
+                          <ul class="list-unstyled">
+                              <li>
+                                  <span class="sale-info"> TODAY USERS
+                                      <i class="fa fa-img-up"></i>
+                                  </span>
+                                  <span class="sale-num"> 23 </span>
+                              </li>
+                              <li>
+                                  <span class="sale-info"> WEEKLY USERS
+                                      <i class="fa fa-img-down"></i>
+                                  </span>
+                                  <span class="sale-num"> 87 </span>
+                              </li>
+                              <li>
+                                  <span class="sale-info"> TOTAL USERS </span>
+                                  <span class="sale-num"> 2377 </span>
+                              </li>
+                          </ul>
+                      </div>
+                  </div>
+                </div> -->
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-7">
+                        <h5 class="sbold font-grey-mint"><i class="icon-trophy"></i> Activities</h5>
+                    </div>
+                    <div class="col-md-5">
+                      <a class="btn btn-primary btn-sm btn-block" ui-sref="gamificationActivityNew({event_id: event.id})">Attach an Activity to this Campaign</a>
+                    </div>
+                  </div>
+                  <br>
+                  <table ng-if="event.activities.length != 0" class="table">
+                    <thead>
+                      <tr>
+                        <th>Title</th>
+                        <th>Step</th>
+                        <th>Start</th>
+                        <th>End</th>
+                        <th>Type</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="activity in event.activities">
+                        <td>{{activity.title}}</a></td>
+                        <td>{{activity.step}}</td>
+                        <td>{{activity.start_date | moment: 'format': 'Do MMM YYYY'}}</td>
+                        <td>{{activity.end_date | moment: 'format': 'Do MMM YYYY'}}</td>
+                        <td>{{activity.activity_type}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div ng-if="event.activities.length == 0">
+                    <h4>There are currently no activities under this event. Why not add one?</h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,69 @@
+<ul class="page-breadcrumb breadcrumb">
+  <li>
+    <a ui-sref="gamification">Gamification</a>
+    <i class="fa fa-circle"></i>
+  </li>
+  <li>
+    <span>Events</span>
+  </li>
+</ul>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="portlet light bordered">
+      <div class="portlet-title">
+        <div class="caption font-green-sharp">
+          <i class="icon-diamond font-green-sharp"></i>
+          <span class="caption-subject bold uppercase" data-ng-bind="$state.current.data.pageTitle"></span>
+          <span class="caption-helper hide"></span>
+        </div>
+        <div class="actions">
+          <a class="btn btn-default" ui-sref="gamificationCampaigns"><i class="icon-map"></i> Campaigns</a>
+          <a class="btn btn-default" ui-sref="gamificationEvents"><i class="icon-globe"></i> Events</a>
+        </div>
+      </div>
+      <div class="portlet-body">
+
+        <div class="table-toolbar" style="margin-bottom: 0;">
+          <div class="row">
+            <div class="col-md-10">
+              <label><b>Filter:</b></label>
+              <div class="mt-checkbox-inline">
+                <label class="mt-checkbox">
+                  <input type="checkbox" class="filterStatus" value="all"> All
+                  <span></span>
+                </label>
+                <label class="mt-checkbox">
+                  <input type="checkbox" class="filterStatus" value="publish" checked> Publish
+                  <span></span>
+                </label>
+                <label class="mt-checkbox">
+                  <input type="checkbox" class="filterStatus" value="unpublish"> Unpublish
+                  <span></span>
+                </label>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <a class="btn btn-primary btn-sm btn-block" ui-sref="gamification.gamificationEventNew">Create Event</a>
+            </div>
+          </div>
+
+        </div>
+        <table id="eventsTable" class="display" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Status</th>
+                    <th>Provider</th>
+                </tr>
+            </thead>
+        </table>
+
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,123 @@
+<ul class="page-breadcrumb breadcrumb">
+  <li>
+    <a ui-sref="gamification">Gamification</a>
+    <i class="fa fa-circle"></i>
+  </li>
+  <li>
+    <a ui-sref="gamificationEvents">Events</a>
+    <i class="fa fa-circle"></i>
+  </li>
+  <li>
+    <a ui-sref="gamificationEventDetail({id: event.id})">{{event.id}}</a>
+    <i class="fa fa-circle"></i>
+  </li>
+  <li>
+    <span>Activities</span>
+    <i class="fa fa-circle"></i>
+  </li>
+  <li>
+    <span>New</span>
+  </li>
+</ul>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="portlet light bordered">
+      <div class="portlet-title">
+        <div class="caption font-green-sharp">
+          <i class="icon-diamond font-green-sharp"></i>
+          <span class="caption-subject bold uppercase" data-ng-bind="$state.current.data.pageTitle"></span>
+          <span class="caption-helper hide"></span>
+        </div>
+        <div class="actions">
+          <a class="btn btn-default" ui-sref="gamificationCampaigns"><i class="icon-map"></i> Campaigns</a>
+          <a class="btn btn-default" ui-sref="gamificationEvents"><i class="icon-globe"></i> Events</a>
+        </div>
+      </div>
+      <div class="portlet-body">
+
+        <div class="row">
+          <div class="col-md-7">
+
+            <div class="portlet-body form">
+              <form action="#">
+                <div class="form-body">
+                  <div class="form-group">
+                    <label><b>Event</b></label>
+                    <div class="input-group">
+                      <span class="input-group-addon">
+                        <i class="icon-globe"></i>
+                      </span>
+                      <input type="text" class="form-control" disabled="true" ng-model="activity.event_id" ng-init="activity.event_id = event.id" ng-value="event.title || 'No Event Selected'">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label><b>Step</b></label>
+                    <div class="input-group">
+                      <span class="input-group-addon">
+                        <i class="fa fa-compass"></i>
+                      </span>
+                      <input type="text" class="form-control" placeholder="Step" ng-model="activity.step">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label><b>Title</b></label>
+                    <div class="input-group">
+                      <span class="input-group-addon">
+                        <i class="fa fa-envelope"></i>
+                      </span>
+                      <input type="text" class="form-control" placeholder="Title" ng-model="activity.title">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label><b>Page Content</b></label>
+                    <textarea class="form-control" rows="6" ng-model="activity.page_content"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label><b>Start date and End date</b></label>
+                    <div class="input-group input-large date-picker input-daterange" data-date="10/11/2012" data-date-format="dd/mm/yyyy">
+                      <input type="text" class="form-control" name="from" ng-model="activity.start_date">
+                      <span class="input-group-addon">to</span>
+                      <input type="text" class="form-control" name="to" ng-model="activity.end_date"></div>
+                  </div>
+                  <div class="form-group">
+                    <label><b>Status</b></label>
+                    <div class="mt-radio-list">
+                      <label class="mt-radio"> Active
+                        <input type="radio" ng-model="activity.activity_type" value="active"/>
+                        <span></span>
+                      </label>
+                      <label class="mt-radio"> Pending
+                        <input type="radio" ng-model="activity.activity_type" value="pending"/>
+                        <span></span>
+                      </label>
+                      <label class="mt-radio"> Locked
+                        <input type="radio" ng-model="activity.activity_type" value="locked"/>
+                        <span></span>
+                      </label>
+                      <label class="mt-radio"> Ended
+                        <input type="radio" ng-model="activity.activity_type" value="ended"/>
+                        <span></span>
+                      </label>
+                    </div>
+                  </div>
+
+                <button type="button" name="button" class="btn btn-primary" ng-click="createActivity(activity)">Create</button>
+              </form>
+            </div>
+
+          </div>
+        </div>
+        <script>
+        $('.date-picker').datepicker({
+            rtl: App.isRTL(),
+            orientation: "left",
+            autoclose: true
+        });
+        </script>
+
+
+      </div>
+    </div>
+  </div>
+</div>
