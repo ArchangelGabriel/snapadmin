@@ -18,12 +18,15 @@ function BroadcastController($scope, NotificationService, notificationsDep) {
   };
 
   $scope.removeNotification = function(notification) {
-    return NotificationService.remove(notification.id)
-      .then(function() {
-        $scope.notifications = $.grep($scope.notifications, function(e) { return e.id != notification.id });
-        alert('Delete Notification Success')
-      })
-      .catch(function() {alert('Delete Notification Failed')});
+    var isConfirmed = confirm('Are you sure you want to delete?')
+    if (isConfirmed) {
+      return NotificationService.remove(notification.id)
+        .then(function() {
+          $scope.notifications = $.grep($scope.notifications, function(e) { return e.id != notification.id });
+          alert('Delete Notification Success')
+        })
+        .catch(function(err) {alert('Delete Notification Failed')});  
+    }
   };
 };
 
