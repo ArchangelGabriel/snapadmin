@@ -9,10 +9,12 @@
   <title>Snaplar Admin</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
   <link href="assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
   <link href="assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
   <link href="assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <link href="assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />
+
   <link id="ng_load_plugins_before" />
   <link href="assets/global/css/components-rounded.min.css" id="style_components" rel="stylesheet" type="text/css" />
   <link href="assets/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
@@ -60,6 +62,7 @@
   <script src="assets/global/plugins/angularjs/angular.min.js" type="text/javascript"></script>
   <script src="assets/global/plugins/angularjs/plugins/angular-ui-router.min.js" type="text/javascript"></script>
   <script src="assets/global/plugins/angularjs/plugins/ocLazyLoad.min.js" type="text/javascript"></script>
+  <script src="assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
 
   <!-- END APP LEVEL ANGULARJS SCRIPTS -->
   <!-- BEGIN APP LEVEL JQUERY SCRIPTS -->
@@ -84,12 +87,16 @@
   <script src="controllers/EventsController.js"></script>
   <script src="controllers/ActivitiesController.js"></script>
   <script src="controllers/CategoriesController.js"></script>
+  <script src="controllers/BroadcastController.js"></script>
+  <script src="controllers/NotificationsController.js"></script>
 
   <script src="services/ProviderService.js"></script>
   <script src="services/CampaignService.js"></script>
   <script src="services/EventService.js"></script>
   <script src="services/ActivityService.js"></script>
   <script src="services/CategoryService.js"></script>
+  <script src="services/NotificationService.js"></script>
+  <script src="services/ScheduleService.js"></script>
 
 </body>
 </html>

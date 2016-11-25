@@ -1,0 +1,112 @@
+<ul class="page-breadcrumb breadcrumb">
+  <li>
+    <span>Broadcast</span>
+  </li>
+</ul>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="portlet light bordered">
+      <div class="portlet-title">
+        <div class="caption font-green-sharp">
+          <i class="fa fa-microphone font-green-sharp"></i>
+          <span class="caption-subject bold uppercase">Broadcast a Message</span>
+          <span class="caption-helper hide"></span>
+        </div>
+      </div>
+      <div class="portlet-body">
+        <div class="row">
+          <div class="col-md-5">
+
+            <div class="portlet-body form">
+              <form role="form">
+                <div class="form-body">
+
+                  <div class="form-group">
+                    <label><b>Message</b></label>
+                    <textarea class="form-control" rows="6" ng-model="notification.message"></textarea>
+                  </div>
+
+                  <div class="form-group" style="margin-bottom: 0;">
+                    <label><b>Audience</b></label>
+                    <div class="mt-radio-inline">
+                      <label class="mt-radio">
+                        <input type="radio" name="notification.platform" value="all_platforms" ng-model="notification.platform">all_platforms
+                        <span></span>
+                      </label>
+                      <label class="mt-radio">
+                        <input type="radio" name="notification.platform" value="apns" ng-model="notification.platform">apns
+                        <span></span>
+                      </label>
+                      <label class="mt-radio">
+                        <input type="radio" name="notification.platform" value="gcm" ng-model="notification.platform">gcm
+                        <span></span>
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label>
+                      <b>Execute Time</b>
+                    </label>
+
+                    <div class="input-group date form_datetime">
+                      <input type="text" size="16" readonly class="form-control" ng-model="notification.execute_time">
+                      <span class="input-group-btn">
+                        <button class="btn default date-set" type="button">
+                          <i class="fa fa-calendar"></i>
+                        </button>
+                      </span>
+                    </div>
+                  </div>
+
+                  <button type="button" name="button" class="btn btn-primary" ng-click="sendNotification(notification)">Broadcast</button>
+                </div>
+              </form>
+            </div>
+
+          </div>
+          <div class="col-md-7">
+            <!-- <table ng-if="campaign.events.length != 0" class="table"> -->
+            <table class="table" style="margin-top:10px">
+              <thead>
+                <tr>
+                  <th>id</th>
+                  <th>message</th>
+                  <th>audience</th>
+                  <th>execution_time</th>
+                  <th>status</th>
+                  <th>actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="notification in notifications | filter:'pending'">
+                  <td>{{notification.id}}</td>
+                  <td>{{notification.message}}</td>
+                  <td>{{notification.platform}}</td>
+                  <td>{{notification.execute_time | moment: 'format': 'Do MMM YYYY hh:mm'}}</td>
+                  <td>{{notification.status}}</td>
+                  <td>
+                    <a href="javascript:void(0);" ui-sref="broadcastEdit({id: notification.id})">edit</a>
+                    <a href="javascript:void(0);" ng-click="removeNotification(notification)">remove</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+$(".form_datetime").datetimepicker({
+  autoclose: true,
+  isRTL: App.isRTL(),
+  format: "dd MM yyyy - hh:ii",
+  pickerPosition: (App.isRTL() ? "bottom-right" : "bottom-left"),
+  stepMinute: 1
+});
+</script>

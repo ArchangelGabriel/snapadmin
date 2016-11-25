@@ -35,7 +35,7 @@
                   <tr ng-repeat="category in categories">
                     <td>{{category.id}}</td>
                     <td>{{category.name}}</td>
-                    <td><a href="#">Edit</a></td>
+                    <td><a ui-sref="categoryEdit({id: category.id})">Edit</a></td>
                   </tr>
                 </tbody>
               </table>

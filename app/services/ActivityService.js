@@ -7,7 +7,7 @@ function ActivityService($http, settings) {
     list: function(params) { return $http.get(activitiesEndpoint) },
     get: function(id) { return $http.get(activitiesEndpoint.concat(id)) },
     remove: function(id) {},
-    update: function(id, data) {},
+    update: function(id, data) { return $http.put(activitiesEndpoint.concat(id), data) },
     create: function(data) { return $http.post(activitiesEndpoint, data) }
   };
 

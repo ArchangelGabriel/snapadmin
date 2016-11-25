@@ -15,6 +15,19 @@ function CategoryNewController($scope, $state, CategoryService) {
   };
 };
 
+function CategoryEditController($scope, $state, CategoryService, categoryDep) {
+  $scope.category = categoryDep;
+
+  $scope.updateCategory = function(category) {
+    return CategoryService.update(category.id, category)
+      .then(function(result) {
+        var newCategory = result.data;
+        $state.go('categories');
+      });
+  };
+};
+
 angular.module('snapadmin')
-  .controller('CategoriesController',  ['$scope', 'categoriesDep', CategoriesController])
-  .controller('CategoryNewController', ['$scope', '$state', 'CategoryService', CategoryNewController]);
+  .controller('CategoriesController',   ['$scope', 'categoriesDep', CategoriesController])
+  .controller('CategoryNewController',  ['$scope', '$state', 'CategoryService', CategoryNewController])
+  .controller('CategoryEditController', ['$scope', '$state', 'CategoryService', 'categoryDep', CategoryEditController]);

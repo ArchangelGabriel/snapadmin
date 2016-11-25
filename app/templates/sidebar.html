@@ -7,7 +7,18 @@
             <a ui-sref="{{link.sref}}">
                 <i class="{{link.iconClass}}"></i>
                 <span class="title">{{link.title}}</span>
+                <span ng-if="link.children" class="arrow"></span>
             </a>
+
+            <ul ng-if="link.children" class="sub-menu">
+                <li ng-repeat="childLink in link.children">
+                    <a ui-sref="{{childLink.sref}}">
+                      <i class="{{childLink.iconClass}}"></i>
+                      <span class="title">{{childLink.title}}</span>
+                    </a>
+                </li>
+            </ul>
+
         </li>
     </ul>
 </div>

@@ -28,8 +28,8 @@
 
           <div class="col-md-3">
             <ul class="list-unstyled profile-nav">
-              <li><img src="assets/global/img/portfolio/600x600/5.jpg" class="img-responsive pic-bordered" alt=""></li>
-              <!-- <li><a href="javascript:;">Settings</a></li> -->
+              <li><img ng-src="{{provider.image_url}}" class="img-responsive pic-bordered" alt=""></li>
+              <li><a ui-sref="providerEdit({id: provider.id})"><i class="fa fa-wrench"></i>Edit</a></li>
             </ul>
           </div>
 
@@ -73,7 +73,7 @@
                         <tr ng-repeat="event in events">
                             <td><a ui-sref="gamificationEventDetail({id: event.id})">{{event.title}}</a></td>
                             <td>{{event.description}}</td>
-                            <td>{{event.status}}</td>
+                            <td>{{event.publish_status}}</td>
                         </tr>
                     </tbody>
                 </table>

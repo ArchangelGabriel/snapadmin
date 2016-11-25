@@ -20,6 +20,8 @@ function CampaignsController($scope, campaignsDep) {
       }
     );
 
+    console.log($scope.campaigns);
+
     campaignsTable = $('#campaignsTable').DataTable({
       data: $scope.campaigns,
       columns: [
@@ -28,11 +30,11 @@ function CampaignsController($scope, campaignsDep) {
             $(elem).html("<a href='/#!/gamification/campaigns/" + allData.id + "'>" + colData + "</a>");
           }},
         { data: 'description' },
-        { data: 'start_date',
+        { data: 'starts_at',
           fnCreatedCell: function(elem, colData, allData) {
             $(elem).html(moment(colData).format("Do MMM YYYY"));
           }},
-        { data: 'end_date',
+        { data: 'ends_at',
           fnCreatedCell: function(elem, colData, allData) {
             $(elem).html(moment(colData).format("Do MMM YYYY"));
           }},
@@ -70,11 +72,28 @@ function CampaignNewController($scope, $state, CampaignService, providersDep) {
   };
 };
 
+function CampaignEditController($scope, $state, CampaignService, campaignDep, providersDep) {
+  $scope.providers = providersDep;
+  $scope.campaign  = campaignDep;
+  $scope.campaign.starts_at = moment($scope.campaign.starts_at).format("D MMMM YYYY - hh:mm");
+  $scope.campaign.ends_at   = moment($scope.campaign.ends_at).format("D MMMM YYYY - hh:mm");
+  console.log($scope)
+
+  $scope.updateCampaign = function(campaign) {
+    var modifiedCampaign = angular.extend({}, campaign, { provider_id: $('#provider_id').val() });
+    return CampaignService.update(modifiedCampaign.id, modifiedCampaign)
+      .then(function(result) {
+        var newCampaign = result.data;
+        $state.go('gamificationCampaignDetail', {id: newCampaign.id});
+      });
+  };
+};
+
 function CampaignDetailController($scope, $state, campaignDep) {
   $scope.campaign = campaignDep;
   var now         = moment(new Date());
-  var start       = moment($scope.campaign.start_date);
-  var end         = moment($scope.campaign.end_date);
+  var start       = moment($scope.campaign.starts_at);
+  var end         = moment($scope.campaign.ends_at);
   var duration    = moment.duration(end.diff(start)).asDays();
   var difference  = moment.duration(end.diff(now)).asDays();
   $scope.progress = parseInt(((duration-difference)/duration)*100);
@@ -104,4 +123,5 @@ function untickAll() {
 angular.module('snapadmin')
   .controller('CampaignsController',      ['$scope', 'campaignsDep', CampaignsController])
   .controller('CampaignNewController',    ['$scope', '$state', 'CampaignService', 'providersDep', CampaignNewController])
+  .controller('CampaignEditController',   ['$scope', '$state', 'CampaignService', 'campaignDep', 'providersDep', CampaignEditController])
   .controller('CampaignDetailController', ['$scope', '$state', 'campaignDep', CampaignDetailController]);

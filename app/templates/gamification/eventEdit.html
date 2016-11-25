@@ -1,0 +1,232 @@
+<ul class="page-breadcrumb breadcrumb">
+  <li>
+    <a ui-sref="gamification">Gamification</a>
+    <i class="fa fa-circle"></i>
+  </li>
+  <li>
+    <a ui-sref="gamificationEvents">Events</a>
+    <i class="fa fa-circle"></i>
+  </li>
+  <li>
+    <a ui-sref="gamificationEventDetail({id: event.id})">{{event.id}}</a>
+    <i class="fa fa-circle"></i>
+  </li>
+  <li>
+    <span>Edit</span>
+  </li>
+</ul>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="portlet light bordered">
+      <div class="portlet-title">
+        <div class="caption font-green-sharp">
+          <i class="icon-diamond font-green-sharp"></i>
+          <span class="caption-subject bold uppercase" data-ng-bind="$state.current.data.pageTitle"></span>
+          <span class="caption-helper hide"></span>
+        </div>
+        <div class="actions">
+          <a class="btn btn-default" ui-sref="gamificationCampaigns"><i class="icon-map"></i> Campaigns</a>
+          <a class="btn btn-default" ui-sref="gamificationEvents"><i class="icon-globe"></i> Events</a>
+        </div>
+      </div>
+      <div class="portlet-body">
+
+        <div class="row">
+          <div class="col-md-7">
+
+              <div class="portlet-body form">
+                <form action="#">
+                  <div class="form-body">
+
+                    <input type="hidden" class="form-control" disabled="true" ng-model="event.provider_id">
+
+                    <div class="form-group">
+                      <label><b>Campaign</b></label>
+                      <div class="input-group">
+                        <span class="input-group-addon">
+                          <i class="icon-map"></i>
+                        </span>
+                        <input type="text" class="form-control" disabled="true" ng-model="event.campaign.id">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label><b>Title</b></label>
+                      <div class="input-group">
+                        <span class="input-group-addon">
+                          <i class="fa fa-envelope"></i>
+                        </span>
+                        <input type="text" class="form-control" placeholder="Title" ng-model="event.title">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label><b>Description</b></label>
+                      <textarea class="form-control" rows="6" ng-model="event.description"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                      <label><b>Page Content</b></label>
+                      <textarea class="form-control" rows="6" ng-model="event.page_content"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                      <label><b>Categories</b></label>
+                      <div class="input-group">
+                        <select id="category_ids" class="form-control select2" multiple>
+                          <option ng-repeat="category in categories" ng-value="{{category.id}}" ng-selected="event.category_ids.includes(category.id)">{{category.name}}</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label><b>Starts At</b></label>
+                      <div class="input-group date form_datetime">
+                        <input type="text" size="16" readonly class="form-control" ng-model="event.starts_at">
+                        <span class="input-group-btn">
+                          <button class="btn default date-set" type="button">
+                            <i class="fa fa-calendar"></i>
+                          </button>
+                        </span>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label><b>Ends At</b></label>
+                      <div class="input-group date form_datetime">
+                        <input type="text" size="16" readonly class="form-control" ng-model="event.ends_at">
+                        <span class="input-group-btn">
+                          <button class="btn default date-set" type="button">
+                            <i class="fa fa-calendar"></i>
+                          </button>
+                        </span>
+                      </div>
+                    </div>
+
+                    <div class="form-group row">
+                      <div class="col-xs-6">
+                        <label><b>Lng</b></label>
+                        <input type="number" class="form-control" placeholder="Lng" ng-model="event.location[0]">
+                      </div>
+                      <div class="col-xs-6">
+                        <label><b>Lat</b></label>
+                        <input type="number" class="form-control" placeholder="Lat" ng-model="event.location[1]">
+                      </div>
+                    </div>
+
+                    <div class="form-group row">
+                      <div class="col-xs-6">
+                        <label><b>Country</b></label>
+                        <input type="text" class="form-control" placeholder="SGP" ng-model="event.country">
+                      </div>
+                      <div class="col-xs-6">
+                        <label><b>Region</b></label>
+                        <input type="text" class="form-control" placeholder="Central" ng-model="event.region">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label><b>Event AR Package</b></label>
+                      <div class="input-group">
+                        <span class="input-group-addon">
+                          <i class="fa fa-link"></i>
+                        </span>
+                        <input type="text" class="form-control" placeholder="http://storage.pixeloak.com/ar_content.3d" ng-model="event.event_ar_package">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label><b>Image Url</b></label>
+                      <div class="input-group">
+                        <span class="input-group-addon">
+                          <i class="fa fa-image"></i>
+                        </span>
+                        <input type="text" class="form-control" placeholder="http://storage.pixeloak.com/image.jpg" ng-model="event.image_url">
+                      </div>
+                    </div>
+                    <hr />
+
+                    <div class="form-group">
+                      <div class="row">
+                        <label class="col-md-12"><b>World Setting</b></label>
+                      </div>
+                      <div class="row">
+                        <div class="col-xs-11 col-xs-offset-1 input-group" style="margin-top: 15px">
+                          <label><b>Feature Request</b></label>
+                          <div class="mt-radio-inline">
+                            <label class="mt-radio">
+                              <input type="radio" name="world_setting.feature_request" value="0" ng-model="event.world_setting.feature_request">Geo
+                              <span></span>
+                            </label>
+                            <label class="mt-radio">
+                              <input type="radio" name="world_setting.feature_request" value="1" ng-model="event.world_setting.feature_request">Tracking 2d
+                              <span></span>
+                            </label>
+                            <label class="mt-radio">
+                              <input type="radio" name="world_setting.feature_request" value="2" ng-model="event.world_setting.feature_request">Both
+                              <span></span>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-xs-11 col-xs-offset-1 input-group">
+                          <label><b>Orientation</b></label>
+                          <div class="mt-radio-inline">
+                            <label class="mt-radio">
+                              <input type="radio" name="world_setting.orientation" value="0" ng-model="event.world_setting.orientation">Auto
+                              <span></span>
+                            </label>
+                            <label class="mt-radio">
+                              <input type="radio" name="world_setting.orientation" value="1" ng-model="event.world_setting.orientation">Portrait
+                              <span></span>
+                            </label>
+                            <label class="mt-radio">
+                              <input type="radio" name="world_setting.orientation" value="2" ng-model="event.world_setting.orientation">Landscape
+                              <span></span>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <hr />
+
+                    <div class="form-group">
+                      <label><b>Publish Status</b></label>
+                      <div class="mt-radio-inline">
+                        <label class="mt-radio">
+                          <input type="radio" name="publish_status" value="published" ng-model="event.publish_status"> Published
+                          <span></span>
+                        </label>
+                        <label class="mt-radio">
+                          <input type="radio" name="publish_status" value="unpublished" ng-model="event.publish_status"> Unpublished
+                          <span></span>
+                        </label>
+                      </div>
+                    </div>
+
+                  <button type="button" name="button" class="btn btn-primary" ng-click="updateEvent(event)">Update</button>
+                </form>
+
+              </div>
+            </div>
+          </div>
+
+          <script>
+          $(".form_datetime").datetimepicker({
+            autoclose: true,
+            isRTL: App.isRTL(),
+            format: "dd MM yyyy - hh:ii",
+            pickerPosition: (App.isRTL() ? "bottom-right" : "bottom-left")
+          });
+
+          ComponentsSelect2.init(); // init todo page
+          </script>
+
+
+      </div>
+
+    </div>
+  </div>
+</div>

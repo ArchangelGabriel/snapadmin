@@ -7,7 +7,7 @@ function CategoryService($http, settings) {
     list: function(params) { return $http.get(categoriesEndpoint) },
     get: function(id) { return $http.get(categoriesEndpoint.concat(id)) },
     remove: function(id) {},
-    update: function(id, data) {},
+    update: function(id, data) { return $http.put(categoriesEndpoint.concat(id), data) },
     create: function(data) { return $http.post(categoriesEndpoint, data) }
   };
 

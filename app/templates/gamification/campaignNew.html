@@ -53,13 +53,31 @@
                     <label><b>Description</b></label>
                     <textarea class="form-control" rows="6" ng-model="campaign.description"></textarea>
                   </div>
+
                     <div class="form-group">
-                      <label><b>Start date and End date</b></label>
-                      <div class="input-group input-large date-picker input-daterange" data-date="10/11/2012" data-date-format="mm/dd/yyyy">
-                          <input type="text" class="form-control" name="from" ng-model="campaign.start_date">
-                          <span class="input-group-addon"> to </span>
-                          <input type="text" class="form-control" name="to" ng-model="campaign.end_date"> </div>
+                      <label><b>Starts At</b></label>
+                      <div class="input-group date form_datetime">
+                        <input type="text" size="16" readonly class="form-control" ng-model="campaign.starts_at">
+                        <span class="input-group-btn">
+                          <button class="btn default date-set" type="button">
+                            <i class="fa fa-calendar"></i>
+                          </button>
+                        </span>
+                      </div>
                     </div>
+
+                    <div class="form-group">
+                      <label><b>Ends At</b></label>
+                      <div class="input-group date form_datetime">
+                        <input type="text" size="16" readonly class="form-control" ng-model="campaign.ends_at">
+                        <span class="input-group-btn">
+                          <button class="btn default date-set" type="button">
+                            <i class="fa fa-calendar"></i>
+                          </button>
+                        </span>
+                      </div>
+                    </div>
+
                     <div class="form-group">
                       <label><b>Status</b></label>
                       <div class="mt-radio-list">
@@ -91,9 +109,11 @@
         </div>
 
         <script>
-        $('.date-picker').datepicker({
-            orientation: "left",
-            autoclose: true
+        $(".form_datetime").datetimepicker({
+          autoclose: true,
+          isRTL: App.isRTL(),
+          format: "dd MM yyyy - hh:ii",
+          pickerPosition: (App.isRTL() ? "bottom-right" : "bottom-left")
         });
         </script>
 

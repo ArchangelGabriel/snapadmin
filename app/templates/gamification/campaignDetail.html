@@ -35,8 +35,7 @@
                 <img src="assets/global/img/portfolio/600x600/4.jpg" class="img-responsive pic-bordered" alt="">
                 <a href="javascript:;" class="profile-edit"> edit </a>
               </li>
-              <li><a href="javascript:;">Users</a></li>
-              <li><a href="javascript:;">Settings</a></li>
+              <li><a ui-sref="gamificationCampaignEdit({id: campaign.id})"><i class="fa fa-wrench"></i>Edit</a></li>
             </ul>
           </div>
 
@@ -46,14 +45,26 @@
                 <h1 class="font-green sbold uppercase">{{campaign.name}}</h1>
                 <p>{{campaign.description}}</p>
                 <ul class="list-inline">
-                    <li><i class="fa fa-calendar-check-o"></i>{{campaign.start_date | moment: 'format': 'Do MMM YYYY'}}</li>
-                    <li><i class="fa fa-calendar-times-o"></i>{{campaign.end_date | moment: 'format': 'Do MMM YYYY'}}</li>
+                    <li><i class="fa fa-calendar-check-o"></i>{{campaign.starts_at | moment: 'format': 'Do MMM YYYY'}}</li>
+                    <li><i class="fa fa-calendar-times-o"></i>{{campaign.ends_at | moment: 'format': 'Do MMM YYYY'}}</li>
                     <li><i class="fa fa-home"></i>{{campaign.provider.name}}</li>
                 </ul>
-                <div class="progress">
+                <div class="progress" ng-if="progress >= 0 &&  progress <= 100">
                   <div class="progress-bar progress-bar-info" role="progressbar"
                     style="width: {{progress}}%;">
                     {{progress}}% Done
+                  </div>
+                </div>
+                <div class="progress" ng-if="progress < 0">
+                  <div class="progress-bar progress-bar-success" role="progressbar"
+                    style="width: 100%;">
+                    Event Starting Soon
+                  </div>
+                </div>
+                <div class="progress" ng-if="progress > 100">
+                  <div class="progress-bar progress-bar-error" role="progressbar"
+                    style="width: 100%;">
+                    Event Ended
                   </div>
                 </div>
                 <hr />
@@ -114,9 +125,9 @@
                     <tr ng-repeat="event in campaign.events">
                       <td><a ui-sref="gamificationEventDetail({id: event.id})">{{event.title}}</a></td>
                       <td>{{event.description}}</td>
-                      <td>{{event.start_date | moment: 'format': 'Do MMM YYYY'}}</td>
-                      <td>{{event.end_date | moment: 'format': 'Do MMM YYYY'}}</td>
-                      <td>{{event.status}}</td>
+                      <td>{{event.starts_at | moment: 'format': 'Do MMM YYYY'}}</td>
+                      <td>{{event.ends_at | moment: 'format': 'Do MMM YYYY'}}</td>
+                      <td>{{event.publish_status}}</td>
                     </tr>
                   </tbody>
                 </table>

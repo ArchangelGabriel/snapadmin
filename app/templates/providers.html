@@ -78,7 +78,7 @@
                       <div ng-repeat="provider in providers | filter:searchText" class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                         <div class="mt-card-item">
                           <div class="mt-card-avatar mt-overlay-1">
-                            <img src="assets/global/img/portfolio/600x600/5.jpg" />
+                            <img ng-src="{{provider.image_url}}" />
                             <div class="mt-overlay">
                                 <ul class="mt-info">
                                     <li>
@@ -109,7 +109,7 @@
                 <div ng-repeat="provider in providers | filter:searchText" class="row margin-bottom-10" style="padding-bottom: 10px;">
                   <div class="col-md-12">
                     <div class="col-md-1" style="padding: 0;">
-                      <img src="assets/global/img/portfolio/600x600/5.jpg" class="img-responsive img-thumbnail"/>
+                      <img ng-src="{{provider.image_url}}" class="img-responsive img-thumbnail"/>
                     </div>
                     <div class="col-md-4">
                       <a ui-sref="providerDetail({id: provider.id})" class="font-gray h3" style="padding: 0; margin: 5px 0 0; font-weight: 500;">{{provider.name}}</a>

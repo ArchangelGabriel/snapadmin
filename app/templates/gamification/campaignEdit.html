@@ -1,0 +1,128 @@
+<ul class="page-breadcrumb breadcrumb">
+  <li>
+    <a ui-sref="gamification">Gamification</a>
+    <i class="fa fa-circle"></i>
+  </li>
+  <li>
+    <a ui-sref="gamificationCampaigns">Campaigns</a>
+    <i class="fa fa-circle"></i>
+  </li>
+  <li>
+    <a ui-sref="gamificationCampaignDetail({id: campaign.id})">{{campaign.id}}</a>
+    <i class="fa fa-circle"></i>
+  </li>
+  <li>
+    <span>Edit</span>
+  </li>
+</ul>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="portlet light bordered">
+      <div class="portlet-title">
+        <div class="caption font-green-sharp">
+          <i class="icon-diamond font-green-sharp"></i>
+          <span class="caption-subject bold uppercase" data-ng-bind="$state.current.data.pageTitle"></span>
+          <span class="caption-helper hide"></span>
+        </div>
+        <div class="actions">
+          <a class="btn btn-default" ui-sref="gamificationCampaigns"><i class="icon-map"></i> Campaigns</a>
+          <a class="btn btn-default" ui-sref="gamificationEvents"><i class="icon-globe"></i> Events</a>
+        </div>
+      </div>
+      <div class="portlet-body">
+
+        <div class="row">
+          <div class="col-md-7">
+
+            <div class="portlet-body form">
+              <form role="form">
+                <div class="form-body">
+                  <div class="form-group">
+                    <label><b>Provider</b></label>
+                    <select id="provider_id" class="form-control">
+                      <option ng-repeat="provider in providers" ng-value="{{provider.id}}" ng-selected="campaign.provider_id == provider.id">{{provider.name}}</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label><b>Name</b></label>
+                    <div class="input-group">
+                      <span class="input-group-addon">
+                        <i class="fa fa-archive"></i>
+                      </span>
+                      <input type="text" class="form-control" placeholder="Name" ng-model="campaign.name">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label><b>Description</b></label>
+                    <textarea class="form-control" rows="6" ng-model="campaign.description"></textarea>
+                  </div>
+
+                    <div class="form-group">
+                      <label><b>Starts At</b></label>
+                      <div class="input-group date form_datetime">
+                        <input type="text" size="16" readonly class="form-control" ng-model="campaign.starts_at">
+                        <span class="input-group-btn">
+                          <button class="btn default date-set" type="button">
+                            <i class="fa fa-calendar"></i>
+                          </button>
+                        </span>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label><b>Ends At</b></label>
+                      <div class="input-group date form_datetime">
+                        <input type="text" size="16" readonly class="form-control" ng-model="campaign.ends_at">
+                        <span class="input-group-btn">
+                          <button class="btn default date-set" type="button">
+                            <i class="fa fa-calendar"></i>
+                          </button>
+                        </span>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label><b>Status</b></label>
+                      <div class="mt-radio-list">
+                        <label class="mt-radio"> Active
+                          <input type="radio" ng-model="campaign.status" value="active"/>
+                          <span></span>
+                        </label>
+                        <label class="mt-radio"> Pending
+                          <input type="radio" ng-model="campaign.status" value="pending"/>
+                          <span></span>
+                        </label>
+                        <label class="mt-radio"> Locked
+                          <input type="radio" ng-model="campaign.status" value="locked"/>
+                          <span></span>
+                        </label>
+                        <label class="mt-radio"> Ended
+                          <input type="radio" ng-model="campaign.status" value="ended"/>
+                          <span></span>
+                        </label>
+                      </div>
+                    </div>
+                    <button type="button" name="button" class="btn btn-primary" ng-click="updateCampaign(campaign)">Update</button>
+                  </div>
+                </form>
+
+            </div>
+
+          </div>
+        </div>
+
+        <script>
+        $(".form_datetime").datetimepicker({
+          autoclose: true,
+          isRTL: App.isRTL(),
+          format: "dd MM yyyy - hh:ii",
+          pickerPosition: (App.isRTL() ? "bottom-right" : "bottom-left")
+        });
+        </script>
+
+
+      </div>
+    </div>
+  </div>
+</div>

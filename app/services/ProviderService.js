@@ -7,7 +7,7 @@ function ProviderService($http, settings) {
     list: function(params) { return $http.get(providersEndpoint, { params: params }) },
     get: function(id) { return $http.get(providersEndpoint.concat(id)) },
     remove: function(id) {},
-    update: function(id, data) {},
+    update: function(id, data) { return $http.put(providersEndpoint.concat(id), data) },
     create: function(data) { return $http.post(providersEndpoint, data) }
   };
 

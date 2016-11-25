@@ -28,15 +28,15 @@ function EventsController($scope, eventsDep) {
             $(elem).html("<a href='/#!/gamification/events/" + allData.id + "'>" + colData + "</a>");
           }},
         { data: 'description' },
-        { data: 'start_date',
+        { data: 'starts_at',
           fnCreatedCell: function(elem, colData, allData) {
             $(elem).html(moment(colData).format("Do MMM YYYY"));
           }},
-        { data: 'end_date',
+        { data: 'ends_at',
           fnCreatedCell: function(elem, colData, allData) {
             $(elem).html(moment(colData).format("Do MMM YYYY"));
           }},
-        { data: 'status' },
+        { data: 'publish_status' },
         { data: 'provider.name',
           fnCreatedCell: function(elem, colData, allData) {
             $(elem).html("<a href='/#!/providers/" + allData.provider_id + "'>" + colData + "</a>");
@@ -63,6 +63,7 @@ function EventNewController($scope, $state, EventService, categoriesDep, campaig
   $scope.event      = {};
 
   $scope.createEvent = function(event) {
+    console.log(event);
     return EventService.create(event)
       .then(function(newEvent) {
         $state.go('gamificationCampaignDetail', {id: $scope.campaign.id});
@@ -70,14 +71,51 @@ function EventNewController($scope, $state, EventService, categoriesDep, campaig
   };
 };
 
-function EventDetailController($scope, $state, eventDep) {
+function EventEditController($scope, $state, EventService, eventDep, categoriesDep) {
+  $scope.event            = eventDep;
+  $scope.event.starts_at = moment($scope.event.starts_at).format("D MMMM YYYY - hh:mm");
+  $scope.event.ends_at   = moment($scope.event.ends_at).format("D MMMM YYYY - hh:mm");
+  $scope.categories       = categoriesDep;
+
+  $scope.updateEvent = function(event) {
+    var modifiedEvent = angular.extend(
+      {},
+      event,
+      { campaign_id: $('#campaign_id').val(), category_ids: $('#category_ids').val() }
+      // { location: [$('#campaign_id').val()] }
+    );
+    console.log(modifiedEvent);
+    return EventService.update(modifiedEvent.id, modifiedEvent)
+      .then(function(result) {
+        var newEvent = result.data;
+        $state.go('gamificationEventDetail', {id: newEvent.id});
+      });
+  };
+};
+
+function EventDetailController($scope, $state, EventService, eventDep) {
+  $scope.label = ['default', 'primary', 'info', 'success', 'warning', 'error'];
   $scope.event = eventDep;
   var now         = moment(new Date());
-  var start       = moment($scope.event.start_date);
-  var end         = moment($scope.event.end_date);
+  var start       = moment($scope.event.starts_at);
+  var end         = moment($scope.event.ends_at);
   var duration    = moment.duration(end.diff(start)).asDays();
   var difference  = moment.duration(end.diff(now)).asDays();
   $scope.progress = parseInt(((duration-difference)/duration)*100);
+  console.log(eventDep);
+  $scope.sync = function(event) {
+    var modifiedEvent = angular.extend({}, event, { event_id: event.id, published_at: moment().toISOString() });
+    return EventService.sync(modifiedEvent)
+      .then(function(result) {
+        var syncedEvent = result.data;
+        console.log(syncedEvent);
+        alert('Event: Successfully synced.');
+      })
+      .catch(function(error) {
+        console.error(error);
+        alert('Event: Failed to sync.');
+      });
+  };
 };
 
 function getFilterStatus() {
@@ -103,4 +141,5 @@ function untickAll() {
 angular.module('snapadmin')
   .controller('EventsController',      ['$scope', 'eventsDep', EventsController])
   .controller('EventNewController',    ['$scope', '$state', 'EventService', 'categoriesDep', 'campaignDep', EventNewController])
-  .controller('EventDetailController', ['$scope', '$state', 'eventDep', EventDetailController]);
+  .controller('EventEditController',   ['$scope', '$state', 'EventService', 'eventDep', 'categoriesDep', EventEditController])
+  .controller('EventDetailController', ['$scope', '$state', 'EventService', 'eventDep', EventDetailController]);

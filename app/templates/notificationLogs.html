@@ -1,0 +1,95 @@
+<ul class="page-breadcrumb breadcrumb">
+  <li>
+    <span>Notification Logs</span>
+  </li>
+</ul>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="portlet light bordered">
+      <div class="portlet-title">
+        <div class="caption font-green-sharp">
+          <i class="fa fa-microphone font-green-sharp"></i>
+          <span class="caption-subject bold uppercase">Notification Logs</span>
+          <span class="caption-helper hide"></span>
+        </div>
+      </div>
+      <div class="portlet-body">
+
+        <div class="row">
+          <!-- <div class="col-md-4">
+            <label><b>Filter:</b></label>
+            <div class="mt-checkbox-inline">
+              <label class="mt-checkbox">
+                <input type="checkbox" class="filterStatus" value="all"> All
+                <span></span>
+              </label>
+              <label class="mt-checkbox">
+                <input type="checkbox" class="filterStatus" value="trial" checked> Trial
+                <span></span>
+              </label>
+              <label class="mt-checkbox">
+                <input type="checkbox" class="filterStatus" value="active"> Active
+                <span></span>
+              </label>
+              <label class="mt-checkbox">
+                <input type="checkbox" class="filterStatus" value="expired"> Expired
+                <span></span>
+              </label>
+            </div>
+          </div> -->
+
+          <div class="col-md-4 col-md-offset-8">
+            <form role="form">
+              <div class="form-body">
+                <div class="form-group">
+                  <div class="input-group" style="margin-top: 20px;">
+                    <span class="input-group-addon">
+                      <i class="fa fa-search"></i>
+                    </span>
+                    <input type="text" class="form-control" placeholder="Search Notification" ng-model="filters.text">
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <table class="table" style="margin-top:10px">
+              <thead>
+                <tr>
+                  <th>id</th>
+                  <th>message</th>
+                  <th>platform</th>
+                  <th>execution_time</th>
+                  <th>status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="notification in notifications | filter:filters.text">
+                  <td>{{notification.id}}</td>
+                  <td>{{notification.message }}</td>
+                  <td>{{notification.platform }}</td>
+                  <td>{{notification.execute_time | moment: 'format': 'Do MMM YYYY hh:mm'}}</td>
+                  <td>{{notification.status}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+$(".form_datetime").datetimepicker({
+  autoclose: true,
+  isRTL: App.isRTL(),
+  format: "dd MM yyyy - hh:ii",
+  pickerPosition: (App.isRTL() ? "bottom-right" : "bottom-left")
+});
+</script>
