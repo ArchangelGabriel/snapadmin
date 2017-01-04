@@ -72,10 +72,12 @@ function EventNewController($scope, $state, EventService, categoriesDep, campaig
 };
 
 function EventEditController($scope, $state, EventService, eventDep, categoriesDep) {
-  $scope.event            = eventDep;
-  $scope.event.starts_at = moment($scope.event.starts_at).format("D MMMM YYYY - hh:mm");
-  $scope.event.ends_at   = moment($scope.event.ends_at).format("D MMMM YYYY - hh:mm");
-  $scope.categories       = categoriesDep;
+  $scope.event             = eventDep;
+  $scope.event.starts_at   = moment($scope.event.starts_at).format("D MMMM YYYY - hh:mm");
+  $scope.event.ends_at     = moment($scope.event.ends_at).format("D MMMM YYYY - hh:mm");
+  $scope.event.location[0] = parseFloat($scope.event.location[0]);
+  $scope.event.location[1] = parseFloat($scope.event.location[1]);
+  $scope.categories        = categoriesDep;
 
   $scope.updateEvent = function(event) {
     var modifiedEvent = angular.extend(

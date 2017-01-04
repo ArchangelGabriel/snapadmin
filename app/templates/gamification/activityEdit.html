@@ -149,11 +149,55 @@
                     </div>
                   </div>
 
+                </div>
                 <button type="button" name="button" class="btn btn-primary" ng-click="updateActivity(activity)">Edit</button>
               </form>
             </div>
 
           </div>
+
+          <div class="col-md-5">
+
+            <div style="padding: 20px 0 5px;">
+              <b>Activity Template</b>
+            </div>
+
+            <div class="panel-group accordion" id="activity_rules_accordion">
+
+              <div ng-repeat="template in templates" class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a class="accordion-toggle accordion-toggle-styled" data-toggle="collapse" data-target="{{ '#' + template.id }}" data-parent="#activity_rules_accordion">
+                      <b>{{template.name}}</b>
+                      <span ng-if="activity.activity_rule.id == template.id" class="label label-warning">Added</span>
+                    </a>
+                  </h4>
+                </div>
+                <div id="{{ template.id }}" ng-class="{collapse: true, in: $index == 0}">
+                  <div class="panel-body">
+
+                    <div class="form-group">
+                      <label><b>Description</b></label>
+                      <div ng-bind-html="template.description"></div>
+                    </div>
+
+                    <div ng-repeat="(key, value) in template.parameters" class="form-group">
+                      <label><b>{{key}}</b></label>
+                      <input ng-if="value == 'number'" type="text" class="form-control" placeholder="text" ng-model="activity_params[template.id][key]">
+                      <input ng-if="value == 'string'" type="number" class="form-control" placeholder="number" ng-model="activity_params[template.id][key]">
+                    </div>
+
+                    <button ng-click="addTemplate(template, activity_params[template.id])" type="button" name="button" class="btn btn-primary">Add Template</button>
+                    <button ng-click="removeTemplate(template.id)" type="button" name="button" class="btn btn-danger">Remove Template</button>
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
         </div>
         <script>
         $(".form_datetime").datetimepicker({

@@ -2,7 +2,8 @@
 
 var snapadmin = angular.module('snapadmin', [
   'ui.router',
-  'oc.lazyLoad'
+  'oc.lazyLoad',
+  'ngSanitize'
 ])
 
 // TODO: separate this filter
@@ -31,10 +32,10 @@ var snapadmin = angular.module('snapadmin', [
     assetsPath: 'assets',
     globalPath: 'assets/global',
     layoutPath: 'assets/layouts/layout4',
-    railsApi: 'http://localhost:3001/api/',
-    cmsApi: 'http://localhost:3000/api/'
-    // railsApi: 'http://snaplar-rails.southeastasia.cloudapp.azure.com:3000/api/',
-    // cmsApi: 'http://snaplar-cms.southeastasia.cloudapp.azure.com:3000/api/'
+    // railsApi: 'http://localhost:3001/api/',
+    // cmsApi: 'http://localhost:3000/api/'
+    railsApi: 'http://snaplar-backend.southeastasia.cloudapp.azure.com:3001/api/',
+    cmsApi: 'http://snaplar-backend.southeastasia.cloudapp.azure.com:3000/api/'
   };
 
   $rootScope.settings = settings;
@@ -470,6 +471,7 @@ var snapadmin = angular.module('snapadmin', [
     templateUrl: 'templates/gamification/activityNew.html',
     controller: 'ActivityNewController',
     resolve: {
+
       eventDep: ['$stateParams', 'EventService', function($stateParams, EventService) {
         return EventService.get($stateParams.event_id)
           .then(function(result) {
@@ -486,6 +488,16 @@ var snapadmin = angular.module('snapadmin', [
     controller: 'ActivityEditController',
     data: { pageTitle: 'Edit Activity' },
     resolve: {
+      deps: ['$ocLazyLoad', function($ocLazyLoad) {
+        return $ocLazyLoad.load({
+          name: 'snapadmin',
+          insertBefore: '#ng_load_plugins_before',
+          files: [
+            'assets/global/plugins/bootstrap-tabdrop/js/bootstrap-tabdrop.js'
+          ]
+        })
+      }],
+
       activityDep: ['$stateParams', 'ActivityService' ,function($stateParams, ActivityService) {
         return ActivityService.get($stateParams.id)
           .then(function(result) {
