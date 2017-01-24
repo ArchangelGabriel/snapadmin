@@ -61,11 +61,13 @@ function EventNewController($scope, $state, EventService, categoriesDep, campaig
   $scope.categories = categoriesDep;
   $scope.campaign   = campaignDep;
   $scope.event      = {};
+  $scope.event.location = [];
 
   $scope.createEvent = function(event) {
     console.log(event);
     return EventService.create(event)
       .then(function(newEvent) {
+        console.log('newEvent', newEvent);
         $state.go('gamificationCampaignDetail', {id: $scope.campaign.id});
       });
   };
