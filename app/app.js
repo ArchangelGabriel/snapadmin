@@ -69,7 +69,7 @@ var snapadmin = angular.module('snapadmin', [
           name: 'snapadmin',
           insertBefore: '#ng_load_plugins_before',
           files: [
-            'assets2/pages/css/login-2.min.css'
+            'assets/pages/css/login-2.min.css'
           ]
         })
       }]
