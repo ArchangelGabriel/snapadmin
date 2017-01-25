@@ -20,8 +20,6 @@ function CampaignsController($scope, campaignsDep) {
       }
     );
 
-    console.log($scope.campaigns);
-
     campaignsTable = $('#campaignsTable').DataTable({
       data: $scope.campaigns,
       columns: [

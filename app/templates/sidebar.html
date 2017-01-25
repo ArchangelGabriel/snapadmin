@@ -1,24 +1,33 @@
-<div class="page-sidebar navbar-collapse collapse">
-    <ul class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="false" data-slide-speed="200" ng-class="{'page-sidebar-menu-closed': settings.layout.pageSidebarClosed}">
-        <li class="heading">
-            <h3>{{title}}</h3>
-        </li>
-        <li class="start nav-item" ng-repeat="link in links">
-            <a ui-sref="{{link.sref}}">
-                <i class="{{link.iconClass}}"></i>
-                <span class="title">{{link.title}}</span>
-                <span ng-if="link.children" class="arrow"></span>
-            </a>
+<div class="page-sidebar-wrapper">
+    <div class="page-sidebar navbar-collapse collapse">
+        <ul class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="false" data-slide-speed="200" ng-class="{'page-sidebar-menu-closed': settings.layout.pageSidebarClosed}">
+            <li class="heading">
+                <h3>{{title}}</h3>
+            </li>
+            <li class="nav-item" ng-repeat="link in links">
 
-            <ul ng-if="link.children" class="sub-menu">
-                <li ng-repeat="childLink in link.children">
-                    <a ui-sref="{{childLink.sref}}">
-                      <i class="{{childLink.iconClass}}"></i>
-                      <span class="title">{{childLink.title}}</span>
-                    </a>
-                </li>
-            </ul>
+                <a ng-if="link.sref && link.access.includes(user.roles[0])" ui-sref="{{link.sref}}">
+                    <i class="{{link.iconClass}}"></i>
+                    <span class="title">{{link.title}}</span>
+                    <span ng-if="link.children" class="arrow"></span>
+                </a>
 
-        </li>
-    </ul>
+                <a ng-if="!link.sref && link.access.includes(user.roles[0])">
+                  <i class="{{link.iconClass}}"></i>
+                  <span class="title">{{link.title}}</span>
+                  <span ng-if="link.children" class="arrow"></span>
+                </a>
+
+                <ul ng-if="link.children && link.access.includes(user.roles[0])" class="sub-menu">
+                    <li ng-repeat="childLink in link.children">
+                        <a ui-sref="{{childLink.sref}}">
+                          <i class="{{childLink.iconClass}}"></i>
+                          <span class="title">{{childLink.title}}</span>
+                        </a>
+                    </li>
+                </ul>
+
+            </li>
+        </ul>
+    </div>
 </div>

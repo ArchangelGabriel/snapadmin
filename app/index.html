@@ -31,20 +31,20 @@
     <div class="bounce3"></div>
   </div>
 
-  <div ng-include="'templates/header.html'" data-ng-controller="HeaderController" class="page-header navbar navbar-fixed-top"></div>
+  <div ui-view name="header"></div>
 
   <div class="clearfix"></div>
 
   <div class="page-container">
-      <div data-ng-include="'templates/sidebar.html'" data-ng-controller="SidebarController" class="page-sidebar-wrapper"> </div>
+      <div ui-view name="nav"></div>
       <div class="page-content-wrapper">
           <div class="page-content">
-              <div ui-view class="fade-in-up"></div>
+              <div ui-view name="content" class="fade-in-up"></div>
           </div>
       </div>
-      <a href="javascript:;" class="page-quick-sidebar-toggler">
+      <!-- <a href="javascript:;" class="page-quick-sidebar-toggler">
           <i class="icon-login"></i>
-      </a>
+      </a> -->
   </div>
 
   <!--[if lt IE 7]>
@@ -52,7 +52,7 @@
   <![endif]-->
 
   <!-- In production use:
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js.min.js"></script>
   -->
   <script src="assets/global/plugins/moment.min.js"></script>
   <script src="assets/global/plugins/jquery.min.js" type="text/javascript"></script>
@@ -61,9 +61,12 @@
   <!-- BEGIN CORE ANGULARJS PLUGINS -->
   <script src="assets/global/plugins/angularjs/angular.min.js" type="text/javascript"></script>
   <script src="assets/global/plugins/angularjs/angular-sanitize.min.js" type="text/javascript"></script>
+  <script src="assets/global/plugins/angular-cookie/angular-cookie.min.js" type="text/javascript"></script>
+  <script src="assets/global/plugins/ng-token-auth/dist/ng-token-auth.min.js" type="text/javascript"></script>
   <script src="assets/global/plugins/angularjs/plugins/angular-ui-router.min.js" type="text/javascript"></script>
   <script src="assets/global/plugins/angularjs/plugins/ocLazyLoad.min.js" type="text/javascript"></script>
   <script src="assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+
 
   <!-- END APP LEVEL ANGULARJS SCRIPTS -->
   <!-- BEGIN APP LEVEL JQUERY SCRIPTS -->
@@ -79,6 +82,7 @@
   <script src="controllers/HeaderController.js"></script>
   <script src="controllers/SidebarController.js"></script>
 
+  <script src="controllers/AuthenticationController.js"></script>
   <script src="controllers/ProfileController.js"></script>
   <script src="controllers/DashboardController.js"></script>
   <script src="controllers/UsersController.js"></script>
@@ -91,6 +95,7 @@
   <script src="controllers/BroadcastController.js"></script>
   <script src="controllers/NotificationsController.js"></script>
 
+  <script src="services/UserService.js"></script>
   <script src="services/ProviderService.js"></script>
   <script src="services/CampaignService.js"></script>
   <script src="services/EventService.js"></script>
@@ -98,6 +103,8 @@
   <script src="services/CategoryService.js"></script>
   <script src="services/NotificationService.js"></script>
   <script src="services/ScheduleService.js"></script>
+
+  <script src="directives/restrict.js"></script>
 
 </body>
 </html>

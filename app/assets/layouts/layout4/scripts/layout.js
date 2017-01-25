@@ -59,7 +59,7 @@ var Layout = function() {
     var handleSidebarMenuActiveLink = function (mode, el, $state) {
         var url = location.hash.toLowerCase();
         var menu = $('.page-sidebar-menu');
- 
+
         if (mode === 'click' || mode === 'set') {
             el = $(el);
         } else if (mode === 'match') {
@@ -73,7 +73,7 @@ var Layout = function() {
                 } else {
                     var path = $(this).attr('href');
                     if (path) {
-                        // url match condition         
+                        // url match condition
                         path = path.toLowerCase();
                         if (path.length > 1 && url.substr(1, path.length - 1) == path.substr(1)) {
                             el = $(this);
@@ -83,11 +83,11 @@ var Layout = function() {
                 }
             });
         }
- 
+
         if (!el || el.size() == 0) {
             return;
         }
- 
+
         if (el.attr('href') == 'javascript:;' ||
             el.attr('ui-sref') == 'javascript:;' ||
             el.attr('href') == '#' ||
@@ -95,10 +95,10 @@ var Layout = function() {
             ) {
             return;
         }
- 
+
         var slideSpeed = parseInt(menu.data('slide-speed'));
         var keepExpand = menu.data('keep-expanded');
- 
+
         // begin: handle active state
         if (menu.hasClass('page-sidebar-menu-hover-submenu') === false) {
             menu.find('li.nav-item.open').each(function () {
@@ -115,11 +115,11 @@ var Layout = function() {
                         return;
                     }
                 });
- 
+
                 if (match === true) {
                     return;
                 }
- 
+
                 $(this).removeClass('open');
                 $(this).find('> a > .arrow.open').removeClass('open');
                 $(this).find('> .sub-menu').slideUp();
@@ -127,26 +127,26 @@ var Layout = function() {
         } else {
             menu.find('li.open').removeClass('open');
         }
- 
+
         menu.find('li.active').removeClass('active');
         menu.find('li > a > .selected').remove();
         // end: handle active state
- 
+
         el.parents('li').each(function () {
             $(this).addClass('active');
             $(this).find('> a > span.arrow').addClass('open');
- 
+
             if ($(this).parent('ul.page-sidebar-menu').size() === 1) {
                 $(this).find('> a').append('<span class="selected"></span>');
             }
- 
+
             if ($(this).children('ul.sub-menu').size() === 1) {
                 $(this).addClass('open');
             }
         });
- 
+
         if (mode === 'click') {
-            if (App.getViewPort().width < resBreakpointMd && $('.page-sidebar').hasClass('in')) { // close the menu on mobile view while laoding a page 
+            if (App.getViewPort().width < resBreakpointMd && $('.page-sidebar').hasClass('in')) { // close the menu on mobile view while laoding a page
                 $('.page-header .responsive-toggler').click();
             }
         }
@@ -154,19 +154,20 @@ var Layout = function() {
 
     // Handle sidebar menu
     var handleSidebarMenu = function() {
+      console.log('I get called!');
         $('.page-sidebar').on('click', 'li > a', function(e) {
-
+            console.log('I get called!');
             if (App.getViewPort().width >= resBreakpointMd && $(this).parents('.page-sidebar-menu-hover-submenu').size() === 1) { // exit of hover sidebar menu
                 return;
             }
 
             if ($(this).next().hasClass('sub-menu') === false) {
-                if (App.getViewPort().width < resBreakpointMd && $('.page-sidebar').hasClass("in")) { // close the menu on mobile view while laoding a page 
+                if (App.getViewPort().width < resBreakpointMd && $('.page-sidebar').hasClass("in")) { // close the menu on mobile view while laoding a page
                     $('.page-header .responsive-toggler').click();
                 }
                 return;
             }
-            
+
             var parent = $(this).parent().parent();
             var the = $(this);
             var menu = $('.page-sidebar-menu');
@@ -245,7 +246,7 @@ var Layout = function() {
             });
             $(this).parents('li').addClass('active');
 
-            if (App.getViewPort().width < resBreakpointMd && $('.page-sidebar').hasClass("in")) { // close the menu on mobile view while laoding a page 
+            if (App.getViewPort().width < resBreakpointMd && $('.page-sidebar').hasClass("in")) { // close the menu on mobile view while laoding a page
                 $('.page-header .responsive-toggler').click();
             }
 
@@ -262,7 +263,7 @@ var Layout = function() {
 
             App.startPageLoading();
 
-            if (App.getViewPort().width < resBreakpointMd && $('.page-sidebar').hasClass("in")) { // close the menu on mobile view while laoding a page 
+            if (App.getViewPort().width < resBreakpointMd && $('.page-sidebar').hasClass("in")) { // close the menu on mobile view while laoding a page
                 $('.page-header .responsive-toggler').click();
             }
 
@@ -272,7 +273,7 @@ var Layout = function() {
         // handle scrolling to top on responsive menu toggler click when header is fixed for mobile view
         $(document).on('click', '.page-header-fixed-mobile .responsive-toggler', function(){
             App.scrollTop();
-        });      
+        });
     };
 
     var _calculateFixedSidebarViewportHeight = function () {
@@ -404,7 +405,7 @@ var Layout = function() {
 
     // Handles the horizontal menu
     var handleHeader = function() {
-        // handle search box expand/collapse        
+        // handle search box expand/collapse
         $('.page-header').on('click', '.search-form', function(e) {
             $(this).addClass("open");
             $(this).find('.form-control').focus();
@@ -444,7 +445,7 @@ var Layout = function() {
                     $('.scroll-to-top').fadeOut(duration);
                 }
             });
-        } else { // general 
+        } else { // general
             $(window).scroll(function() {
                 if ($(this).scrollTop() > offset) {
                     $('.scroll-to-top').fadeIn(duration);
@@ -470,7 +471,7 @@ var Layout = function() {
         // IMPORTANT!!!: Do not modify the core handlers call order.
 
         initHeader: function() {
-            handleHeader(); // handles horizontal menu    
+            handleHeader(); // handles horizontal menu
         },
 
         setSidebarMenuActiveLink: function(mode, el) {
@@ -487,22 +488,22 @@ var Layout = function() {
             handleSidebarMenu(); // handles main menu
             handleSidebarToggler(); // handles sidebar hide/show
 
-            if (App.isAngularJsApp()) {      
-                handleSidebarMenuActiveLink('match', null, $state); // init sidebar active links 
+            if (App.isAngularJsApp()) {
+                handleSidebarMenuActiveLink('match', null, $state); // init sidebar active links
             }
 
             App.addResizeHandler(handleFixedSidebar); // reinitialize fixed sidebar on window resize
         },
 
         initContent: function() {
-            return; 
+            return;
         },
 
         initFooter: function() {
             handleGoTop(); //handles scroll to top functionality in the footer
         },
 
-        init: function () {            
+        init: function () {
             this.initHeader();
             this.initSidebar(null);
             this.initContent();
@@ -510,18 +511,18 @@ var Layout = function() {
         },
 
         loadAjaxContent: function(url, sidebarMenuLink) {
-            var pageContent = $('.page-content .page-content-body');    
+            var pageContent = $('.page-content .page-content-body');
 
             App.startPageLoading({animate: true});
-            
+
             $.ajax({
                 type: "GET",
                 cache: false,
                 url: url,
                 dataType: "html",
-                success: function (res) {    
+                success: function (res) {
                     App.stopPageLoading();
-                                    
+
                     for (var i = 0; i < ajaxContentSuccessCallbacks.length; i++) {
                         ajaxContentSuccessCallbacks[i].call(res);
                     }
@@ -540,7 +541,7 @@ var Layout = function() {
 
                     for (var i = 0; i < ajaxContentErrorCallbacks.length; i++) {
                         ajaxContentSuccessCallbacks[i].call(res);
-                    }                    
+                    }
                 }
             });
         },
@@ -578,7 +579,7 @@ var Layout = function() {
 }();
 
 if (App.isAngularJsApp() === false) {
-    jQuery(document).ready(function() {    
+    jQuery(document).ready(function() {
        Layout.init(); // init metronic core componets
     });
 }

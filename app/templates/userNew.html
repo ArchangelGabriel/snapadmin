@@ -1,0 +1,88 @@
+<ul class="page-breadcrumb breadcrumb">
+  <li>
+    <a ui-sref="users">Users</a>
+    <i class="fa fa-circle"></i>
+  </li>
+  <li>
+    <span>New</span>
+  </li>
+</ul>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="portlet light bordered">
+      <div class="portlet-title">
+        <div class="caption font-green-sharp">
+          <i class="icon-users font-green-sharp"></i>
+          <span class="caption-subject bold uppercase">New User</span>
+          <span class="caption-helper hide"></span>
+        </div>
+      </div>
+      <div class="portlet-body">
+        <div class="row">
+          <div class="col-md-5">
+
+            <div class="portlet-body form">
+              <form role="form">
+                <div class="form-body">
+
+                  <div class="form-group">
+                    <label><b>Email</b></label>
+                    <div class="input-group">
+                      <span class="input-group-addon">
+                        <i class="fa fa-user"></i>
+                      </span>
+                      <input type="text" class="form-control" placeholder="Email" ng-model="new_user.email">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label><b>Password</b></label>
+                    <div class="input-group">
+                      <span class="input-group-addon">
+                        <i class="fa fa-lock"></i>
+                      </span>
+                      <input type="password" class="form-control" placeholder="Password" ng-model="new_user.password">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label><b>Confirm Password</b></label>
+                    <div class="input-group">
+                      <span class="input-group-addon">
+                        <i class="fa fa-lock"></i>
+                      </span>
+                      <input type="password" class="form-control" placeholder="Confirm Password" ng-model="new_user.password_confirmation">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                      <label><b>Role</b></label>
+                      <div class="mt-radio-inline" ng-init="new_user.role='report_viewer'">
+                        <label class="mt-radio">
+                          <input type="radio" ng-model="new_user.role" value="super_admin">Super Admin
+                          <span></span>
+                        </label>
+                        <label class="mt-radio">
+                          <input type="radio" ng-model="new_user.role" value="admin">Admin
+                          <span></span>
+                        </label>
+                        <label class="mt-radio">
+                          <input type="radio" ng-model="new_user.role" value="report_viewer">Report Viewer
+                          <span></span>
+                        </label>
+                      </div>
+                  </div>
+
+                  <button type="button" name="button" class="btn btn-primary" ng-click="createUser(new_user)">Create</button>
+                </div>
+              </form>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
