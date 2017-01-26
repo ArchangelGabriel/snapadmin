@@ -55,8 +55,12 @@ var snapadmin = angular.module('snapadmin', [
     tokenValidationPath: '/admin_auth/validate_token'
   });
 
-  $locationProvider.hashPrefix('!');
-  $urlRouterProvider.otherwise('/dashboard');
+  $urlRouterProvider.otherwise(function ($injector, $location) {
+    var $state = $injector.get("$state");
+    $state.go("dashboard");
+  });
+
+  $locationProvider.html5Mode(true);
 
   var login = {
     url: '/login',
