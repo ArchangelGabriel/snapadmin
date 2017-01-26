@@ -17,7 +17,7 @@
   },
   "scripts": {
     "prestart": "npm install",
-    "start": "http-server -a localhost -p 8000 -c-1 ./app",
+    "start": "cd app && superstatic --config ../superstatic.json --port 8000 --host 0.0.0.0",
 
     "pretest": "npm install",
     "test": "karma start karma.conf.js",
