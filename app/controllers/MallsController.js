@@ -59,7 +59,7 @@ function MallsListController($scope, $stateParams, MallService) {
 }
 
 function MallsNewController($scope, $state, MallService, Upload) {
-  $scope.createMall = function(mall, status = 'publish') {
+  $scope.createMall = function(mall, status = 'submitted') {
     mall = Object.assign({}, mall, { publish_status: status }, $scope.image != undefined && { image: $scope.image });
     MallService.create(mall).then(function(result) {
       $state.go('malls');
