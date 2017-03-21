@@ -1,6 +1,6 @@
 'use strict';
 
-function HeaderController($scope, $state, $auth, auth) {
+function HeaderController($rootScope, $scope, $state, $auth, auth) {
   $scope.email = auth.email;
   $scope.logout = function() {
     $auth.signOut()
@@ -11,7 +11,12 @@ function HeaderController($scope, $state, $auth, auth) {
         console.error(error);
       })
   };
+
+  $scope.toggleExperimental = function() {
+    $rootScope.settings.isExperimental = !$rootScope.settings.isExperimental;
+    console.log($rootScope.settings.isExperimental);
+  }
 };
 
 angular.module('snapadmin')
-  .controller('HeaderController', ['$scope', '$state', '$auth', 'auth', HeaderController]);
+  .controller('HeaderController', ['$rootScope', '$scope', '$state', '$auth', 'auth', HeaderController]);

@@ -1,10 +1,6 @@
 <ul class="page-breadcrumb breadcrumb">
   <li>
-    <a ui-sref="providers">Providers</a>
-    <i class="fa fa-circle"></i>
-  </li>
-  <li>
-    <a ui-sref="providerDetail({id: provider.id})">Providers</a>
+    <a ui-sref="pois">Points of Interest</a>
     <i class="fa fa-circle"></i>
   </li>
   <li>
@@ -18,7 +14,7 @@
       <div class="portlet-title">
         <div class="caption font-green-sharp">
           <i class="icon-diamond font-green-sharp"></i>
-          <span class="caption-subject bold uppercase">Edit Provider</span>
+          <span class="caption-subject bold uppercase">New Point of Interest</span>
           <span class="caption-helper hide"></span>
         </div>
       </div>
@@ -36,21 +32,27 @@
                       <span class="input-group-addon">
                         <i class="fa fa-archive"></i>
                       </span>
-                      <input type="text" class="form-control" placeholder="Name" ng-model="provider.name">
+                      <input type="text" class="form-control" placeholder="Name" ng-model="poi.name">
                     </div>
                   </div>
 
                   <div class="form-group">
-                    <label><b>Image Url</b></label>
-                    <div class="input-group">
-                      <span class="input-group-addon">
-                        <i class="fa fa-image"></i>
-                      </span>
-                      <input type="text" class="form-control" placeholder="http://storage.pixeloak.com/image.jpg" ng-model="provider.image_url">
+                    <label><b>Description</b></label>
+                    <textarea class="form-control" rows="6" ng-model="poi.description"></textarea>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-xs-6">
+                      <label><b>Lng</b></label>
+                      <input type="number" step="any" class="form-control" placeholder="Lng" ng-model="poi.geometry.location.lng">
+                    </div>
+                    <div class="col-xs-6">
+                      <label><b>Lat</b></label>
+                      <input type="number" step="any" class="form-control" placeholder="Lat" ng-model="poi.geometry.location.lat">
                     </div>
                   </div>
 
-                  <button type="button" name="button" class="btn btn-primary" ng-click="editProvider(provider)">Edit</button>
+                  <button type="button" name="button" class="btn btn-primary" ng-click="createPoi(poi)">Create Poi</button>
                 </div>
               </form>
             </div>

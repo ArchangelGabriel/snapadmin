@@ -1,0 +1,147 @@
+<ul class="page-breadcrumb breadcrumb">
+  <li>
+    <a ui-sref="malls">Malls</a>
+    <i class="fa fa-circle"></i>
+  </li>
+  <li>
+    <span>{{mall.id}}</span>
+  </li>
+</ul>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="portlet light bordered">
+      <div class="portlet-title">
+        <div class="caption font-green-sharp">
+          <i class="fa fa-building font-green-sharp"></i>
+          <span class="caption-subject bold uppercase">{{mall.name}}</span>
+          <span class="caption-helper hide"></span>
+        </div>
+        <div class="actions">
+          <button ui-sref="mallsEdit({id: mall.id})" class="btn btn-primary">Edit Mall
+            <i class="fa fa-wrench"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="portlet-body">
+        <div class="row">
+          <div class="col-md-4">
+            <img ng-src="{{ settings.imagePath.concat(mall.image.medium) }}"
+                 onerror="this.src='https://placeholdit.imgix.net/~text?txtsize=100&txt=SampleImage&w=600&h=600';"
+                 class="img-responsive"
+                 style="border: 1px solid #d3d3d3; object-fit: contain; height: 300px; width: 100%; background: black; margin-bottom: 15px;">
+          </div>
+
+          <div class="col-md-5">
+            <h3 class="uppercase bold font-grey-mint" style="margin: 0 0 15px;">{{mall.name}}</h3>
+            <small class="bold" style="display:block; margin-bottom: 15px;">
+              {{mall.block}} {{mall.street}}, Singapore {{mall.postal_code}}
+            </small>
+            <p>{{mall.description}}</p>
+            <p>
+              Status: <label class="label" ng-class="status()">{{mall.publish_status}}</label>
+            </p>
+          </div>
+        </div>
+
+        <div class="row">
+
+          <div class="col-md-12">
+            <ul class="nav nav-tabs">
+              <li class="active">
+                  <a href="#" data-target="#stores" data-toggle="tab">Store Listings</a>
+              </li>
+              <li>
+                  <a href="#" data-target="#billboards" data-toggle="tab">Billboards</a>
+              </li>
+              <li>
+                  <a href="#" data-target="#map" data-toggle="tab">Map</a>
+              </li>
+            </ul>
+            <div class="tab-content">
+
+              <div class="tab-pane active" id="stores">
+                <div class="actions pull-right" style="margin-bottom: 10px;">
+                  <div class="input-group">
+                    <div class="input-icon right" style="margin-right: 10px;">
+                      <i class="fa fa-search"></i>
+                      <input class="form-control" type="text" name="search" placeholder="Search" ng-model="storeFilter">
+                    </div>
+                    <span class="input-group-btn">
+                      <button ui-sref="storesNew({ mall_id: mall.id })" class="btn btn-primary">New Store
+                        <i class="fa fa-plus"></i>
+                      </button>
+                    </span>
+                  </div>
+                </div>
+
+                <table class="table table-striped table-bordered table-hover">
+                  <thead>
+                    <tr>
+                      <th>Store</th>
+                      <th>Description</th>
+                      <th>Level</th>
+                      <th>Unit</th>
+                      <th>Linked</th>
+                      <th>Edit</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="store in stores | filter: storeFilter">
+                      <td><a ui-sref="storesEdit({ mall_id: mall.id, id: store.id })">{{store.name}}</a></td>
+                      <td>{{store.description}}</td>
+                      <td>{{store.level}}</td>
+                      <td>{{store.unit}}</td>
+                      <td><input type="checkbox" ng-checked="{{store.linked}}"></td>
+                      <td><input type="checkbox" ng-checked="{{store.edit}}"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="tab-pane" id="billboards">
+                <div class="actions pull-right" style="margin-bottom: 10px;">
+                  <div class="input-group">
+                    <div class="input-icon right" style="margin-right: 10px;">
+                      <i class="fa fa-search"></i>
+                      <input class="form-control" type="text" name="search" placeholder="Search" ng-model="textFilter">
+                    </div>
+                    <span class="input-group-btn">
+                      <button ui-sref="billboardsNew" class="btn btn-primary">New Billboard
+                        <i class="fa fa-plus"></i>
+                      </button>
+                    </span>
+                  </div>
+                </div>
+
+                <table class="table table-striped table-bordered table-hover">
+                  <thead>
+                    <tr>
+                      <th>Billboard</th>
+                      <th>Description</th>
+                      <th>Level</th>
+                      <th>Unit</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="billboard in billboards">
+                      <td><a href="#">{{billboard.name}}</a></td>
+                      <td>{{billboard.description}}</td>
+                      <td>{{billboard.level}}</td>
+                      <td>{{billboard.unit}}</td>
+                      <td><a href="#">edit</a></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="tab-pane" id="map">Map Here</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

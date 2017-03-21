@@ -1,0 +1,61 @@
+<ul class="page-breadcrumb breadcrumb">
+  <li>
+    <span>Points Of Interest</span>
+  </li>
+</ul>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="portlet light bordered">
+      <div class="portlet-title">
+        <div class="caption font-green-sharp">
+          <i class="icon-diamond font-green-sharp"></i>
+          <span class="caption-subject bold uppercase" data-ng-bind="$state.current.data.pageTitle"></span>
+          <span class="caption-helper hide"></span>
+        </div>
+        <div class="actions">
+          <a class="btn btn-primary" ui-sref="poiNew"> Create Point Of Interest
+            <i class="fa fa-plus"></i>
+          </a>
+        </div>
+      </div>
+      <div class="portlet-body">
+
+        <div class="table-toolbar" style="margin-bottom: 0;">
+          <div class="row">
+            <form class="col-md-4 col-md-offset-8" role="form">
+              <div class="form-body">
+                <div class="form-group">
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-search"></i>
+                    </span>
+                    <input type="text" class="form-control" placeholder="Search Points Of Interest" ng-model="searchText">
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <table id="eventsTable" class="display" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <!-- <th>Description</th>
+                    <th>Categories</th>
+                    <th>Geometry</th> -->
+                </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="poi in pois | filter: searchText">
+                <td><a ui-sref="poiShow({id: poi._id})">{{poi.name}}</a></td>
+                <!-- <td>{{poi}}</td> -->
+              </tr>
+            </tbody>
+        </table>
+
+
+      </div>
+    </div>
+  </div>
+</div>

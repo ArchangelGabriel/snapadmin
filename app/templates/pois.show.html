@@ -1,0 +1,30 @@
+<ul class="page-breadcrumb breadcrumb">
+  <li>
+    <a ui-sref="pois">Points of Interest</a>
+    <i class="fa fa-circle"></i>
+  </li>
+  <li>
+    <span>{{poi._id}}</span>
+  </li>
+</ul>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="portlet light bordered">
+      <div class="portlet-title">
+        <div class="caption font-green-sharp">
+          <i class="fa fa-spoon font-green-sharp"></i>
+          <span class="caption-subject bold uppercase">{{poi.name}}</span>
+          <span class="caption-helper hide"></span>
+        </div>
+      </div>
+      <div class="portlet-body">
+        <div>
+          <p ng-if="poi.description">{{poi.description}}</p>
+          <p>lat: {{poi.geometry.location.lat}}, lng: {{poi.geometry.location.lng}}</p>
+        </div>
+        <a class="btn btn-primary" ui-sref="poiEdit({ id: poi._id })">Edit</a>
+      </div>
+    </div>
+  </div>
+</div>

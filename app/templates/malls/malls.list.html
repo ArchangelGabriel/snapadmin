@@ -1,0 +1,85 @@
+<ul class="page-breadcrumb breadcrumb">
+  <li>
+    <span>Malls</span>
+  </li>
+</ul>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="portlet light bordered">
+      <div class="portlet-title" style="margin-bottom: 0">
+        <div class="caption font-green-sharp">
+          <i class="fa fa-building font-green-sharp"></i>
+          <span class="caption-subject bold uppercase">Malls</span>
+          <span class="caption-helper hide"></span>
+        </div>
+        <div class="actions">
+          <div class="input-group">
+            <div class="input-icon right" style="margin-right: 10px;">
+              <i class="fa fa-search"></i>
+              <input class="form-control" type="text" name="search" placeholder="Search Malls" ng-model="textFilter">
+            </div>
+            <span class="input-group-btn">
+              <button ui-sref="mallsNew" class="btn btn-primary" type="button">
+                Create<i class="fa fa-plus fa-fw"></i>
+              </button>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="portlet-body" style="padding-top: 0">
+
+        <div class="row">
+
+          <div class="col-md-3" style="padding-right: 0;">
+
+            <div class="portlet light" style="padding: 10px 0 0;">
+                <div class="portlet-title">
+                    <div class="caption" data-toggle="collapse" data-target=".todo-project-list-content">
+                        <span class="caption-subject font-green-sharp bold uppercase">Filter By Location </span>
+                    </div>
+                </div>
+                <div class="portlet-body todo-project-list-content" style="height: auto;">
+                  <div class="todo-project-list">
+                    <ul class="nav nav-stacked">
+                      <li ng-repeat="city in cities">
+                        <a ui-sref="malls({city: city.key})">
+                          <span class="badge badge-default">{{city.value}}</span> {{city.key || 'Others'}}
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+            </div>
+
+          </div>
+
+          <div class="col-md-9" style="padding-left: 0;">
+            <div class="mt-element-list">
+              <div class="mt-list-container list-news ext-1">
+                <ul>
+                  <li class="mt-list-item" ng-repeat="mall in malls | filter: textFilter">
+                    <div class="list-thumb">
+                      <img onerror="this.src='https://placeholdit.imgix.net/~text?txtsize=100&txt=SampleImage&w=600&h=600';"
+                           ng-src="{{ 'https://snaplar.blob.core.windows.net/image/Users/juangabriel/Desktop/temp/pixeloak/snapadmin_backend/public' + mall.image.thumb }}">
+                    </div>
+                    <div class="list-item-content">
+                      <h3 class="uppercase bold" style="margin-bottom: 5px;">
+                        <a ui-sref="mallsDetail({id: mall.id})">{{mall.name}}</a>
+                      </h3>
+                      <small class="bold" style="display:block; margin-bottom: 5px;">
+                        {{mall.block}} {{mall.street}}, Singapore {{mall.postal_code}}
+                      </small>
+                      <p>{{mall.description}}</p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

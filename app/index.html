@@ -15,11 +15,16 @@
   <link href="assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
   <link href="assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />
 
+  <link href="assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css"></link>
+  <link href="assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css"></link>
   <link id="ng_load_plugins_before" />
   <link href="assets/global/css/components.min.css" id="style_components" rel="stylesheet" type="text/css" />
   <link href="assets/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
   <link href="assets/layouts/layout4/css/layout.min.css" rel="stylesheet" type="text/css" />
   <link href="assets/layouts/layout4/css/themes/light.min.css" rel="stylesheet" type="text/css" id="style_color" />
+  <link href="assets/pages/css/profile-2.min.css" rel="stylesheet" type="text/css" id="style_color" />
+
+  <link href="assets/global/plugins/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet" type="text/css" id="style_color" />
   <link rel="shortcut icon" href="favicon.ico" /> </head>
   <base href="/">
 </head>
@@ -67,8 +72,9 @@
   <script src="assets/global/plugins/angularjs/plugins/angular-ui-router.min.js" type="text/javascript"></script>
   <script src="assets/global/plugins/angularjs/plugins/ocLazyLoad.min.js" type="text/javascript"></script>
   <script src="assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
-
-
+  <script src="assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+  <script src="assets/global/plugins/datatables/datatables.all.min.js" type="text/javascript"></script>
+  <script src="assets/global/plugins/ng-file-upload/ng-file-upload.min.js"></script>
   <!-- END APP LEVEL ANGULARJS SCRIPTS -->
   <!-- BEGIN APP LEVEL JQUERY SCRIPTS -->
   <script src="assets/global/scripts/app.min.js" type="text/javascript"></script>
@@ -95,6 +101,12 @@
   <script src="controllers/CategoriesController.js"></script>
   <script src="controllers/BroadcastController.js"></script>
   <script src="controllers/NotificationsController.js"></script>
+  <script src="controllers/PoisController.js"></script>
+  <script src="controllers/MallsController.js"></script>
+  <script src="controllers/StoresController.js"></script>
+  <script src="controllers/BillboardsController.js"></script>
+  <script src="controllers/BusinessesController.js"></script>
+  <script src="controllers/AdvertisementsController.js"></script>
 
   <script src="services/UserService.js"></script>
   <script src="services/ProviderService.js"></script>
@@ -104,8 +116,12 @@
   <script src="services/CategoryService.js"></script>
   <script src="services/NotificationService.js"></script>
   <script src="services/ScheduleService.js"></script>
+  <script src="services/PoisService.js"></script>
+  <script src="services/MallService.js"></script>
+  <script src="services/StoreService.js"></script>
 
   <script src="directives/restrict.js"></script>
+  <script src="directives/image.js"></script>
 
 </body>
 </html>

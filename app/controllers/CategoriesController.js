@@ -1,10 +1,10 @@
 'use strict';
 
-function CategoriesController($scope, categoriesDep) {
+function CategoriesListController($scope, categoriesDep) {
   $scope.categories = categoriesDep;
 };
 
-function CategoryNewController($scope, $state, CategoryService) {
+function CategoriesNewController($scope, $state, CategoryService) {
   $scope.category = {};
 
   $scope.createCategory = function(category) {
@@ -15,7 +15,7 @@ function CategoryNewController($scope, $state, CategoryService) {
   };
 };
 
-function CategoryEditController($scope, $state, CategoryService, categoryDep) {
+function CategoriesEditController($scope, $state, CategoryService, categoryDep) {
   $scope.category = categoryDep;
 
   $scope.updateCategory = function(category) {
@@ -28,6 +28,6 @@ function CategoryEditController($scope, $state, CategoryService, categoryDep) {
 };
 
 angular.module('snapadmin')
-  .controller('CategoriesController',   ['$scope', 'categoriesDep', CategoriesController])
-  .controller('CategoryNewController',  ['$scope', '$state', 'CategoryService', CategoryNewController])
-  .controller('CategoryEditController', ['$scope', '$state', 'CategoryService', 'categoryDep', CategoryEditController]);
+  .controller('CategoriesListController',   ['$scope', 'categoriesDep', CategoriesListController])
+  .controller('CategoriesNewController',  ['$scope', '$state', 'CategoryService', CategoriesNewController])
+  .controller('CategoriesEditController', ['$scope', '$state', 'CategoryService', 'categoryDep', CategoriesEditController]);

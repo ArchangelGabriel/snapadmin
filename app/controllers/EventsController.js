@@ -1,6 +1,6 @@
 'use strict';
 
-function EventsController($scope, eventsDep) {
+function EventsListController($scope, eventsDep) {
   // reset table filtering
   $.fn.dataTable.ext.search = [];
   $scope.events   = eventsDep;
@@ -57,7 +57,7 @@ function EventsController($scope, eventsDep) {
   };
 };
 
-function EventNewController($scope, $state, EventService, categoriesDep, campaignDep) {
+function EventsNewController($scope, $state, EventService, categoriesDep, campaignDep) {
   $scope.categories = categoriesDep;
   $scope.campaign   = campaignDep;
   $scope.event      = {};
@@ -73,7 +73,7 @@ function EventNewController($scope, $state, EventService, categoriesDep, campaig
   };
 };
 
-function EventEditController($scope, $state, EventService, eventDep, categoriesDep) {
+function EventsEditController($scope, $state, EventService, eventDep, categoriesDep) {
   $scope.event             = eventDep;
   $scope.event.starts_at   = moment($scope.event.starts_at).format("D MMMM YYYY - hh:mm");
   $scope.event.ends_at     = moment($scope.event.ends_at).format("D MMMM YYYY - hh:mm");
@@ -97,7 +97,7 @@ function EventEditController($scope, $state, EventService, eventDep, categoriesD
   };
 };
 
-function EventDetailController($scope, $state, EventService, eventDep) {
+function EventsDetailController($scope, $state, EventService, eventDep) {
   $scope.label = ['default', 'primary', 'info', 'success', 'warning', 'error'];
   $scope.event = eventDep;
   var now         = moment(new Date());
@@ -143,7 +143,7 @@ function untickAll() {
 };
 
 angular.module('snapadmin')
-  .controller('EventsController',      ['$scope', 'eventsDep', EventsController])
-  .controller('EventNewController',    ['$scope', '$state', 'EventService', 'categoriesDep', 'campaignDep', EventNewController])
-  .controller('EventEditController',   ['$scope', '$state', 'EventService', 'eventDep', 'categoriesDep', EventEditController])
-  .controller('EventDetailController', ['$scope', '$state', 'EventService', 'eventDep', EventDetailController]);
+  .controller('EventsListController',      ['$scope', 'eventsDep', EventsListController])
+  .controller('EventsNewController',    ['$scope', '$state', 'EventService', 'categoriesDep', 'campaignDep', EventsNewController])
+  .controller('EventsEditController',   ['$scope', '$state', 'EventService', 'eventDep', 'categoriesDep', EventsEditController])
+  .controller('EventsDetailController', ['$scope', '$state', 'EventService', 'eventDep', EventsDetailController]);

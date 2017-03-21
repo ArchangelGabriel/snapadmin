@@ -1,0 +1,90 @@
+<ul class="page-breadcrumb breadcrumb">
+  <li>
+    <span>Businesses</span>
+  </li>
+</ul>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="portlet light bordered">
+      <div class="portlet-title" style="margin-bottom: 0">
+        <div class="caption font-green-sharp">
+          <i class="fa fa-building font-green-sharp"></i>
+          <span class="caption-subject bold uppercase">My Businesses</span>
+          <span class="caption-helper hide"></span>
+        </div>
+        <div class="actions">
+          <div class="input-group">
+            <div class="input-icon right" style="margin-right: 10px;">
+              <i class="fa fa-search"></i>
+              <input class="form-control" type="text" name="search" placeholder="Search Businesses" ng-model="textFilter">
+            </div>
+            <span class="input-group-btn">
+              <button ui-sref="businessesNew" class="btn btn-primary" type="button">
+                Create<i class="fa fa-plus fa-fw"></i>
+              </button>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="portlet-body" style="padding-top: 0">
+
+        <div class="row">
+
+          <div class="col-md-3" style="padding-right: 0;">
+
+            <div class="portlet light" style="padding: 10px 0 0;">
+                <div class="portlet-title">
+                    <div class="caption" data-toggle="collapse" data-target=".todo-project-list-content">
+                        <span class="caption-subject font-green-sharp bold uppercase">Filter By Mall </span>
+                    </div>
+                </div>
+                <div class="portlet-body todo-project-list-content" style="height: auto;">
+                    <div class="todo-project-list">
+                        <ul class="nav nav-stacked">
+                            <li>
+                                <a href="javascript:;">
+                                    <span class="badge badge-default"> 1 </span> Bugis Junction</a>
+                            </li>
+                            <li>
+                                <a href="javascript:;">
+                                    <span class="badge badge-default"> 2 </span> Plaza Singapura</a>
+                            </li>
+                            <li class="active">
+                                <a href="javascript:;">
+                                    <span class="badge badge-default"> 1 </span> Lot 1</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+          </div>
+
+          <div class="col-md-9" style="padding-left: 0;">
+            <div class="mt-element-list">
+              <div class="mt-list-container list-news ext-1">
+                <ul>
+                  <li class="mt-list-item" ng-repeat="business in businesses | filter: textFilter">
+                    <div class="list-thumb">
+                      <img alt="" ng-src="{{business.img}}">
+                    </div>
+                    <div class="list-item-content">
+                      <h3 class="uppercase bold" style="margin-bottom: 5px;">
+                        <a ui-sref="mallsDetail({id: business.id})">{{business.name}}</a>
+                      </h3>
+                      <small class="bold" style="display:block; margin-bottom: 5px;">{{business.address}}</small>
+                      <p>{{business.description}}</p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,10 @@
 'use strict';
 
-function ActivityNewController($scope, $state, ActivityService, eventDep) {
+function ActivitiesListController() {
+
+}
+
+function ActivitiesNewController($scope, $state, ActivityService, eventDep) {
   $scope.event      = eventDep;
   $scope.activity   = {};
 
@@ -13,7 +17,7 @@ function ActivityNewController($scope, $state, ActivityService, eventDep) {
   };
 };
 
-function ActivityEditController($scope, $state, ActivityService, activityDep, eventDep) {
+function ActivitiesEditController($scope, $state, ActivityService, activityDep, eventDep) {
   $scope.event      = eventDep;
   $scope.activity   = activityDep;
   $scope.activity.starts_at = moment($scope.activity.starts_at).format("D MMMM YYYY - hh:mm");
@@ -61,5 +65,6 @@ function ActivityEditController($scope, $state, ActivityService, activityDep, ev
 };
 
 angular.module('snapadmin')
-  .controller('ActivityNewController', ['$scope', '$state', 'ActivityService', 'eventDep', ActivityNewController])
-  .controller('ActivityEditController', ['$scope', '$state', 'ActivityService', 'activityDep', 'eventDep', ActivityEditController])
+  .controller('ActivitiesListController', [ActivitiesListController])
+  .controller('ActivitiesNewController', ['$scope', '$state', 'ActivityService', 'eventDep', ActivitiesNewController])
+  .controller('ActivitiesEditController', ['$scope', '$state', 'ActivityService', 'activityDep', 'eventDep', ActivitiesEditController])

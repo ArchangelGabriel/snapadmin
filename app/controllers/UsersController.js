@@ -1,6 +1,6 @@
 'use strict';
 
-function UsersController($scope, UserService) {
+function UsersListController($scope, UserService) {
   $scope.$on('$viewContentLoaded', function() {
     UserService.list().then(function(result) {
       $scope.users = result.data;
@@ -42,9 +42,14 @@ function UsersNewController($scope, $state, UserService) {
 
 };
 
+function UsersDetailController($scope, $state, UserService) {
+
+};
+
 angular.module('snapadmin')
-  .controller('UsersController', ['$scope', 'UserService', UsersController])
-  .controller('UsersNewController', ['$scope', '$state', 'UserService', UsersNewController]);
+  .controller('UsersListController', ['$scope', 'UserService', UsersListController])
+  .controller('UsersNewController', ['$scope', '$state', 'UserService', UsersNewController])
+  .controller('UsersDetailController', ['$scope', '$state', 'UserService', UsersDetailController]);
 
 function getFilterStatus() {
   var statuses = [];

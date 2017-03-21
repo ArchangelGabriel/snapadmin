@@ -1,0 +1,141 @@
+<ul class="page-breadcrumb breadcrumb">
+  <li>
+    <a ui-sref="malls">Malls</a>
+    <i class="fa fa-circle"></i>
+  </li>
+  <li>
+    <a ui-sref="mallsDetail({id: mall.id})">{{mall.id}}</a>
+    <i class="fa fa-circle"></i>
+  </li>
+  <li>
+    <span>edit</span>
+  </li>
+</ul>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="portlet light bordered">
+      <div class="portlet-title">
+        <div class="caption font-green-sharp">
+          <i class="icon-diamond font-green-sharp"></i>
+          <span class="caption-subject bold uppercase">Edit Mall</span>
+          <span class="caption-helper hide"></span>
+        </div>
+      </div>
+      <div class="portlet-body">
+
+        <div class="row">
+
+          <div class="col-md-4">
+            <img ng-src="{{ settings.imagePath.concat(mall.image.medium) }}"
+                 onerror="this.src='https://placeholdit.imgix.net/~text?txtsize=100&txt=SampleImage&w=600&h=600';"
+                 class="img-responsive"
+                 style="border: 1px solid #d3d3d3; object-fit: contain; height: 300px; width: 100%; background: black;">
+            <div>
+              <input type="file" image="image" />
+            </div>
+          </div>
+
+          <div class="col-md-5">
+
+            <div class="portlet-body form">
+              <form role="form">
+                <div class="form-body" style="padding: 0">
+
+                  <div class="form-group">
+                    <label><b>Name</b></label>
+                    <div class="input-group">
+                      <span class="input-group-addon"></span>
+                      <input type="text" class="form-control" placeholder="Name" ng-model="mall.name">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label><b>Email</b></label>
+                    <div class="input-group">
+                      <span class="input-group-addon"></span>
+                      <input type="text" class="form-control" placeholder="Email" ng-model="mall.email">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label><b>Phonenumber</b></label>
+                    <div class="input-group">
+                      <span class="input-group-addon"></span>
+                      <input type="text" class="form-control" placeholder="Phonenumber" ng-model="mall.phone_number">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label><b>Description</b></label>
+                    <textarea class="form-control" rows="6" ng-model="mall.description"></textarea>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-xs-6">
+                      <label><b>Block</b></label>
+                      <div class="input-group">
+                        <span class="input-group-addon"></span>
+                        <input type="text" class="form-control" placeholder="90" ng-model="mall.block">
+                      </div>
+                    </div>
+                    <div class="col-xs-6">
+                      <label><b>Street</b></label>
+                      <div class="input-group">
+                        <span class="input-group-addon"></span>
+                        <input type="text" class="form-control" placeholder="Orchard Rd" ng-model="mall.street">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-xs-6">
+                      <label><b>Postal Code</b></label>
+                      <div class="input-group">
+                        <span class="input-group-addon"></span>
+                        <input type="text" class="form-control" placeholder="238839" ng-model="mall.postal_code">
+                      </div>
+                    </div>
+                    <div class="col-xs-6">
+                      <label><b>City</b></label>
+                      <div class="input-group">
+                        <span class="input-group-addon"></span>
+                        <input type="text" class="form-control" placeholder="Orchard" ng-model="mall.city">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-xs-6">
+                      <label><b>Lng</b></label>
+                      <div class="input-group">
+                        <span class="input-group-addon"></span>
+                        <input type="number" step="any" class="form-control" placeholder="Lng" ng-model="mall.lng">
+                      </div>
+                    </div>
+                    <div class="col-xs-6">
+                      <label><b>Lat</b></label>
+                      <div class="input-group">
+                        <span class="input-group-addon"></span>
+                        <input type="number" step="any" class="form-control" placeholder="Lat" ng-model="mall.lat">
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </form>
+            </div>
+
+          </div>
+
+          <div class="col-md-3">
+            <button type="button" name="button" class="btn btn-block yellow-haze" ng-click="editMall(mall, 'draft')">Save Draft</button>
+            <button type="button" name="button" class="btn btn-block btn-primary" ng-click="editMall(mall)">Edit</button>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

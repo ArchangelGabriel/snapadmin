@@ -26,7 +26,7 @@ function ProvidersEditController($scope, $state, ProviderService, providerDep) {
     return ProviderService.update(provider.id, provider)
       .then(function(result) {
         var newProvider = result.data;
-        $state.go('providerDetail', {id: newProvider.id});
+        $state.go('providersDetail', {id: newProvider.id});
       });
   };
 };

@@ -1,6 +1,6 @@
 'use strict';
 
-function CampaignsController($scope, campaignsDep) {
+function CampaignsListController($scope, campaignsDep) {
   // reset table filtering
   $.fn.dataTable.ext.search = [];
   $scope.campaigns = campaignsDep;
@@ -58,7 +58,7 @@ function CampaignsController($scope, campaignsDep) {
 
 };
 
-function CampaignNewController($scope, $state, CampaignService, providersDep) {
+function CampaignsNewController($scope, $state, CampaignService, providersDep) {
   $scope.providers = providersDep;
   $scope.campaign  = {};
 
@@ -70,7 +70,7 @@ function CampaignNewController($scope, $state, CampaignService, providersDep) {
   };
 };
 
-function CampaignEditController($scope, $state, CampaignService, campaignDep, providersDep) {
+function CampaignsEditController($scope, $state, CampaignService, campaignDep, providersDep) {
   $scope.providers = providersDep;
   $scope.campaign  = campaignDep;
   $scope.campaign.starts_at = moment($scope.campaign.starts_at).format("D MMMM YYYY - hh:mm");
@@ -87,7 +87,7 @@ function CampaignEditController($scope, $state, CampaignService, campaignDep, pr
   };
 };
 
-function CampaignDetailController($scope, $state, campaignDep) {
+function CampaignsDetailController($scope, $state, campaignDep) {
   $scope.campaign = campaignDep;
   var now         = moment(new Date());
   var start       = moment($scope.campaign.starts_at);
@@ -119,7 +119,7 @@ function untickAll() {
 
 
 angular.module('snapadmin')
-  .controller('CampaignsController',      ['$scope', 'campaignsDep', CampaignsController])
-  .controller('CampaignNewController',    ['$scope', '$state', 'CampaignService', 'providersDep', CampaignNewController])
-  .controller('CampaignEditController',   ['$scope', '$state', 'CampaignService', 'campaignDep', 'providersDep', CampaignEditController])
-  .controller('CampaignDetailController', ['$scope', '$state', 'campaignDep', CampaignDetailController]);
+  .controller('CampaignsListController',  ['$scope', 'campaignsDep', CampaignsListController])
+  .controller('CampaignsNewController',   ['$scope', '$state', 'CampaignService', 'providersDep', CampaignsNewController])
+  .controller('CampaignsEditController',   ['$scope', '$state', 'CampaignService', 'campaignDep', 'providersDep', CampaignsEditController])
+  .controller('CampaignsDetailController', ['$scope', '$state', 'campaignDep', CampaignsDetailController]);

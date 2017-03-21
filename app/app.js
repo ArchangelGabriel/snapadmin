@@ -5,6 +5,7 @@ var snapadmin = angular.module('snapadmin', [
   'oc.lazyLoad',
   'ngSanitize',
   'ng-token-auth',
+  'ngFileUpload'
 ])
 
 // TODO: separate this filter
@@ -34,6 +35,8 @@ var snapadmin = angular.module('snapadmin', [
       pageBodySolid: false,
       pageAutoScrollOnLoad: 1000
     },
+    imagePath: 'https://snaplar.blob.core.windows.net/image/Users/juangabriel/Desktop/temp/pixeloak/snapadmin_backend/public',
+    isExperimental: false,
     assetsPath: 'assets',
     globalPath: 'assets/global',
     layoutPath: 'assets/layouts/layout4',
@@ -55,12 +58,14 @@ var snapadmin = angular.module('snapadmin', [
     tokenValidationPath: '/admin_auth/validate_token'
   });
 
-  $urlRouterProvider.otherwise(function ($injector, $location) {
-    var $state = $injector.get("$state");
-    $state.go("dashboard");
-  });
+  $locationProvider.hashPrefix('!');
+  $urlRouterProvider.otherwise('/dashboard');
+  // $urlRouterProvider.otherwise(function ($injector, $location) {
+  //   var $state = $injector.get("$state");
+  //   $state.go("dashboard");
+  // });
 
-  $locationProvider.html5Mode(true);
+  // $locationProvider.html5Mode(true);
 
   var login = {
     url: '/login',
@@ -68,115 +73,50 @@ var snapadmin = angular.module('snapadmin', [
       content: { templateUrl: 'templates/login.html', controller: 'AuthenticationController' },
     },
     resolve: {
-      deps: ['$ocLazyLoad', function($ocLazyLoad) {
-        return $ocLazyLoad.load({
-          name: 'snapadmin',
-          insertBefore: '#ng_load_plugins_before',
-          files: [
-            'assets/pages/css/login-2.min.css'
-          ]
-        })
-      }]
+      deps: lazyLoad(['assets/pages/css/login-2.min.css'])
     }
   };
   var profile = {
     url: '/profile',
-    views: {
-      nav: { templateUrl: 'templates/sidebar.html', controller: 'SidebarController' },
-      content: { templateUrl: 'templates/profile.html', controller: 'ProfileController' },
-      header: { templateUrl: 'templates/header.html', controller: 'HeaderController' }
-    },
+    views: viewsHelper('profile'),
     resolve: {
-      auth: function($auth) {
-        return $auth.validateUser();
-      }
+      auth: resolveAuthHelper
     }
   };
   var dashboard = {
     url: '/dashboard',
-    views: {
-      nav: { templateUrl: 'templates/sidebar.html', controller: 'SidebarController' },
-      content: { templateUrl: 'templates/dashboard.html', controller: 'DashboardController' },
-      header: { templateUrl: 'templates/header.html', controller: 'HeaderController' }
-    },
+    views: viewsHelper('dashboard'),
     resolve: {
-      auth: function($auth) {
-        return $auth.validateUser();
-      }
+      auth: resolveAuthHelper
     }
   };
   var users = {
     url: '/users',
-    views: {
-      nav: { templateUrl: 'templates/sidebar.html', controller: 'SidebarController' },
-      content: { templateUrl: 'templates/users.html', controller: 'UsersController' },
-      header: { templateUrl: 'templates/header.html', controller: 'HeaderController' }
-    },
+    views: viewsHelper('users', 'list'),
     data: { pageTitle: 'Users' },
     resolve: {
-      auth: function($auth) {
-        return $auth.validateUser();
-      },
-
-      deps: ['$ocLazyLoad', function($ocLazyLoad) {
-        return $ocLazyLoad.load({
-          name: 'snapadmin',
-          insertBefore: '#ng_load_plugins_before',
-          files: [
-            'assets/global/plugins/datatables/datatables.min.css',
-            'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css',
-            'assets/global/plugins/datatables/datatables.all.min.js'
-          ]
-        })
-      }]
+      auth: resolveAuthHelper
     }
   };
-  var userDetail = {
+  var usersDetail = {
     url: '/users/1',
-    views: {
-      nav: { templateUrl: 'templates/sidebar.html', controller: 'SidebarController' },
-      content: { templateUrl: 'templates/userDetail.html', controller: 'UsersController' },
-      header: { templateUrl: 'templates/header.html', controller: 'HeaderController' }
-    },
+    views: viewsHelper('users', 'detail'),
     resolve: {
-      auth: function($auth) {
-        return $auth.validateUser();
-      },
-      deps: ['$ocLazyLoad', function($ocLazyLoad) {
-        return $ocLazyLoad.load({
-          name: 'snapadmin',
-          insertBefore: '#ng_load_plugins_before',
-          files: [
-            'assets/pages/css/profile-2.min.css'
-          ]
-        })
-      }]
+      auth: resolveAuthHelper
     }
   };
-  var userNew = {
+  var usersNew = {
     url: '/users/new',
-    views: {
-      nav: { templateUrl: 'templates/sidebar.html', controller: 'SidebarController' },
-      content: { templateUrl: 'templates/userNew.html', controller: 'UsersNewController' },
-      header: { templateUrl: 'templates/header.html', controller: 'HeaderController' }
-    },
+    views: viewsHelper('users', 'new'),
     resolve: {
-      auth: function($auth) {
-        return $auth.validateUser();
-      }
+      auth: resolveAuthHelper
     }
   };
   var providers = {
     url: '/providers',
-    views: {
-      nav: { templateUrl: 'templates/sidebar.html', controller: 'SidebarController' },
-      content: { templateUrl: 'templates/providers.html', controller: 'ProvidersController' },
-      header: { templateUrl: 'templates/header.html', controller: 'HeaderController' }
-    },
+    views: viewsHelper('providers'),
     resolve: {
-      auth: function($auth) {
-        return $auth.validateUser();
-      },
+      auth: resolveAuthHelper,
       providersDep: ['ProviderService', function(ProviderService) {
         return ProviderService.list()
           .then(function(result) {
@@ -186,26 +126,11 @@ var snapadmin = angular.module('snapadmin', [
       }]
     }
   };
-  var providerDetail = {
+  var providersDetail = {
     url: '/providers/:id',
-    views: {
-      nav: { templateUrl: 'templates/sidebar.html', controller: 'SidebarController' },
-      content: { templateUrl: 'templates/providerDetail.html', controller: 'ProvidersDetailController' },
-      header: { templateUrl: 'templates/header.html', controller: 'HeaderController' }
-    },
+    views: viewsHelper('providers', 'detail'),
     resolve: {
-      auth: function($auth) {
-        return $auth.validateUser();
-      },
-      deps: ['$ocLazyLoad', function($ocLazyLoad) {
-        return $ocLazyLoad.load({
-          name: 'snapadmin',
-          insertBefore: '#ng_load_plugins_before',
-          files: [
-            'assets/pages/css/profile-2.min.css'
-          ]
-        })
-      }],
+      auth: resolveAuthHelper,
 
       providerDep: ['$stateParams', 'ProviderService', function($stateParams, ProviderService) {
         return ProviderService.get($stateParams.id)
@@ -235,23 +160,13 @@ var snapadmin = angular.module('snapadmin', [
   };
   var providerNew = {
     url: '/providers/new',
-    views: {
-      nav: { templateUrl: 'templates/sidebar.html', controller: 'SidebarController' },
-      content: { templateUrl: 'templates/providerNew.html', controller: 'ProvidersNewController' },
-      header: { templateUrl: 'templates/header.html', controller: 'HeaderController' }
-    },
+    views: viewsHelper('providers', 'new'),
   };
   var providerEdit = {
     url: '/providers/:id/edit',
-    views: {
-      nav: { templateUrl: 'templates/sidebar.html', controller: 'SidebarController' },
-      content: { templateUrl: 'templates/providerEdit.html', controller: 'ProvidersEditController' },
-      header: { templateUrl: 'templates/header.html', controller: 'HeaderController' }
-    },
+    views: viewsHelper('providers', 'helper'),
     resolve: {
-      auth: function($auth) {
-        return $auth.validateUser();
-      },
+      auth: resolveAuthHelper,
       providerDep: ['$stateParams', 'ProviderService', function($stateParams, ProviderService) {
         return ProviderService.get($stateParams.id)
           .then(function(result) {
@@ -263,37 +178,15 @@ var snapadmin = angular.module('snapadmin', [
   };
   var gamification = {
     url: '/gamification',
-    views: {
-      nav: { templateUrl: 'templates/sidebar.html', controller: 'SidebarController' },
-      content: { templateUrl: 'templates/gamification.html', controller: 'GamificationController' },
-      header: { templateUrl: 'templates/header.html', controller: 'HeaderController' }
-    },
+    views: viewsHelper('gamification'),
     data: { pageTitle: 'Gamification' }
   };
   var gamificationCampaigns = {
     url: '/gamification/campaigns',
-    views: {
-      nav: { templateUrl: 'templates/sidebar.html', controller: 'SidebarController' },
-      content: { templateUrl: 'templates/gamification/campaigns.html', controller: 'CampaignsController' },
-      header: { templateUrl: 'templates/header.html', controller: 'HeaderController' }
-    },
+    views: viewsHelper('campaigns', 'list', 'gamification/'),
     data: { pageTitle: 'Campaigns' },
     resolve: {
-      auth: function($auth) {
-        return $auth.validateUser();
-      },
-
-      deps: ['$ocLazyLoad', function($ocLazyLoad) {
-        return $ocLazyLoad.load({
-          name: 'snapadmin',
-          insertBefore: '#ng_load_plugins_before',
-          files: [
-            'assets/global/plugins/datatables/datatables.min.css',
-            'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css',
-            'assets/global/plugins/datatables/datatables.all.min.js'
-          ]
-        })
-      }],
+      auth: resolveAuthHelper,
 
       campaignsDep: ['CampaignService', 'ProviderService', function(CampaignService, ProviderService) {
         return CampaignService.list().then(function(campaigns) {
@@ -313,25 +206,10 @@ var snapadmin = angular.module('snapadmin', [
   };
   var gamificationCampaignNew = {
     url: '/gamification/campaigns/new',
-    views: {
-      nav: { templateUrl: 'templates/sidebar.html', controller: 'SidebarController' },
-      content: { templateUrl: 'templates/gamification/campaignNew.html', controller: 'CampaignNewController' },
-      header: { templateUrl: 'templates/header.html', controller: 'HeaderController' }
-    },
+    views: viewsHelper('campaigns', 'new', 'gamification/'),
     data: { pageTitle: 'New Campaign' },
     resolve: {
-      auth: function($auth) {
-        return $auth.validateUser();
-      },
-      deps: ['$ocLazyLoad', function($ocLazyLoad) {
-        return $ocLazyLoad.load({
-          name: 'snapadmin',
-          insertBefore: '#ng_load_plugins_before',
-          files: [
-            'assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js'
-          ]
-        })
-      }],
+      auth: resolveAuthHelper,
 
       providersDep: ['ProviderService', function(ProviderService) {
         return ProviderService.list()
@@ -344,25 +222,10 @@ var snapadmin = angular.module('snapadmin', [
   };
   var gamificationCampaignEdit = {
     url: '/gamification/campaigns/:id/edit',
-    views: {
-      nav: { templateUrl: 'templates/sidebar.html', controller: 'SidebarController' },
-      content: { templateUrl: 'templates/gamification/campaignEdit.html', controller: 'CampaignEditController' },
-      header: { templateUrl: 'templates/header.html', controller: 'HeaderController' }
-    },
+    views: viewsHelper('campaigns', 'edit', 'gamification/'),
     data: { pageTitle: 'Edit Campaign' },
     resolve: {
-      auth: function($auth) {
-        return $auth.validateUser();
-      },
-      deps: ['$ocLazyLoad', function($ocLazyLoad) {
-        return $ocLazyLoad.load({
-          name: 'snapadmin',
-          insertBefore: '#ng_load_plugins_before',
-          files: [
-            'assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js'
-          ]
-        })
-      }],
+      auth: resolveAuthHelper,
 
       campaignDep: ['$stateParams', 'CampaignService', function($stateParams, CampaignService) {
         return CampaignService.get($stateParams.id)
@@ -385,25 +248,11 @@ var snapadmin = angular.module('snapadmin', [
 
   var gamificationCampaignDetail = {
     url: '/gamification/campaigns/:id',
-    views: {
-      nav: { templateUrl: 'templates/sidebar.html', controller: 'SidebarController' },
-      content: { templateUrl: 'templates/gamification/campaignDetail.html', controller: 'CampaignDetailController' },
-      header: { templateUrl: 'templates/header.html', controller: 'HeaderController' }
-    },
+    views: viewsHelper('campaigns', 'detail', 'gamification/'),
     data: { pageTitle: 'Campaign' },
     resolve: {
-      auth: function($auth) {
-        return $auth.validateUser();
-      },
-      deps: ['$ocLazyLoad', function($ocLazyLoad) {
-        return $ocLazyLoad.load({
-          name: 'snapadmin',
-          insertBefore: '#ng_load_plugins_before',
-          files: [
-            'assets/pages/css/profile-2.min.css'
-          ]
-        })
-      }],
+      auth: resolveAuthHelper,
+
       campaignDep: ['$stateParams', 'CampaignService', 'ProviderService', 'EventService', function($stateParams, CampaignService, ProviderService, EventService) {
         return CampaignService.get($stateParams.id)
           .then(function(result) {
@@ -422,28 +271,10 @@ var snapadmin = angular.module('snapadmin', [
   };
   var gamificationEvents = {
     url: '/gamification/events',
-    views: {
-      nav: { templateUrl: 'templates/sidebar.html', controller: 'SidebarController' },
-      content: { templateUrl: 'templates/gamification/events.html', controller: 'EventsController' },
-      header: { templateUrl: 'templates/header.html', controller: 'HeaderController' }
-    },
+    views: viewsHelper('events', 'list', 'gamification/'),
     data: { pageTitle: 'Events' },
     resolve: {
-      auth: function($auth) {
-        return $auth.validateUser();
-      },
-
-      deps: ['$ocLazyLoad', function($ocLazyLoad) {
-        return $ocLazyLoad.load({
-          name: 'snapadmin',
-          insertBefore: '#ng_load_plugins_before',
-          files: [
-            'assets/global/plugins/datatables/datatables.min.css',
-            'assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css',
-            'assets/global/plugins/datatables/datatables.all.min.js'
-          ]
-        })
-      }],
+      auth: resolveAuthHelper,
 
       eventsDep: ['EventService', 'ProviderService', function(EventService, ProviderService) {
         return EventService.list().then(function(events) {
@@ -459,17 +290,12 @@ var snapadmin = angular.module('snapadmin', [
 
     }
   };
+
   var gamificationEventNew = {
     url: '/gamification/campaigns/:campaign_id/events/new',
-    views: {
-      nav: { templateUrl: 'templates/sidebar.html', controller: 'SidebarController' },
-      content: { templateUrl: 'templates/gamification/eventNew.html', controller: 'EventNewController' },
-      header: { templateUrl: 'templates/header.html', controller: 'HeaderController' }
-    },
+    views: viewsHelper('events', 'new', 'gamification/'),
     resolve: {
-      auth: function($auth) {
-        return $auth.validateUser();
-      },
+      auth: resolveAuthHelper,
       deps: ['$ocLazyLoad', function($ocLazyLoad) {
         return $ocLazyLoad.load({
           name: 'snapadmin',
@@ -505,16 +331,10 @@ var snapadmin = angular.module('snapadmin', [
 
   var gamificationEventEdit = {
     url: '/gamification/events/:id/edit',
-    views: {
-      nav: { templateUrl: 'templates/sidebar.html', controller: 'SidebarController' },
-      content: { templateUrl: 'templates/gamification/eventEdit.html', controller: 'EventEditController' },
-      header: { templateUrl: 'templates/header.html', controller: 'HeaderController' }
-    },
+    views: viewsHelper('events', 'edit', 'gamification/'),
     data: { pageTitle: 'Edit Event' },
     resolve: {
-      auth: function($auth) {
-        return $auth.validateUser();
-      },
+      auth: resolveAuthHelper,
       deps: ['$ocLazyLoad', function($ocLazyLoad) {
         return $ocLazyLoad.load({
           name: 'snapadmin',
@@ -559,25 +379,10 @@ var snapadmin = angular.module('snapadmin', [
 
   var gamificationEventDetail = {
     url: '/gamification/events/:id',
-    views: {
-      nav: { templateUrl: 'templates/sidebar.html', controller: 'SidebarController' },
-      content: { templateUrl: 'templates/gamification/eventDetail.html', controller: 'EventDetailController' },
-      header: { templateUrl: 'templates/header.html', controller: 'HeaderController' }
-    },
+    views: viewsHelper('events', 'detail', 'gamification/'),
     data: { pageTitle: 'Event' },
     resolve: {
-      auth: function($auth) {
-        return $auth.validateUser();
-      },
-      deps: ['$ocLazyLoad', function($ocLazyLoad) {
-        return $ocLazyLoad.load({
-          name: 'snapadmin',
-          insertBefore: '#ng_load_plugins_before',
-          files: [
-            'assets/pages/css/profile-2.min.css'
-          ]
-        })
-      }],
+      auth: resolveAuthHelper,
 
       eventDep: ['$stateParams', 'EventService', 'ProviderService', 'CampaignService', 'ActivityService', 'CategoryService', function($stateParams, EventService, ProviderService, CampaignService, ActivityService, CategoryService) {
         return EventService.get($stateParams.id)
@@ -609,23 +414,13 @@ var snapadmin = angular.module('snapadmin', [
   };
   var gamificationActivities = {
     url: '/activities',
-    views: {
-      nav: { templateUrl: 'templates/sidebar.html', controller: 'SidebarController' },
-      content: { templateUrl: 'templates/gamification/activities.html', controller: 'GamificationController' },
-      header: { templateUrl: 'templates/header.html', controller: 'HeaderController' }
-    },
+    views: viewsHelper('activities', 'list', 'gamification/')
   };
   var gamificationActivityNew = {
     url: '/gamification/events/:event_id/activities/new',
-    views: {
-      nav: { templateUrl: 'templates/sidebar.html', controller: 'SidebarController' },
-      content: { templateUrl: 'templates/gamification/activityNew.html', controller: 'ActivityNewController' },
-      header: { templateUrl: 'templates/header.html', controller: 'HeaderController' }
-    },
+    views: viewsHelper('activities', 'new', 'gamification/'),
     resolve: {
-      auth: function($auth) {
-        return $auth.validateUser();
-      },
+      auth: resolveAuthHelper,
 
       eventDep: ['$stateParams', 'EventService', function($stateParams, EventService) {
         return EventService.get($stateParams.event_id)
@@ -639,16 +434,10 @@ var snapadmin = angular.module('snapadmin', [
 
   var gamificationActivityEdit = {
     url: '/gamification/events/:event_id/activities/:id/edit',
-    views: {
-      nav: { templateUrl: 'templates/sidebar.html', controller: 'SidebarController' },
-      content: { templateUrl: 'templates/gamification/activityEdit.html', controller: 'ActivityEditController' },
-      header: { templateUrl: 'templates/header.html', controller: 'HeaderController' }
-    },
+    views: viewsHelper('activities', 'edit', 'gamification/'),
     data: { pageTitle: 'Edit Activity' },
     resolve: {
-      auth: function($auth) {
-        return $auth.validateUser();
-      },
+      auth: resolveAuthHelper,
       deps: ['$ocLazyLoad', function($ocLazyLoad) {
         return $ocLazyLoad.load({
           name: 'snapadmin',
@@ -678,15 +467,9 @@ var snapadmin = angular.module('snapadmin', [
 
   var categories = {
     url: '/categories',
-    views: {
-      nav: { templateUrl: 'templates/sidebar.html', controller: 'SidebarController' },
-      content: { templateUrl: 'templates/categories.html', controller: 'CategoriesController' },
-      header: { templateUrl: 'templates/header.html', controller: 'HeaderController' }
-    },
+    views: viewsHelper('categories', 'list'),
     resolve: {
-      auth: function($auth) {
-        return $auth.validateUser();
-      },
+      auth: resolveAuthHelper,
       categoriesDep: ['CategoryService', function(CategoryService) {
         return CategoryService.list().then(function(categories) {
           return categories.data;
@@ -696,24 +479,14 @@ var snapadmin = angular.module('snapadmin', [
   };
   var categoryNew = {
     url: '/categories/new',
-    views: {
-      nav: { templateUrl: 'templates/sidebar.html', controller: 'SidebarController' },
-      content: { templateUrl: 'templates/categoryNew.html', controller: 'CategoryNewController' },
-      header: { templateUrl: 'templates/header.html', controller: 'HeaderController' }
-    },
+    views: viewsHelper('categories', 'new'),
   };
 
   var categoryEdit = {
     url: '/categories/:id/edit',
-    views: {
-      nav: { templateUrl: 'templates/sidebar.html', controller: 'SidebarController' },
-      content: { templateUrl: 'templates/categoryEdit.html', controller: 'CategoryEditController' },
-      header: { templateUrl: 'templates/header.html', controller: 'HeaderController' }
-    },
+    views: viewsHelper('categories', 'edit'),
     resolve: {
-      auth: function($auth) {
-        return $auth.validateUser();
-      },
+      auth: resolveAuthHelper,
       categoryDep: ['$stateParams', 'CategoryService', function($stateParams, CategoryService) {
         return CategoryService.get($stateParams.id)
           .then(function(result) {
@@ -726,24 +499,9 @@ var snapadmin = angular.module('snapadmin', [
 
   var broadcast = {
     url: '/broadcast',
-    views: {
-      nav: { templateUrl: 'templates/sidebar.html', controller: 'SidebarController' },
-      content: { templateUrl: 'templates/broadcast.html', controller: 'BroadcastController' },
-      header: { templateUrl: 'templates/header.html', controller: 'HeaderController' }
-    },
+    views: viewsHelper('broadcast'),
     resolve: {
-      auth: function($auth) {
-        return $auth.validateUser();
-      },
-      deps: ['$ocLazyLoad', function($ocLazyLoad) {
-        return $ocLazyLoad.load({
-          name: 'snapadmin',
-          insertBefore: '#ng_load_plugins_before',
-          files: [
-            'assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js',
-          ]
-        })
-      }],
+      auth: resolveAuthHelper,
 
       notificationsDep: ['NotificationService', function(NotificationService) {
         return NotificationService.list().then(function(notifications) {
@@ -754,25 +512,10 @@ var snapadmin = angular.module('snapadmin', [
   };
 
   var broadcastEdit = {
-    url: '/broadcast/:id',
-    views: {
-      nav: { templateUrl: 'templates/sidebar.html', controller: 'SidebarController' },
-      content: { templateUrl: 'templates/broadcastEdit.html', controller: 'BroadcastEditController' },
-      header: { templateUrl: 'templates/header.html', controller: 'HeaderController' }
-    },
+    url: '/broadcast/:id/edit',
+    views: viewsHelper('broadcast', 'edit'),
     resolve: {
-      auth: function($auth) {
-        return $auth.validateUser();
-      },
-      deps: ['$ocLazyLoad', function($ocLazyLoad) {
-        return $ocLazyLoad.load({
-          name: 'snapadmin',
-          insertBefore: '#ng_load_plugins_before',
-          files: [
-            'assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js',
-          ]
-        })
-      }],
+      auth: resolveAuthHelper,
 
       notificationDep: ['$stateParams', 'NotificationService', function($stateParams, NotificationService) {
         return NotificationService.get($stateParams.id)
@@ -784,17 +527,11 @@ var snapadmin = angular.module('snapadmin', [
     }
   };
 
-  var notificationLogs = {
-    url: '/logs/notification',
-    views: {
-      nav: { templateUrl: 'templates/sidebar.html', controller: 'SidebarController' },
-      content: { templateUrl: 'templates/notificationLogs.html', controller: 'NotificationsController' },
-      header: { templateUrl: 'templates/header.html', controller: 'HeaderController' }
-    },
+  var notifications = {
+    url: '/notifications',
+    views: viewsHelper('notifications'),
     resolve: {
-      auth: function($auth) {
-        return $auth.validateUser();
-      },
+      auth: resolveAuthHelper,
       notificationsDep: ['NotificationService', function(NotificationService) {
         return NotificationService.list().then(function(notifications) {
           return notifications.data;
@@ -804,17 +541,186 @@ var snapadmin = angular.module('snapadmin', [
     }
   };
 
+  var pois = {
+    list: {
+      url: '/pois',
+      views: viewsHelper('pois', 'list'),
+      data: { pageTitle: 'Points Of Interest' },
+      resolve: {
+        auth: function($auth) {
+          return $auth.validateUser();
+        }
+      }
+    },
+    'new': {
+      url: '/pois/new',
+      views: viewsHelper('pois', 'new'),
+      resolve: {
+        auth: resolveAuthHelper
+      }
+    },
+    edit: {
+      url: '/pois/:id/edit',
+      views: viewsHelper('pois', 'edit'),
+      resolve: {
+        auth: resolveAuthHelper,
+        currentPoi: ['$stateParams', 'PoisService', function($stateParams, PoisService) {
+          return PoisService.get($stateParams.id).then(result => result.data);
+        }]
+      }
+    },
+    show: {
+      url: '/pois/:id',
+      views: viewsHelper('pois', 'show'),
+      resolve: {
+        auth: resolveAuthHelper,
+        currentPoi: ['$stateParams', 'PoisService', function($stateParams, PoisService) {
+          return PoisService.get($stateParams.id).then(result => result.data);
+        }]
+      }
+    }
+  };
+
+  var malls = {
+    list: {
+      url: '/malls?city',
+      views: viewsHelper('malls', 'list', 'malls/'),
+      resolve: { auth: resolveAuthHelper }
+    },
+    'new': {
+      url: '/malls/new',
+      views: viewsHelper('malls', 'new', 'malls/'),
+      resolve: { auth: resolveAuthHelper }
+    },
+    detail: {
+      url: '/malls/:id',
+      views: viewsHelper('malls', 'detail', 'malls/'),
+      resolve: { auth: resolveAuthHelper }
+    },
+    edit: {
+      url: '/malls/:id/edit',
+      views: viewsHelper('malls', 'edit', 'malls/'),
+      resolve: { auth: resolveAuthHelper }
+    }
+  };
+
+  var stores = {
+    'new': {
+      url: '/malls/:mall_id/stores/new',
+      views: viewsHelper('stores', 'new', 'stores/'),
+      resolve: { auth: resolveAuthHelper }
+    },
+    edit: {
+      url: '/malls/:mall_id/stores/:id',
+      views: viewsHelper('stores', 'edit', 'stores/'),
+      resolve: { auth: resolveAuthHelper }
+    }
+  }
+
+  var billboards = {
+    'new': {
+      url: '/billboards/new',
+      views: viewsHelper('billboards', 'new', 'billboards/'),
+      resolve: { auth: resolveAuthHelper }
+    }
+  }
+
+  var businesses = {
+    'new': {
+      url: '/businesses/new',
+      views: viewsHelper('businesses', 'new', 'businesses/'),
+      resolve: { auth: resolveAuthHelper }
+    },
+    list: {
+      url: '/businesses',
+      views: viewsHelper('businesses', 'list', 'businesses/'),
+      resolve: { auth: resolveAuthHelper }
+    }
+  }
+
+  var advertisements = {
+    list: {
+      url: '/advertisements',
+      views: viewsHelper('advertisements', 'list', 'advertisements/'),//viewsHelper('ads', 'list', 'ads/'),
+      resolve: { auth: resolveAuthHelper }
+    },
+    'new': {
+      url: '/advertisements/new',
+      views: viewsHelper('advertisements', 'new', 'advertisements/'),
+      resolve: { auth: resolveAuthHelper }
+    }
+  }
+
+  var studio = {
+    stores: {
+      list: {
+        url: '/stores',
+        views: {
+          nav: { templateUrl: 'templates/sidebar.html', controller: 'SidebarController' },
+          content: { templateUrl: 'templates/studio/stores.list.html' },
+          header: { templateUrl: 'templates/header.html', controller: 'HeaderController' }
+        },
+        data: { pageTitle: 'Stores' },
+      },
+      'new': {
+        url: '/stores/new',
+        views: {
+          nav: { templateUrl: 'templates/sidebar.html', controller: 'SidebarController' },
+          content: { templateUrl: 'templates/studio/stores.new.html' },
+          header: { templateUrl: 'templates/header.html', controller: 'HeaderController' }
+        },
+        data: { pageTitle: 'Create a new Store' },
+      }
+    },
+    billboards: {
+      list: {
+        url: '/billboards',
+        views: {
+          nav: { templateUrl: 'templates/sidebar.html', controller: 'SidebarController' },
+          content: { templateUrl: 'templates/studio/billboards.list.html' },
+          header: { templateUrl: 'templates/header.html', controller: 'HeaderController' }
+        },
+        data: { pageTitle: 'Billboards' },
+      },
+      'new': {
+        url: '/billboards/new',
+        views: {
+          nav: { templateUrl: 'templates/sidebar.html', controller: 'SidebarController' },
+          content: { templateUrl: 'templates/studio/billboards.new.html' },
+          header: { templateUrl: 'templates/header.html', controller: 'HeaderController' }
+        },
+        data: { pageTitle: 'Create a new Billboard' },
+      }
+    },
+    ads: {
+      list: {
+        url: '/ads',
+        views: viewsHelper('ads', 'list', 'ads/'),
+        resolve: { auth: resolveAuthHelper }
+      },
+      'new': {
+
+      }
+    },
+    campaigns: {
+
+    },
+    reports: {
+
+    }
+  }
+
   $stateProvider
     .state('login', login)
     .state('profile', profile)
     .state('dashboard', dashboard)
     .state('users', users)
-    .state('userDetail', userDetail)
-    .state('userNew', userNew)
+    .state('usersDetail', usersDetail)
+    .state('usersNew', usersNew)
     .state('providers', providers)
     .state('providerNew', providerNew)
     .state('providerEdit', providerEdit)
-    .state('providerDetail', providerDetail)
+    .state('providersDetail', providersDetail)
     .state('gamification', gamification)
     .state('gamificationCampaigns', gamificationCampaigns)
     .state('gamificationCampaignNew', gamificationCampaignNew)
@@ -832,7 +738,24 @@ var snapadmin = angular.module('snapadmin', [
     .state('categoryEdit', categoryEdit)
     .state('broadcast', broadcast)
     .state('broadcastEdit', broadcastEdit)
-    .state('notificationLogs', notificationLogs);
+    .state('notifications', notifications)
+    .state('pois', pois.list)
+    .state('poiNew', pois['new'])
+    .state('poiEdit', pois.edit)
+    .state('poiShow', pois.show)
+
+    .state('malls', malls.list)
+    .state('mallsNew', malls['new'])
+    .state('mallsDetail', malls.detail)
+    .state('mallsEdit', malls.edit)
+    .state('stores', studio.stores.list)
+    .state('storesNew', stores['new'])
+    .state('storesEdit', stores.edit)
+    .state('billboardsNew', billboards['new'])
+    .state('businesses', businesses.list)
+    .state('businessesNew', businesses['new'])
+    .state('advertisements', advertisements.list)
+    .state('advertisementsNew', advertisements['new']);
 }])
 
 .run(['$rootScope', 'settings', '$state', function($rootScope, settings, $state) {
@@ -840,3 +763,18 @@ var snapadmin = angular.module('snapadmin', [
     $rootScope.$settings = settings; // state to be accessed from view
     $rootScope.moment = moment;
 }]);
+
+var capitalize = (str) => str[0].toUpperCase() + str.slice(1);
+var resolveAuthHelper = ['$auth', ($auth) => { return $auth.validateUser() }];
+var viewsHelper = (name, action = '', folder = '') => ({
+  nav: { templateUrl: 'templates/sidebar.html', controller: 'SidebarController' },
+  content: { templateUrl: `templates/${folder && folder + '/'}${name}.${action && action + '.'}html`, controller: `${capitalize(name)}${action && capitalize(action)}Controller` },
+  header: { templateUrl: 'templates/header.html', controller: 'HeaderController' }
+});
+var lazyLoad = (files) => ['$ocLazyLoad', function($ocLazyLoad) {
+  return $ocLazyLoad.load({
+    name: 'snapadmin',
+    insertBefore: '#ng_load_plugins_before',
+    files: files
+  })
+}];

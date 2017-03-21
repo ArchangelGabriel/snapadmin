@@ -1,0 +1,66 @@
+<ul class="page-breadcrumb breadcrumb">
+  <li>
+    <a ui-sref="pois">Points of Interest</a>
+    <i class="fa fa-circle"></i>
+  </li>
+  <li>
+    <span>New</span>
+  </li>
+</ul>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="portlet light bordered">
+      <div class="portlet-title">
+        <div class="caption font-green-sharp">
+          <i class="icon-diamond font-green-sharp"></i>
+          <span class="caption-subject bold uppercase">Edit Point of Interest</span>
+          <span class="caption-helper hide"></span>
+        </div>
+      </div>
+      <div class="portlet-body">
+        <div class="row">
+          <div class="col-md-5">
+
+            <div class="portlet-body form">
+              <form role="form">
+                <div class="form-body">
+
+                  <div class="form-group">
+                    <label><b>Name</b></label>
+                    <div class="input-group">
+                      <span class="input-group-addon">
+                        <i class="fa fa-archive"></i>
+                      </span>
+                      <input type="text" class="form-control" placeholder="Name" ng-model="poi.name">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label><b>Description</b></label>
+                    <textarea class="form-control" rows="6" ng-model="poi.description"></textarea>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-xs-6">
+                      <label><b>Lng</b></label>
+                      <input type="number" step="any" class="form-control" placeholder="Lng" ng-model="poi.geometry.location.lng">
+                    </div>
+                    <div class="col-xs-6">
+                      <label><b>Lat</b></label>
+                      <input type="number" step="any" class="form-control" placeholder="Lat" ng-model="poi.geometry.location.lat">
+                    </div>
+                  </div>
+
+                  <button type="button" name="button" class="btn btn-primary" ng-click="updatePoi(poi)">Save</button>
+                </div>
+              </form>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

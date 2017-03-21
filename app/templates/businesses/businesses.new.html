@@ -1,0 +1,328 @@
+<ul class="page-breadcrumb breadcrumb">
+  <li>
+    <a ui-sref="businesses">Businesses</a>
+    <i class="fa fa-circle"></i>
+  </li>
+  <li>
+    <span>New</span>
+  </li>
+</ul>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="portlet light bordered">
+      <div class="portlet-title">
+        <div class="caption font-green-sharp">
+          <i class="icon-diamond font-green-sharp"></i>
+          <span class="caption-subject bold uppercase">New Business</span>
+          <span class="caption-helper hide"></span>
+        </div>
+      </div>
+      <div class="portlet-body">
+
+        <div class="row">
+
+          <div class="col-md-4">
+            <img ng-src="{{'https://placeholdit.imgix.net/~text?txtsize=100&txt=Business&w=600&h=600'}}"
+                 alt=""
+                 class="img-responsive" />
+          </div>
+
+          <div class="col-md-5">
+
+            <div class="portlet-body form">
+              <form role="form">
+                <div class="form-body" style="padding: 0">
+
+                  <div class="form-group">
+                    <label><b>Name</b></label>
+                    <div class="input-group">
+                      <span class="input-group-addon">
+                        <i class="fa fa-archive"></i>
+                      </span>
+                      <input type="text" class="form-control" placeholder="Name" ng-model="provider.name">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label><b>Image Url</b></label>
+                    <div class="input-group">
+                      <span class="input-group-addon">
+                        <i class="fa fa-image"></i>
+                      </span>
+                      <input type="text" class="form-control" placeholder="http://storage.pixeloak.com/image.jpg" ng-model="provider.image_url">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label><b>Categories</b></label>
+                    <div class="input-group">
+                      <select class="form-control select2" ng-model="event.category_ids" multiple>
+                        <option value="1">F&B</option>
+                        <option value="1">FASHION</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="mt-checkbox-inline">
+                      <label class="mt-checkbox">
+                        <input type="checkbox" class="filterStatus" value="active" checked> HQ
+                        <span></span>
+                      </label>
+                    </div>
+                  </div>
+
+                </div>
+              </form>
+            </div>
+
+          </div>
+
+          <div class="col-md-3">
+            <button type="button" name="button" class="btn btn-block yellow-haze" ng-click="createProvider(provider)">Save Draft</button>
+            <button type="button" name="button" class="btn btn-block btn-primary" ng-click="createProvider(provider)">Create</button>
+          </div>
+
+        </div>
+
+        <div class="row">
+
+          <div class="col-md-12">
+            <ul class="nav nav-tabs">
+              <li class="active">
+                  <a href="#" data-target="#details" data-toggle="tab"><b>Details</b></a>
+              </li>
+              <li>
+                  <a href="#" data-target="#signboards" data-toggle="tab"><b>Signboards</b></a>
+              </li>
+              <li>
+                  <a href="#" data-target="#promotions" data-toggle="tab"><b>Promotions</b></a>
+              </li>
+            </ul>
+            <div class="tab-content">
+
+              <div class="tab-pane active" id="details">
+                <form role="form row" style="padding: 10px;">
+                  <div class="form-body col-md-6" style="padding: 0">
+
+                    <div class="form-group">
+                      <label><b>Address</b></label>
+                      <div class="input-group">
+                        <span class="input-group-addon"></span>
+                        <input type="text" class="form-control" placeholder="Address" ng-model="provider.name">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label><b>Email</b></label>
+                      <div class="input-group">
+                        <span class="input-group-addon"></span>
+                        <input type="text" class="form-control" placeholder="Email" ng-model="provider.image_url">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label><b>Contact</b></label>
+                      <div class="input-group">
+                        <span class="input-group-addon"></span>
+                        <input type="text" class="form-control" placeholder="Contact" ng-model="provider.image_url">
+                      </div>
+                    </div>
+
+                    <div class="form-group row">
+                      <div class="col-xs-4">
+                        <label><b>Opening time</b></label>
+                        <div class="input-group">
+                          <span class="input-group-addon"></span>
+                          <input type="text" class="form-control" placeholder="9am" ng-model="provider.image_url">
+                        </div>
+                      </div>
+                      <div class="col-xs-4">
+                        <label><b>Closing time</b></label>
+                        <div class="input-group">
+                          <span class="input-group-addon"></span>
+                          <input type="text" class="form-control" placeholder="6pm" ng-model="provider.image_url">
+                        </div>
+                      </div>
+                      <div class="col-xs-4">
+                        <div class="mt-checkbox-inline" style="padding-top: 30px;">
+                          <label class="mt-checkbox">
+                            <input type="checkbox" class="filterStatus" value="active"><b> Open 24 hrs</b>
+                            <span></span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <hr />
+
+                    <div class="form-group row">
+                      <div class="col-xs-6">
+                        <label><b>Lng</b></label>
+                        <input type="number" step="any" class="form-control" placeholder="Lng" ng-model="event.location[0]">
+                      </div>
+                      <div class="col-xs-6">
+                        <label><b>Lat</b></label>
+                        <input type="number" step="any" class="form-control" placeholder="Lat" ng-model="event.location[1]">
+                      </div>
+                    </div>
+
+                    <hr />
+
+                    <div class="form-group">
+                      <label><b>Mall</b></label>
+                      <div class="btn-group bootstrap-select bs-select form-control dropdown">
+                        <button type="button" class="btn dropdown-toggle btn-default" data-toggle="dropdown" role="button" title="Mustard" aria-expanded="true">
+                          <span class="filter-option pull-left">Mustard</span>&nbsp;
+                          <span class="bs-caret"><span class="caret"></span></span>
+                        </button>
+                        <div class="dropdown-menu open" role="combobox" style="max-height: 253px; overflow: hidden; min-height: 0px;">
+                          <ul class="dropdown-menu inner" role="listbox" aria-expanded="true" style="max-height: 251px; overflow-y: auto; min-height: 0px;">
+                            <li data-original-index="0" class="selected">
+                              <a tabindex="0" class="" style="" data-tokens="null" role="option" aria-disabled="false" aria-selected="true">
+                                <span class="text">Bugis Junction</span>
+                                <span class="fa fa-check check-mark"></span>
+                              </a>
+                            </li>
+                            <li data-original-index="1">
+                              <a tabindex="0" class="" style="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false">
+                                <span class="text">Plaza Singapura</span>
+                                <span class="fa fa-check check-mark"></span>
+                              </a>
+                            </li>
+                            <li data-original-index="2">
+                              <a tabindex="0" class="" style="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false">
+                                <span class="text">Lot One</span>
+                                <span class="fa fa-check check-mark"></span>
+                              </a>
+                            </li>
+                          </ul></div>
+                          <select class="bs-select form-control" tabindex="-98">
+                            <option>Bugis Junction</option>
+                            <option>Plaza Singapura</option>
+                            <option>Lot One</option>
+                          </select>
+                        </div>
+                    </div>
+
+                      <div class="form-group row">
+                        <div class="col-xs-6">
+                          <label><b>Unit</b></label>
+                          <div class="input-group">
+                            <span class="input-group-addon"></span>
+                            <input type="text" class="form-control" placeholder="01" ng-model="provider.image_url">
+                          </div>
+                        </div>
+                        <div class="col-xs-6">
+                          <label><b>Level</b></label>
+                          <div class="input-group">
+                            <span class="input-group-addon"></span>
+                            <input type="text" class="form-control" placeholder="73" ng-model="provider.image_url">
+                          </div>
+                        </div>
+                      </div>
+
+                  </div>
+                </form>
+              </div>
+
+              <div class="tab-pane" id="signboards">
+                <div class="actions pull-right" style="margin-bottom: 10px;">
+                  <div class="input-group">
+                    <div class="input-icon right" style="margin-right: 10px;">
+                      <i class="fa fa-search"></i>
+                      <input class="form-control" type="text" name="search" placeholder="Search signboards" ng-model="textFilter">
+                    </div>
+                    <span class="input-group-btn">
+                      <button ui-sref="billboardsNew" class="btn btn-primary">New Billboard
+                        <i class="fa fa-plus"></i>
+                      </button>
+                    </span>
+                  </div>
+                </div>
+
+                <div class="row" style="padding: 10px 0;">
+                  <div class="col-md-4">
+                    <img ng-src="{{'https://placeholdit.imgix.net/~text?txtsize=100&txt=Signboard1&w=600&h=450'}}"
+                         alt=""
+                         class="img-responsive" />
+                  </div>
+                  <div class="col-md-7">
+                    <h3 class="h3">Free Food Vouchers @ Something</h3>
+                    <small><b>#01-31</b></small>
+                    <p style="margin-top: 10px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde beatae omnis dignissimos ipsa tempora? Ipsum sapiente dolores ducimus in quis soluta hic, dignissimos, dolor, veritatis veniam, doloremque incidunt! Porro, ratione.</p>
+                    <button class="btn btn-lg btn-success">Schedule</button>
+                  </div>
+                </div>
+
+                <div class="row" style="padding: 10px 0;">
+                  <div class="col-md-4">
+                    <img ng-src="{{'https://placeholdit.imgix.net/~text?txtsize=100&txt=Signboard1&w=600&h=450'}}"
+                         alt=""
+                         class="img-responsive" />
+                  </div>
+                  <div class="col-md-7">
+                    <h3 class="h3">Yoshinoya Buy One Get One</h3>
+                    <small><b>#04-23</b></small>
+                    <p style="margin-top: 10px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde beatae omnis dignissimos ipsa tempora? Ipsum sapiente dolores ducimus in quis soluta hic, dignissimos, dolor, veritatis veniam, doloremque incidunt! Porro, ratione.</p>
+                    <button class="btn btn-lg btn-success">Schedule</button>
+                  </div>
+                </div>
+
+              </div>
+              <div class="tab-pane" id="promotions">
+
+                <div class="actions pull-right" style="margin-bottom: 10px;">
+                  <div class="input-group">
+                    <div class="input-icon right" style="margin-right: 10px;">
+                      <i class="fa fa-search"></i>
+                      <input class="form-control" type="text" name="search" placeholder="Search promotions" ng-model="textFilter">
+                    </div>
+                    <span class="input-group-btn">
+                      <button ui-sref="billboardsNew" class="btn btn-primary">New Promotion
+                        <i class="fa fa-plus"></i>
+                      </button>
+                    </span>
+                  </div>
+                </div>
+
+                <div class="row" style="padding: 10px 0;">
+                  <div class="col-md-4">
+                    <img ng-src="{{'https://placeholdit.imgix.net/~text?txtsize=100&txt=Promo1&w=600&h=450'}}"
+                         alt=""
+                         class="img-responsive" />
+                  </div>
+                  <div class="col-md-7">
+                    <h3 class="h3">Promo1</h3>
+                    <small><b>#01-31</b></small>
+                    <p style="margin-top: 10px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde beatae omnis dignissimos ipsa tempora? Ipsum sapiente dolores ducimus in quis soluta hic, dignissimos, dolor, veritatis veniam, doloremque incidunt! Porro, ratione.</p>
+                    <button class="btn btn-lg btn-success">Schedule</button>
+                  </div>
+                </div>
+
+                <div class="row" style="padding: 10px 0;">
+                  <div class="col-md-4">
+                    <img ng-src="{{'https://placeholdit.imgix.net/~text?txtsize=100&txt=Promo2&w=600&h=450'}}"
+                         alt=""
+                         class="img-responsive" />
+                  </div>
+                  <div class="col-md-7">
+                    <h3 class="h3">Promo2</h3>
+                    <small><b>#04-23</b></small>
+                    <p style="margin-top: 10px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde beatae omnis dignissimos ipsa tempora? Ipsum sapiente dolores ducimus in quis soluta hic, dignissimos, dolor, veritatis veniam, doloremque incidunt! Porro, ratione.</p>
+                    <button class="btn btn-lg btn-success">Schedule</button>
+                    <button class="btn btn-lg btn-warning">Status</button>
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

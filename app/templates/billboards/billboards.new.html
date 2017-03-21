@@ -1,0 +1,98 @@
+<ul class="page-breadcrumb breadcrumb">
+  <li>
+    <a ui-sref="malls">Billboards</a>
+    <i class="fa fa-circle"></i>
+  </li>
+  <li>
+    <span>New</span>
+  </li>
+</ul>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="portlet light bordered">
+      <div class="portlet-title">
+        <div class="caption font-green-sharp">
+          <i class="icon-diamond font-green-sharp"></i>
+          <span class="caption-subject bold uppercase">New Billboard</span>
+          <span class="caption-helper hide"></span>
+        </div>
+      </div>
+      <div class="portlet-body">
+
+        <div class="row">
+
+          <div class="col-md-4">
+            <img ng-src="{{'https://placeholdit.imgix.net/~text?txtsize=100&txt=Billboard&w=600&h=600'}}"
+                 alt=""
+                 class="img-responsive" />
+          </div>
+
+          <div class="col-md-5">
+
+            <div class="portlet-body form">
+              <form role="form">
+                <div class="form-body" style="padding: 0">
+
+                  <div class="form-group">
+                    <label><b>Name</b></label>
+                    <div class="input-group">
+                      <span class="input-group-addon">
+                        <i class="fa fa-archive"></i>
+                      </span>
+                      <input type="text" class="form-control" placeholder="Name" ng-model="provider.name">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label><b>Image Url</b></label>
+                    <div class="input-group">
+                      <span class="input-group-addon">
+                        <i class="fa fa-image"></i>
+                      </span>
+                      <input type="text" class="form-control" placeholder="http://storage.pixeloak.com/image.jpg" ng-model="provider.image_url">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label><b>Description</b></label>
+                    <textarea class="form-control" rows="6" ng-model="event.description"></textarea>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-xs-6">
+                      <label><b>Level</b></label>
+                      <input type="text" class="form-control" placeholder="01" ng-model="event.location[0]">
+                    </div>
+                    <div class="col-xs-6">
+                      <label><b>Unit</b></label>
+                      <input type="text" class="form-control" placeholder="73" ng-model="event.location[1]">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label><b>Advertisement mode:</b></label>
+                    <div class="mt-checkbox-inline">
+                      <label class="mt-checkbox">
+                        <input type="checkbox" class="filterStatus" value="active" checked> Fixed
+                        <span></span>
+                      </label>
+                      <label class="mt-checkbox">
+                        <input type="checkbox" class="filterStatus" value="ended"> Rotating
+                        <span></span>
+                      </label>
+                    </div>
+                  </div>
+
+                  <button type="button" name="button" class="btn btn-primary" ng-click="createProvider(provider)">Create New Store</button>
+                </div>
+              </form>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

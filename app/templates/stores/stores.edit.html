@@ -1,0 +1,136 @@
+<ul class="page-breadcrumb breadcrumb">
+  <li>
+    <a ui-sref="malls">Malls</a>
+    <i class="fa fa-circle"></i>
+  </li>
+  <li>
+    <a ui-sref="mallsDetail({id: mall.id})">{{mall.id}}</a>
+    <i class="fa fa-circle"></i>
+  </li>
+  <li>
+    <span>Stores</span>
+    <i class="fa fa-circle"></i>
+  </li>
+  <li>
+    <span>New</span>
+  </li>
+</ul>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="portlet light bordered">
+      <div class="portlet-title">
+        <div class="caption font-green-sharp">
+          <i class="icon-diamond font-green-sharp"></i>
+          <span class="caption-subject bold uppercase">Edit a New Store for {{mall.name}}</span>
+          <span class="caption-helper hide"></span>
+        </div>
+      </div>
+      <div class="portlet-body">
+
+        <div class="row">
+
+          <div class="col-md-4">
+            <img ng-src="{{ settings.imagePath.concat(store.image.medium) }}"
+                 onerror="this.src='https://placeholdit.imgix.net/~text?txtsize=100&txt=SampleStore&w=600&h=600';"
+                 class="img-responsive"
+                 style="border: 1px solid #d3d3d3; object-fit: contain; height: 300px; width: 100%; background: black;">
+            <div>
+              <input type="file" image="image" />
+            </div>
+          </div>
+
+          <div class="col-md-5">
+
+            <div class="portlet-body form">
+              <form role="form">
+                <div class="form-body" style="padding: 0">
+
+                  <div class="form-group">
+                    <label><b>Name</b></label>
+                    <div class="input-group">
+                      <span class="input-group-addon"></span>
+                      <input type="text" class="form-control" placeholder="Name" ng-model="store.name">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label><b>Email</b></label>
+                    <div class="input-group">
+                      <span class="input-group-addon"></span>
+                      <input type="text" class="form-control" placeholder="Email" ng-model="store.email">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label><b>Phonenumber</b></label>
+                    <div class="input-group">
+                      <span class="input-group-addon"></span>
+                      <input type="text" class="form-control" placeholder="Phonenumber" ng-model="store.phone_number">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label><b>Description</b></label>
+                    <textarea class="form-control" rows="6" ng-model="store.description"></textarea>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-xs-6">
+                      <label><b>Level</b></label>
+                      <div class="input-group">
+                        <span class="input-group-addon"></span>
+                        <input type="text" class="form-control" placeholder="01" ng-model="store.level">
+                      </div>
+                    </div>
+                    <div class="col-xs-6">
+                      <label><b>Unit</b></label>
+                      <div class="input-group">
+                        <span class="input-group-addon"></span>
+                        <input type="text" class="form-control" placeholder="73" ng-model="store.unit">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-xs-4">
+                      <label><b>Opening time</b></label>
+                      <div class="input-group">
+                        <span class="input-group-addon"></span>
+                        <input type="text" class="form-control" placeholder="9am" ng-model="store.opening_time">
+                      </div>
+                    </div>
+                    <div class="col-xs-4">
+                      <label><b>Closing time</b></label>
+                      <div class="input-group">
+                        <span class="input-group-addon"></span>
+                        <input type="text" class="form-control" placeholder="6pm" ng-model="store.closing_time">
+                      </div>
+                    </div>
+                    <div class="col-xs-4">
+                      <div class="mt-checkbox-inline" style="padding-top: 30px;">
+                        <label class="mt-checkbox">
+                          <input type="checkbox" class="filterStatus" value="active"><b> Open 24 hrs</b>
+                          <span></span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </form>
+            </div>
+
+          </div>
+
+          <div class="col-md-3">
+            <button type="button" name="button" class="btn btn-block yellow-haze" ng-click="editStore(store, 'draft')">Save as Draft</button>
+            <button type="button" name="button" class="btn btn-block btn-primary" ng-click="editStore(store)">Edit</button>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
