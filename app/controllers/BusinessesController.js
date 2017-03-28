@@ -7,14 +7,55 @@ var businesses = [
   {id: 4, name: 'Business D', address: "91 Kallang St, Singapore 154223", img: "https://media-cdn.tripadvisor.com/media/photo-s/08/23/8f/96/the-ritz-carlton-millenia.jpg", description: "Kallang /kɑːlɑːŋ/ is a planning area and residential town located in the Central Region of Singapore. Development of the town is centered around the Kallang River, which is Singapore's longest river." },
 ];
 
-function BusinessesListController($scope) {
-  $scope.businesses = businesses;
+function BusinessesListController($scope, BusinessService) {
+  BusinessService.list().then(function(result) {
+    $scope.businesses = result.data;
+  })
 }
 
-function BusinessesNewController($scope) {
+function BusinessesNewController($scope, $state, BusinessService) {
+  $scope.$on('$viewContentLoaded', function() {
+    ComponentsSelect2.init();
+  });
 
+  $scope.createBusiness = function(business, status = 'submitted') {
+    business = Object.assign({}, business, { publish_status: status }, $scope.image != undefined && { image: $scope.image });
+    BusinessService.create(business).then(function(results) {
+      $state.go('businesses');
+    })
+  }
+}
+
+function BusinessesDetailController($scope, $stateParams, BusinessService) {
+  BusinessService.get($stateParams.id).then(function(result) {
+    console.log(result.data);
+  })
+}
+
+function BusinessesEditController($scope, $state, $stateParams, BusinessService) {
+  $scope.$on('$viewContentLoaded', function() {
+    ComponentsSelect2.init();
+  });
+
+  Promise.all([
+    BusinessService.get($stateParams.id)
+  ]).then(function(results) {
+    $scope.business = results[0].data;
+    console.log($scope.business);
+    $scope.$apply();
+  });
+
+  $scope.editBusiness = function(business, status = 'submitted') {
+    if (typeof business.image == "object") delete business["image"];
+    business = Object.assign({}, business, { publish_status: status }, $scope.image != undefined && { image: $scope.image });
+    BusinessService.update(business.id, business).then(function(result) {
+      $state.go('businesses');
+    });
+  }
 }
 
 angular.module('snapadmin')
-  .controller('BusinessesListController',      ['$scope', BusinessesListController])
-  .controller('BusinessesNewController', ['$scope', BusinessesNewController])
+  .controller('BusinessesListController', ['$scope', 'BusinessService', BusinessesListController])
+  .controller('BusinessesNewController', ['$scope', '$state', 'BusinessService', BusinessesNewController])
+  .controller('BusinessesDetailController', ['$scope', '$stateParams', 'BusinessService', BusinessesDetailController])
+  .controller('BusinessesEditController', ['$scope', '$state', '$stateParams', 'BusinessService', BusinessesEditController]);

@@ -4,8 +4,7 @@ var snapadmin = angular.module('snapadmin', [
   'ui.router',
   'oc.lazyLoad',
   'ngSanitize',
-  'ng-token-auth',
-  'ngFileUpload'
+  'ng-token-auth'
 ])
 
 // TODO: separate this filter
@@ -306,7 +305,6 @@ var snapadmin = angular.module('snapadmin', [
             'assets/global/plugins/select2/css/select2-bootstrap.min.css',
             'assets/global/plugins/select2/js/select2.full.min.js',
             'assets/pages/scripts/components-select2.min.js',
-
           ]
         })
       }],
@@ -629,12 +627,38 @@ var snapadmin = angular.module('snapadmin', [
     'new': {
       url: '/businesses/new',
       views: viewsHelper('businesses', 'new', 'businesses/'),
-      resolve: { auth: resolveAuthHelper }
+      resolve: {
+        auth: resolveAuthHelper,
+        deps: lazyLoad([
+          'assets/global/plugins/select2/css/select2.min.css',
+          'assets/global/plugins/select2/css/select2-bootstrap.min.css',
+          'assets/global/plugins/select2/js/select2.full.min.js',
+          'assets/pages/scripts/components-select2.min.js',
+        ])
+      },
     },
     list: {
       url: '/businesses',
       views: viewsHelper('businesses', 'list', 'businesses/'),
       resolve: { auth: resolveAuthHelper }
+    },
+    detail: {
+      url: '/businesses/:id',
+      views: viewsHelper('businesses', 'detail', 'businesses/'),
+      resolve: { auth: resolveAuthHelper },
+    },
+    edit: {
+      url: '/businesses/:id/edit',
+      views: viewsHelper('businesses', 'edit', 'businesses/'),
+      resolve: {
+        auth: resolveAuthHelper,
+        deps: lazyLoad([
+          'assets/global/plugins/select2/css/select2.min.css',
+          'assets/global/plugins/select2/css/select2-bootstrap.min.css',
+          'assets/global/plugins/select2/js/select2.full.min.js',
+          'assets/pages/scripts/components-select2.min.js',
+        ])
+      }
     }
   }
 
@@ -754,6 +778,8 @@ var snapadmin = angular.module('snapadmin', [
     .state('billboardsNew', billboards['new'])
     .state('businesses', businesses.list)
     .state('businessesNew', businesses['new'])
+    .state('businessesDetail', businesses.detail)
+    .state('businessesEdit', businesses.edit)
     .state('advertisements', advertisements.list)
     .state('advertisementsNew', advertisements['new']);
 }])

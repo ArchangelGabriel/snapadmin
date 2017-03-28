@@ -4,7 +4,11 @@
     <i class="fa fa-circle"></i>
   </li>
   <li>
-    <span>New</span>
+    <span>{{business.id}}</span>
+    <i class="fa fa-circle"></i>
+  </li>
+  <li>
+    <span>Edit</span>
   </li>
 </ul>
 
@@ -23,10 +27,10 @@
         <div class="row">
 
           <div class="col-md-4" style="margin-bottom: 15px;">
-            <img ng-src="{{'https://placeholdit.imgix.net/~text?txtsize=100&txt=Business&w=600&h=600'}}"
-                alt=""
-                class="img-responsive img-preview"
-                style="object-fit: contain; height: 300px; width: 100%;" />
+            <img onerror="this.src='https://placeholdit.imgix.net/~text?txtsize=100&txt=SampleBusiness&w=600&h=600';"
+                 ng-src="{{ 'https://snaplar.blob.core.windows.net/image/Users/juangabriel/Desktop/temp/pixeloak/snapadmin_backend/public' + business.image.medium }}"
+                 class="img-responsive img-preview"
+                 style="object-fit: contain; height: 300px; width: 100%;" />
             <div>
              <input type="file" image="image" />
             </div>
@@ -67,8 +71,8 @@
           </div>
 
           <div class="col-md-3">
-            <button type="button" name="button" class="btn btn-block yellow-haze" ng-click="createBusiness(business, 'draft')">Save Draft</button>
-            <button type="button" name="button" class="btn btn-block btn-primary" ng-click="createBusiness(business)">Create</button>
+            <button type="button" name="button" class="btn btn-block yellow-haze" ng-click="editBusiness(business, 'draft')">Edit as Draft</button>
+            <button type="button" name="button" class="btn btn-block btn-primary" ng-click="editBusiness(business)">Edit</button>
           </div>
 
         </div>

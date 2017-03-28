@@ -58,7 +58,7 @@ function MallsListController($scope, $stateParams, MallService) {
   });
 }
 
-function MallsNewController($scope, $state, MallService, Upload) {
+function MallsNewController($scope, $state, MallService) {
   $scope.createMall = function(mall, status = 'submitted') {
     mall = Object.assign({}, mall, { publish_status: status }, $scope.image != undefined && { image: $scope.image });
     MallService.create(mall).then(function(result) {
@@ -67,7 +67,7 @@ function MallsNewController($scope, $state, MallService, Upload) {
   };
 }
 
-function MallsEditController($scope, $state, $stateParams, MallService, Upload) {
+function MallsEditController($scope, $state, $stateParams, MallService) {
   MallService.get($stateParams.id).then(function(result) {
     $scope.mall = result.data;
     console.log($scope.mall);
@@ -85,5 +85,5 @@ function MallsEditController($scope, $state, $stateParams, MallService, Upload) 
 angular.module('snapadmin')
   .controller('MallsDetailController', ['$scope', '$stateParams', 'MallService', 'StoreService', MallsDetailController])
   .controller('MallsListController',   ['$scope', '$stateParams', 'MallService', MallsListController])
-  .controller('MallsNewController',    ['$scope', '$state', 'MallService', 'Upload', MallsNewController])
-  .controller('MallsEditController',   ['$scope', '$state','$stateParams', 'MallService', 'Upload', MallsEditController])
+  .controller('MallsNewController',    ['$scope', '$state', 'MallService', MallsNewController])
+  .controller('MallsEditController',   ['$scope', '$state','$stateParams', 'MallService', MallsEditController])

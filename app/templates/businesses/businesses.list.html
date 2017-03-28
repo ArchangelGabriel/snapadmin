@@ -31,47 +31,18 @@
 
         <div class="row">
 
-          <div class="col-md-3" style="padding-right: 0;">
-
-            <div class="portlet light" style="padding: 10px 0 0;">
-                <div class="portlet-title">
-                    <div class="caption" data-toggle="collapse" data-target=".todo-project-list-content">
-                        <span class="caption-subject font-green-sharp bold uppercase">Filter By Mall </span>
-                    </div>
-                </div>
-                <div class="portlet-body todo-project-list-content" style="height: auto;">
-                    <div class="todo-project-list">
-                        <ul class="nav nav-stacked">
-                            <li>
-                                <a href="javascript:;">
-                                    <span class="badge badge-default"> 1 </span> Bugis Junction</a>
-                            </li>
-                            <li>
-                                <a href="javascript:;">
-                                    <span class="badge badge-default"> 2 </span> Plaza Singapura</a>
-                            </li>
-                            <li class="active">
-                                <a href="javascript:;">
-                                    <span class="badge badge-default"> 1 </span> Lot 1</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-          </div>
-
-          <div class="col-md-9" style="padding-left: 0;">
+          <div class="col-md-12">
             <div class="mt-element-list">
               <div class="mt-list-container list-news ext-1">
                 <ul>
                   <li class="mt-list-item" ng-repeat="business in businesses | filter: textFilter">
                     <div class="list-thumb">
-                      <img alt="" ng-src="{{business.img}}">
+                      <img onerror="this.src='https://placeholdit.imgix.net/~text?txtsize=100&txt=SampleBusiness&w=600&h=600';"
+                           ng-src="{{ 'https://snaplar.blob.core.windows.net/image/Users/juangabriel/Desktop/temp/pixeloak/snapadmin_backend/public' + business.image.thumb }}">
                     </div>
                     <div class="list-item-content">
                       <h3 class="uppercase bold" style="margin-bottom: 5px;">
-                        <a ui-sref="mallsDetail({id: business.id})">{{business.name}}</a>
+                        <a ui-sref="businessesEdit({id: business.id})">{{business.name}}</a>
                       </h3>
                       <small class="bold" style="display:block; margin-bottom: 5px;">{{business.address}}</small>
                       <p>{{business.description}}</p>
