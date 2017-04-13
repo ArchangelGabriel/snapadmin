@@ -60,7 +60,7 @@ function MallsListController($scope, $stateParams, MallService) {
 
 function MallsNewController($scope, $state, MallService) {
   $scope.createMall = function(mall, status = 'submitted') {
-    mall = Object.assign({}, mall, { publish_status: status }, $scope.image != undefined && { image: $scope.image });
+    mall = Object.assign({}, mall, { publish_status: status, acc_type: 'basic' }, $scope.image != undefined && { image: $scope.image });
     MallService.create(mall).then(function(result) {
       $state.go('malls');
     });
@@ -74,7 +74,7 @@ function MallsEditController($scope, $state, $stateParams, MallService) {
   });
   $scope.editMall = function(mall, status = 'submitted') {
     if (typeof mall.image == "object") delete mall["image"];
-    mall = Object.assign({}, mall, { publish_status: status }, $scope.image != undefined && { image: $scope.image });
+    mall = Object.assign({}, mall, { publish_status: status, acc_type: 'basic' }, $scope.image != undefined && { image: $scope.image });
     MallService.update(mall.id, mall).then(function(result) {
       console.log('res', result);
       $state.go('mallsDetail', { id: result.id });
