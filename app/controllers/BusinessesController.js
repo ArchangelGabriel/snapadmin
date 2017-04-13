@@ -13,13 +13,21 @@ function BusinessesListController($scope, BusinessService) {
   })
 }
 
-function BusinessesNewController($scope, $state, BusinessService) {
+function BusinessesNewController($scope, $state, BusinessService, MallService) {
   $scope.$on('$viewContentLoaded', function() {
     ComponentsSelect2.init();
   });
 
+  Promise.all([
+    MallService.list()
+  ]).then(function(results) {
+    $scope.malls = results[0].data;
+    console.log(results);
+    $scope.$apply();
+  });
+
   $scope.createBusiness = function(business, status = 'submitted') {
-    business = Object.assign({}, business, { publish_status: status }, $scope.image != undefined && { image: $scope.image });
+    business = Object.assign({}, business, { publish_status: status, mall_id: $("#mall_id").val() }, $scope.image != undefined && { image: $scope.image });
     BusinessService.create(business).then(function(results) {
       $state.go('businesses');
     })
@@ -32,22 +40,26 @@ function BusinessesDetailController($scope, $stateParams, BusinessService) {
   })
 }
 
-function BusinessesEditController($scope, $state, $stateParams, BusinessService) {
+function BusinessesEditController($scope, $state, $stateParams, BusinessService, BillboardService, MallService) {
   $scope.$on('$viewContentLoaded', function() {
     ComponentsSelect2.init();
   });
 
   Promise.all([
-    BusinessService.get($stateParams.id)
+    BusinessService.get($stateParams.id),
+    BillboardService.list({business_id: 1}),
+    MallService.list()
   ]).then(function(results) {
     $scope.business = results[0].data;
-    console.log($scope.business);
+    $scope.signboards = results[1].data;
+    $scope.malls = results[2].data;
+    console.log(results);
     $scope.$apply();
   });
 
   $scope.editBusiness = function(business, status = 'submitted') {
     if (typeof business.image == "object") delete business["image"];
-    business = Object.assign({}, business, { publish_status: status }, $scope.image != undefined && { image: $scope.image });
+    business = Object.assign({}, business, { publish_status: status, mall_id: $('#mall_id').val() }, $scope.image != undefined && { image: $scope.image });
     BusinessService.update(business.id, business).then(function(result) {
       $state.go('businesses');
     });
@@ -56,6 +68,6 @@ function BusinessesEditController($scope, $state, $stateParams, BusinessService)
 
 angular.module('snapadmin')
   .controller('BusinessesListController', ['$scope', 'BusinessService', BusinessesListController])
-  .controller('BusinessesNewController', ['$scope', '$state', 'BusinessService', BusinessesNewController])
+  .controller('BusinessesNewController', ['$scope', '$state', 'BusinessService', 'MallService', BusinessesNewController])
   .controller('BusinessesDetailController', ['$scope', '$stateParams', 'BusinessService', BusinessesDetailController])
-  .controller('BusinessesEditController', ['$scope', '$state', '$stateParams', 'BusinessService', BusinessesEditController]);
+  .controller('BusinessesEditController', ['$scope', '$state', '$stateParams', 'BusinessService', 'BillboardService', 'MallService', BusinessesEditController]);

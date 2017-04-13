@@ -12,7 +12,11 @@
     <i class="fa fa-circle"></i>
   </li>
   <li>
-    <span>New</span>
+    <span>{{signboard.id}}</span>
+    <i class="fa fa-circle"></i>
+  </li>
+  <li>
+    <span>Edit</span>
   </li>
 </ul>
 
@@ -126,7 +130,7 @@
                     </div>
                   </div>
 
-                  <button type="button" name="button" class="btn btn-primary" ng-click="createSignboard(signboard)">Create New Signboard</button>
+                  <button type="button" name="button" class="btn btn-primary" ng-click="editSignboard(signboard)">Edit Signboard</button>
                 </div>
               </form>
             </div>

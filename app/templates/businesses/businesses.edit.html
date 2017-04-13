@@ -148,11 +148,11 @@
                     <div class="form-group">
                       <label><b>Mall</b></label>
                       <div class="input-group">
-                        <select class="form-control select2" ng-model="business.mall_id">
-                          <!-- <option ng-repeat="category in categories" value="{{category.id}}">{{category.name}}</option> -->
-                          <option value="asdf">asdf</option>
-                          <option value="asdf">asdf2</option>
-                          <option value="asdf">asdf3</option>
+                        <select id="mall_id" class="form-control select2">
+                          <option
+                            ng-repeat="mall in malls"
+                            value="{{mall.id}}"
+                            ng-selected="{{business.mall_id === mall.id}}">{{mall.name}}</option>
                         </select>
                       </div>
                     </div>
@@ -182,40 +182,26 @@
                       <input class="form-control" type="text" name="search" placeholder="Search signboards" ng-model="textFilter">
                     </div>
                     <span class="input-group-btn">
-                      <button ui-sref="billboardsNew" class="btn btn-primary">New Billboard
+                      <button ui-sref="billboardsNew({business_id: business.id})" class="btn btn-primary">New Billboard
                         <i class="fa fa-plus"></i>
                       </button>
                     </span>
                   </div>
                 </div>
 
-                <div class="row" style="padding: 10px 0;">
+                <div ng-repeat="signboard in signboards" class="row" style="padding: 10px 0;">
                   <div class="col-md-4">
                     <img ng-src="{{'https://placeholdit.imgix.net/~text?txtsize=100&txt=Signboard1&w=600&h=450'}}"
                          alt=""
                          class="img-responsive" />
                   </div>
                   <div class="col-md-7">
-                    <h3 class="h3">Free Food Vouchers @ Something</h3>
-                    <small><b>#01-31</b></small>
-                    <p style="margin-top: 10px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde beatae omnis dignissimos ipsa tempora? Ipsum sapiente dolores ducimus in quis soluta hic, dignissimos, dolor, veritatis veniam, doloremque incidunt! Porro, ratione.</p>
-                    <button class="btn btn-lg btn-success">Schedule</button>
+                    <h3 class="h3">{{signboard.name}}</h3>
+                    <p style="margin-top: 10px;">{{signboard.description}}</p>
+                    <button ui-sref="billboardsEdit({business_id: business.id, id: signboard.id})" class="btn btn-lg btn-success">View Details</button>
                   </div>
                 </div>
 
-                <div class="row" style="padding: 10px 0;">
-                  <div class="col-md-4">
-                    <img ng-src="{{'https://placeholdit.imgix.net/~text?txtsize=100&txt=Signboard1&w=600&h=450'}}"
-                         alt=""
-                         class="img-responsive" />
-                  </div>
-                  <div class="col-md-7">
-                    <h3 class="h3">Yoshinoya Buy One Get One</h3>
-                    <small><b>#04-23</b></small>
-                    <p style="margin-top: 10px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde beatae omnis dignissimos ipsa tempora? Ipsum sapiente dolores ducimus in quis soluta hic, dignissimos, dolor, veritatis veniam, doloremque incidunt! Porro, ratione.</p>
-                    <button class="btn btn-lg btn-success">Schedule</button>
-                  </div>
-                </div>
 
               </div>
               <div class="tab-pane" id="promotions">

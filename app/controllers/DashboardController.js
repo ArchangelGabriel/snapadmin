@@ -5,4 +5,4 @@ function DashboardController() {
 };
 
 angular.module('snapadmin')
-  .controller('DashboardController', [DashboardController]);
+  .controller('DashboardController', ['EventService', '',DashboardController]);

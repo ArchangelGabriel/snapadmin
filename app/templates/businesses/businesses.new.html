@@ -80,12 +80,6 @@
               <li class="active">
                   <a href="#" data-target="#details" data-toggle="tab"><b>Details</b></a>
               </li>
-              <li>
-                  <a href="#" data-target="#signboards" data-toggle="tab"><b>Signboards</b></a>
-              </li>
-              <li>
-                  <a href="#" data-target="#promotions" data-toggle="tab"><b>Promotions</b></a>
-              </li>
             </ul>
             <div class="tab-content">
 
@@ -144,11 +138,10 @@
                     <div class="form-group">
                       <label><b>Mall</b></label>
                       <div class="input-group">
-                        <select class="form-control select2" ng-model="business.mall_id">
-                          <!-- <option ng-repeat="category in categories" value="{{category.id}}">{{category.name}}</option> -->
-                          <option value="asdf">asdf</option>
-                          <option value="asdf">asdf2</option>
-                          <option value="asdf">asdf3</option>
+                        <select id="mall_id" class="form-control select2" ng-model="business.mall_id">
+                          <option
+                            ng-repeat="mall in malls"
+                            value="{{mall.id}}">{{mall.name}}</option>
                         </select>
                       </div>
                     </div>
@@ -170,97 +163,6 @@
                 </form>
               </div>
 
-              <div class="tab-pane" id="signboards">
-                <div class="actions pull-right" style="margin-bottom: 10px;">
-                  <div class="input-group">
-                    <div class="input-icon right" style="margin-right: 10px;">
-                      <i class="fa fa-search"></i>
-                      <input class="form-control" type="text" name="search" placeholder="Search signboards" ng-model="textFilter">
-                    </div>
-                    <span class="input-group-btn">
-                      <button ui-sref="billboardsNew" class="btn btn-primary">New Billboard
-                        <i class="fa fa-plus"></i>
-                      </button>
-                    </span>
-                  </div>
-                </div>
-
-                <div class="row" style="padding: 10px 0;">
-                  <div class="col-md-4">
-                    <img ng-src="{{'https://placeholdit.imgix.net/~text?txtsize=100&txt=Signboard1&w=600&h=450'}}"
-                         alt=""
-                         class="img-responsive" />
-                  </div>
-                  <div class="col-md-7">
-                    <h3 class="h3">Free Food Vouchers @ Something</h3>
-                    <small><b>#01-31</b></small>
-                    <p style="margin-top: 10px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde beatae omnis dignissimos ipsa tempora? Ipsum sapiente dolores ducimus in quis soluta hic, dignissimos, dolor, veritatis veniam, doloremque incidunt! Porro, ratione.</p>
-                    <button class="btn btn-lg btn-success">Schedule</button>
-                  </div>
-                </div>
-
-                <div class="row" style="padding: 10px 0;">
-                  <div class="col-md-4">
-                    <img ng-src="{{'https://placeholdit.imgix.net/~text?txtsize=100&txt=Signboard1&w=600&h=450'}}"
-                         alt=""
-                         class="img-responsive" />
-                  </div>
-                  <div class="col-md-7">
-                    <h3 class="h3">Yoshinoya Buy One Get One</h3>
-                    <small><b>#04-23</b></small>
-                    <p style="margin-top: 10px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde beatae omnis dignissimos ipsa tempora? Ipsum sapiente dolores ducimus in quis soluta hic, dignissimos, dolor, veritatis veniam, doloremque incidunt! Porro, ratione.</p>
-                    <button class="btn btn-lg btn-success">Schedule</button>
-                  </div>
-                </div>
-
-              </div>
-              <div class="tab-pane" id="promotions">
-
-                <div class="actions pull-right" style="margin-bottom: 10px;">
-                  <div class="input-group">
-                    <div class="input-icon right" style="margin-right: 10px;">
-                      <i class="fa fa-search"></i>
-                      <input class="form-control" type="text" name="search" placeholder="Search promotions" ng-model="textFilter">
-                    </div>
-                    <span class="input-group-btn">
-                      <button ui-sref="billboardsNew" class="btn btn-primary">New Promotion
-                        <i class="fa fa-plus"></i>
-                      </button>
-                    </span>
-                  </div>
-                </div>
-
-                <div class="row" style="padding: 10px 0;">
-                  <div class="col-md-4">
-                    <img ng-src="{{'https://placeholdit.imgix.net/~text?txtsize=100&txt=Promo1&w=600&h=450'}}"
-                         alt=""
-                         class="img-responsive" />
-                  </div>
-                  <div class="col-md-7">
-                    <h3 class="h3">Promo1</h3>
-                    <small><b>#01-31</b></small>
-                    <p style="margin-top: 10px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde beatae omnis dignissimos ipsa tempora? Ipsum sapiente dolores ducimus in quis soluta hic, dignissimos, dolor, veritatis veniam, doloremque incidunt! Porro, ratione.</p>
-                    <button class="btn btn-lg btn-success">Schedule</button>
-                  </div>
-                </div>
-
-                <div class="row" style="padding: 10px 0;">
-                  <div class="col-md-4">
-                    <img ng-src="{{'https://placeholdit.imgix.net/~text?txtsize=100&txt=Promo2&w=600&h=450'}}"
-                         alt=""
-                         class="img-responsive" />
-                  </div>
-                  <div class="col-md-7">
-                    <h3 class="h3">Promo2</h3>
-                    <small><b>#04-23</b></small>
-                    <p style="margin-top: 10px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde beatae omnis dignissimos ipsa tempora? Ipsum sapiente dolores ducimus in quis soluta hic, dignissimos, dolor, veritatis veniam, doloremque incidunt! Porro, ratione.</p>
-                    <button class="btn btn-lg btn-success">Schedule</button>
-                    <button class="btn btn-lg btn-warning">Status</button>
-                  </div>
-                </div>
-
-
-              </div>
             </div>
           </div>
         </div>

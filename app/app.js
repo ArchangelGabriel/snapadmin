@@ -545,9 +545,7 @@ var snapadmin = angular.module('snapadmin', [
       views: viewsHelper('pois', 'list'),
       data: { pageTitle: 'Points Of Interest' },
       resolve: {
-        auth: function($auth) {
-          return $auth.validateUser();
-        }
+        auth: resolveAuthHelper
       }
     },
     'new': {
@@ -617,8 +615,13 @@ var snapadmin = angular.module('snapadmin', [
 
   var billboards = {
     'new': {
-      url: '/billboards/new',
+      url: '/businesses/:business_id/billboards/new',
       views: viewsHelper('billboards', 'new', 'billboards/'),
+      resolve: { auth: resolveAuthHelper }
+    },
+    edit: {
+      url: '/businesses/:business_id/billboards/:id/edit',
+      views: viewsHelper('billboards', 'edit', 'billboards/'),
       resolve: { auth: resolveAuthHelper }
     }
   }
@@ -675,65 +678,6 @@ var snapadmin = angular.module('snapadmin', [
     }
   }
 
-  var studio = {
-    stores: {
-      list: {
-        url: '/stores',
-        views: {
-          nav: { templateUrl: 'templates/sidebar.html', controller: 'SidebarController' },
-          content: { templateUrl: 'templates/studio/stores.list.html' },
-          header: { templateUrl: 'templates/header.html', controller: 'HeaderController' }
-        },
-        data: { pageTitle: 'Stores' },
-      },
-      'new': {
-        url: '/stores/new',
-        views: {
-          nav: { templateUrl: 'templates/sidebar.html', controller: 'SidebarController' },
-          content: { templateUrl: 'templates/studio/stores.new.html' },
-          header: { templateUrl: 'templates/header.html', controller: 'HeaderController' }
-        },
-        data: { pageTitle: 'Create a new Store' },
-      }
-    },
-    billboards: {
-      list: {
-        url: '/billboards',
-        views: {
-          nav: { templateUrl: 'templates/sidebar.html', controller: 'SidebarController' },
-          content: { templateUrl: 'templates/studio/billboards.list.html' },
-          header: { templateUrl: 'templates/header.html', controller: 'HeaderController' }
-        },
-        data: { pageTitle: 'Billboards' },
-      },
-      'new': {
-        url: '/billboards/new',
-        views: {
-          nav: { templateUrl: 'templates/sidebar.html', controller: 'SidebarController' },
-          content: { templateUrl: 'templates/studio/billboards.new.html' },
-          header: { templateUrl: 'templates/header.html', controller: 'HeaderController' }
-        },
-        data: { pageTitle: 'Create a new Billboard' },
-      }
-    },
-    ads: {
-      list: {
-        url: '/ads',
-        views: viewsHelper('ads', 'list', 'ads/'),
-        resolve: { auth: resolveAuthHelper }
-      },
-      'new': {
-
-      }
-    },
-    campaigns: {
-
-    },
-    reports: {
-
-    }
-  }
-
   $stateProvider
     .state('login', login)
     .state('profile', profile)
@@ -754,7 +698,7 @@ var snapadmin = angular.module('snapadmin', [
     .state('gamificationEventNew', gamificationEventNew)
     .state('gamificationEventEdit', gamificationEventEdit)
     .state('gamificationEventDetail', gamificationEventDetail)
-    .state('gamification.activities', gamificationActivities)
+    .state('gamificationActivities', gamificationActivities)
     .state('gamificationActivityNew', gamificationActivityNew)
     .state('gamificationActivityEdit', gamificationActivityEdit)
     .state('categories', categories)
@@ -772,16 +716,16 @@ var snapadmin = angular.module('snapadmin', [
     .state('mallsNew', malls['new'])
     .state('mallsDetail', malls.detail)
     .state('mallsEdit', malls.edit)
-    .state('stores', studio.stores.list)
     .state('storesNew', stores['new'])
     .state('storesEdit', stores.edit)
     .state('billboardsNew', billboards['new'])
+    .state('billboardsEdit', billboards.edit)
     .state('businesses', businesses.list)
     .state('businessesNew', businesses['new'])
     .state('businessesDetail', businesses.detail)
-    .state('businessesEdit', businesses.edit)
-    .state('advertisements', advertisements.list)
-    .state('advertisementsNew', advertisements['new']);
+    .state('businessesEdit', businesses.edit);
+    // .state('advertisements', advertisements.list)
+    // .state('advertisementsNew', advertisements['new']);
 }])
 
 .run(['$rootScope', 'settings', '$state', function($rootScope, settings, $state) {
